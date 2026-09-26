@@ -1,44 +1,45 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>TuBaoBao Egypt | توباباو — مصنع ألواح PVC حوائط | 6 أكتوبر</title>
-    <meta name="description" content="مصنع توباباو في المنطقة الصناعية الخامسة، مدينة 6 أكتوبر، قطعة 37. ألواح تجاليد PVC بديل الخشب والرخام. توريد لكل محافظات مصر وتصدير لليبيا والسودان ودول أخرى. أسعار بالطلب. 01116208881" />
-    <meta name="theme-color" content="#0c0b09" />
-    <meta name="robots" content="index,follow" />
-    <meta property="og:title" content="توباباو TuBaoBao Egypt — مصنع PVC في 6 أكتوبر" />
-    <meta property="og:description" content="شرائح تجاليد 16 / 18 / 20 × 280 سم وألواح رخام 1.22 × 2.80 م. صناعة مصرية، معارض في الجمهورية، تصدير إقليمي." />
-    <meta property="og:type" content="website" />
-    <meta property="og:locale" content="ar_EG" />
-    <meta property="og:image" content="./images/FB_IMG_1790083330712.jpg" />
-    <link rel="icon" href="./images/brand/logo-rabbit.jpg" />
-    <link rel="apple-touch-icon" href="./images/brand/logo-rabbit.jpg" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Noto+Sans+SC:wght@300;400;500;700&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="./styles.css" />
-    <script type="application/ld+json">
-      {
-        "@context": "https://schema.org",
-        "@type": "Manufacturer",
-        "name": "TuBaoBao Egypt توباباو",
-        "telephone": "+201116208881",
-        "address": {
-          "@type": "PostalAddress",
-          "streetAddress": "قطعة 37، المنطقة الصناعية الخامسة",
-          "addressLocality": "مدينة 6 أكتوبر",
-          "addressRegion": "الجيزة",
-          "addressCountry": "EG"
-        },
-        "openingHours": "Mo-Th 08:00-20:00, Sa-Su 08:00-20:00",
-        "areaServed": ["EG", "LY", "SD"]
-      }
-    </script>
-  </head>
-  <body data-font="arabic">
-    <div id="app"></div>
-    <script src="./data.js"></script>
-    <script src="./app.js"></script>
-  </body>
-</html>
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>TuBaoBao Egypt | كتالوج PVC</title>
+<style>
+body{margin:0;background:#0b0a08;color:#f4eee6;font-family:Tahoma,sans-serif}
+.wrap{width:min(1100px,calc(100% - 28px));margin:auto;padding:24px 0 80px}
+.top{display:flex;justify-content:space-between;align-items:center;padding:8px 0 18px;border-bottom:1px solid rgba(196,165,116,.28)}
+img.full{width:100%;display:block;margin:12px 0 28px;border:1px solid rgba(196,165,116,.28);min-height:120px;background:#161410}
+.k{color:#c4a574;letter-spacing:.14em;font-size:12px}
+a.btn{display:inline-block;background:#c4a574;color:#111;padding:12px 18px;border-radius:999px;text-decoration:none;font-weight:700}
+.wa{position:fixed;left:16px;bottom:16px;background:#25d366;color:#062;padding:12px 16px;border-radius:999px;font-weight:800;text-decoration:none}
+</style>
+</head>
+<body>
+<div class="wrap">
+<div class="top"><b>توباباو مصر</b><b style="color:#c4a574">01116208881</b></div>
+<p class="k">FACTORY CATALOG</p>
+<h1>كتالوج المصنع</h1>
+<p style="color:#9a9084">شرائح 16 / 18 / 20 × 280 سم — ألواح 1.22 × 2.80 م — 6 أكتوبر قطعة 37</p>
+<p class="k">16 × 280</p><h2>شرائح 16 سم · M1 / M2 / M3</h2>
+<img class="full" id="s16" alt="شرائح 16"/>
+<p class="k">20 × 280</p><h2>شرائح 20 سم</h2>
+<img class="full" id="s20" alt="شرائح 20"/>
+<p class="k">1.22 × 2.80 · 5MM</p><h2>الألواح الكبيرة</h2>
+<img class="full" id="sheets" alt="ألواح كبيرة"/>
+<p class="k">SWATCHES</p><h2>عينات الألوان</h2>
+<img class="full" id="sw" alt="سواتش"/>
+<p><a class="btn" href="https://wa.me/201116208881?text=%D8%B7%D9%84%D8%A8%20%D9%83%D8%AA%D8%A7%D9%84%D9%88%D8%AC">اطلب الكتالوج / عينة واتساب</a></p>
+</div>
+<a class="wa" href="https://wa.me/201116208881">WA</a>
+<script>
+async function load(id, file){
+  const r = await fetch(file);
+  const t = await r.text();
+  document.getElementById(id).src = "data:image/jpeg;base64," + t.trim();
+}
+load("s16","slats16.jpg.b64");
+load("s20","slats20.jpg.b64");
+load("sheets","sheets.jpg.b64");
+load("sw","swatches.jpg.b64");
+</script>
+</body></html>
