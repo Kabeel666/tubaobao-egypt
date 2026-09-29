@@ -1,0 +1,1 @@
+window.IMG = window.IMG || {};

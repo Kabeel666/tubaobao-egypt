@@ -1,11 +1,9 @@
-# TuBaoBao Egypt — توباباو مصر
+# TuBaoBao Egypt — مصنع PVC
 
-Official factory website. Separate project from Wang Fu / Chinese services.
+موقع كتالوج المصنع في قطعة 37، المنطقة الصناعية الخامسة، 6 أكتوبر.
 
-- Factory: 5th Industrial Zone, 6th of October City, Plot 37, Egypt
-- Hours: 08:00–20:00, closed Friday
-- Phone / WhatsApp only: 01116208881
-- Languages: العربية / English / 中文
-- Prices on request. WPC doors pending.
+- هاتف / واتساب الوحيد: 01116208881
+- شرائح 16 / 18 / 20 × 280 سم
+- ألواح 1.22 × 2.80 — 5 مم
 
-Static site: `index.html` + `styles.css` + `data.js` + `app.js`.
+https://cdn.jsdelivr.net/gh/Kabeel666/tubaobao-egypt@main/index.html
