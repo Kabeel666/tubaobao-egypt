@@ -1,9 +1,11 @@
-# TuBaoBao Egypt — مصنع PVC
+# TuBaoBao Egypt
 
-موقع كتالوج المصنع في قطعة 37، المنطقة الصناعية الخامسة، 6 أكتوبر.
+Factory site for interior PVC slats and marble/wood-look sheets.
 
-- هاتف / واتساب الوحيد: 01116208881
-- شرائح 16 / 18 / 20 × 280 سم
-- ألواح 1.22 × 2.80 — 5 مم
+- Plot 37, 5th Industrial Zone, 6th of October City
+- Slats 16 / 18 / 20 × 280 cm
+- Sheets 1.22 × 2.80 m × 5 mm
+- Bilingual AR / EN
+- Contact number intentionally empty for this step
 
-https://cdn.jsdelivr.net/gh/Kabeel666/tubaobao-egypt@main/index.html
+Public mirror: https://cdn.jsdelivr.net/gh/Kabeel666/tubaobao-egypt@main/index.html
