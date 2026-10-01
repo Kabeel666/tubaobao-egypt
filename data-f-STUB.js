@@ -1,0 +1,15 @@
+const F=[
+['M1-001','wood','خشب بلوط فاتح','Light oak','#c4a574'],
+['M1-002','wood','خشب بلوط طبيعي','Natural oak','#b8955e'],
+['M1-003','wood','خشب جوزي دافئ','Warm walnut','#6b4423'],
+['M1-004','wood','خشب رمادي دخاني','Smoke grey wood','#8a8278'],
+['M1-005','wood','خشب تيك ذهبي','Golden teak','#a67c52'],
+['M1-006','wood','خشب كربوني','Carbon wood','#3a342e'],
+['M1-007','wood','خشب صنوبر فاتح','Light pine','#d4c4a0'],
+['M1-008','wood','خشب بندق','Hazelnut wood','#8b6914'],
+['M1-009','wood','خشب عسلي','Honey wood','#c9a66b'],
+['M2-001','textile','خشب رمادي بارد','Cool grey wood','#9a958c'],
+['M3-001','marble','خشب أبيض مبيّض','Bleached wood','#e8e0d4'],
+['M3-002','marble','خشب إسبريسو','Espresso wood','#4a3728'],
+['M3-003','marble','خشب كستنائي','Chestnut wood','#7a4e2d'],
+];
