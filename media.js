@@ -1,0 +1,17 @@
+window.MEDIA={
+  hero:"media/factory-01.jpg",
+  factory:["media/factory-01.jpg","media/factory-02.jpg","media/factory-03.jpg","media/factory-04.jpg"],
+  products:["media/product-01.jpg","media/product-02.jpg","media/product-03.jpg","media/product-04.jpg","media/product-05.jpg","media/product-06.jpg"],
+  gallery:[
+    ["media/factory-01.jpg","مصنع","Factory"],
+    ["media/factory-02.jpg","إنتاج","Production"],
+    ["media/factory-03.jpg","خطوط","Lines"],
+    ["media/factory-04.jpg","تخزين","Warehouse"],
+    ["media/product-01.jpg","شرائح","Slats"],
+    ["media/product-02.jpg","ألواح","Sheets"],
+    ["media/product-03.jpg","تشطيب","Finish"],
+    ["media/product-04.jpg","عيّنة","Sample"],
+    ["media/product-05.jpg","منتج","Product"],
+    ["media/product-06.jpg","كتالوج","Catalog"]
+  ]
+};
