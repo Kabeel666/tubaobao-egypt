@@ -1,3 +1,4 @@
+
 window.MEDIA_B64=window.MEDIA_B64||{};
 window.CODE_MEDIA=window.CODE_MEDIA||{};
 function b64url(key){return MEDIA_B64[key]?("data:image/jpeg;base64,"+MEDIA_B64[key]):"";}
@@ -7,13 +8,14 @@ function fileUrl(path){
   if(MEDIA_B64[k]) return "data:image/jpeg;base64,"+MEDIA_B64[k];
   var alt="path_"+path.replace(/\//g,"_").replace(/\.jpg$/i,"");
   if(MEDIA_B64[alt]) return "data:image/jpeg;base64,"+MEDIA_B64[alt];
-  return path;
+  return path; // real file if present on deploy
 }
 function codePrimary(code){
   var m=CODE_MEDIA[code]; if(!m) return "";
   var stem=(m.primary||"").split("/").pop().replace(/\.jpg$/i,"");
   return b64url("prod_"+stem)||fileUrl(m.primary)||"";
 }
+
 window.MEDIA={
   hero: fileUrl("media/home/creative-01.jpg") || fileUrl("media/home/showroom-collage.jpg"),
   lifestyle: [
