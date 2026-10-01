@@ -1,22 +1,31 @@
 window.MEDIA_B64=window.MEDIA_B64||{};
-function mediaUrl(key){
-  if(MEDIA_B64[key]) return "data:image/jpeg;base64,"+MEDIA_B64[key];
-  return "media/"+key+".jpg";
+window.CODE_MEDIA=window.CODE_MEDIA||{};
+function b64url(key){return MEDIA_B64[key]?("data:image/jpeg;base64,"+MEDIA_B64[key]):"";}
+function codePrimary(code){
+  var m=CODE_MEDIA[code]; if(!m) return "";
+  var stem=(m.primary||"").split("/").pop().replace(/\.jpg$/i,"");
+  var k="prod_"+stem;
+  return b64url(k)||m.primary||"";
 }
 window.MEDIA={
-  hero:mediaUrl("factory-01"),
-  factory:["factory-01","factory-02","factory-03","factory-04"].map(mediaUrl),
-  products:["product-01","product-02","product-03","product-04","product-05","product-06"].map(mediaUrl),
-  gallery:[
-    [mediaUrl("factory-01"),"مصنع","Factory"],
-    [mediaUrl("factory-02"),"إنتاج","Production"],
-    [mediaUrl("factory-03"),"خطوط","Lines"],
-    [mediaUrl("factory-04"),"تخزين","Warehouse"],
-    [mediaUrl("product-01"),"شرائح","Slats"],
-    [mediaUrl("product-02"),"ألواح","Sheets"],
-    [mediaUrl("product-03"),"تشطيب","Finish"],
-    [mediaUrl("product-04"),"عيّنة","Sample"],
-    [mediaUrl("product-05"),"منتج","Product"],
-    [mediaUrl("product-06"),"كتالوج","Catalog"]
-  ]
+  hero: b64url("mkt_lifestyle-01") || b64url("fac_factory-00") || "",
+  lifestyle: ["mkt_lifestyle-01","mkt_lifestyle-02"].map(b64url).filter(Boolean),
+  features: [
+    {img:b64url("mkt_feature-waterproof"), ar:["مقاوم للمياه","تركيب داخلي يومي"], en:["Waterproof-ready interior","Daily moisture use"]},
+    {img:b64url("mkt_feature-mold"), ar:["يساعد ضد العفن","سطح يتنظف بسهولة"], en:["Mold-resistant help","Easy-clean surface"]},
+    {img:b64url("mkt_feature-install"), ar:["تركيب سريع","فوق الحائط القائم"], en:["Fast install","Over existing walls"]},
+    {img:b64url("mkt_feature-made-egypt"), ar:["صنع في مصر","6 أكتوبر"], en:["Made in Egypt","6th of October"]}
+  ],
+  factory: ["fac_factory-00","fac_factory-01","fac_factory-02"].map(b64url).filter(Boolean),
+  products: Object.keys(CODE_MEDIA).sort().map(codePrimary).filter(Boolean),
+  gallery: []
 };
+(function(){
+  var g=[];
+  Object.keys(CODE_MEDIA).sort().forEach(function(code){
+    var src=codePrimary(code); if(src) g.push([src, code, code]);
+  });
+  MEDIA.lifestyle.forEach(function(src,i){ g.push([src, "لايف ستايل "+(i+1), "Lifestyle "+(i+1)]); });
+  MEDIA.factory.forEach(function(src,i){ g.push([src, "المصنع "+(i+1), "Factory "+(i+1)]); });
+  MEDIA.gallery=g;
+})();
