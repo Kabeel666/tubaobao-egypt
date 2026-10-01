@@ -1,1 +1,1 @@
-PLACEHOLDER
+@file:///workspace/tubaobao-egypt/boot.a.js
