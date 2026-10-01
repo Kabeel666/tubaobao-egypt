@@ -1,32 +1,20 @@
-# توباباو مصر · TuBaoBao Egypt
+# TuBaoBao Egypt — tubaobao-egypt
 
-Professional B2B factory website — interior PVC / décor wall slats, marble & wood-look sheets, fluted profiles, foam board & trims.
+Egyptian PVC / WPC / chipboard-language wall cladding factory site.  
+**Factory:** Plot 37 · 5th Industrial Zone · 6th of October City · ~10,000 m²  
+**WhatsApp ONLY:** `01116208881` (`wa.me/201116208881`)
 
-**Brand:** توباباو مصر / TuBaoBao Egypt (local Egyptian factory — independent of Chinese listed 兔宝宝 / Dehua TB unless a licence is stated)  
-**Factory:** Plot 37, 5th Industrial Zone, 6th of October City · ~10,000 m²  
-**Hours:** 8am–8pm except Friday  
-**WhatsApp ONLY:** [01116208881](https://wa.me/201116208881)
+## Branch note
+Feature work lives on `feat/rich-factory-data-2026-10-01` (PR #2). Do **not** merge to `main` without explicit approval.
 
-## Branch `feat/rich-factory-data-2026-10-01`
+## Catalog (approx.)
+- Finishes: wood / marble / ceramic-look / chipboard-WPC / linen / solid
+- Sheets & squares including ceramic & WPC language
+- Profiles 13.4 / 16 / 18 / 20 × 280 + trims / foam
+- Home: education, portfolio, process, 3D WhatsApp CTA, product search
 
-| Dataset | Count |
-|---------|------:|
-| Finish codes (wood / marble / linen / solid) | 106 |
-| Sheet / square / large-panel codes | 59 |
-| Profiles (13.4 / 16 / 18 / 20 × 280 + fluted / foam / trims + 122×280×5) | 30 |
-| Use-case spaces | 40 |
-| Egypt governorates / zones | 36 |
-| Accessories | 20 |
-| Packing lines | 15 |
-| Project sketches | 12 |
-| FAQ | 17 AR + 17 EN |
-
-Coded catalog photos (when present): M1-001…009, M2-001, M3-001…003 with width variants. Expanded codes use honest CSS swatches labeled approximate until photos arrive.  
-OEM campus photos stay under `media/partner-or-oem/` — **not** labeled as 6th of October.  
-Prices quote-only. No unverified ISO. No Wang Fu. Phone **01116208881** only.
-
-## Stack
-Static HTML/CSS/JS — AR/EN. Catalog in `data-*.js`; optional photos via `CODE_MEDIA` + `media-b64-pack*.js`.
-
-## Deploy
-Open PR to `main` for preview. Do **not** merge until visual review.
+## Honesty
+- No Wang Fu branding
+- No fake ISO claims
+- China campus photos (if any) captioned as international partner — never as October factory
+- Quote-only pricing
