@@ -10,5 +10,8 @@ pkT:"Packing",pkS:"The code is marked on the bundle so finishes do not mix in tr
 facT:"Factory",facP:"5th Industrial Zone — 6th of October City — Plot 37. Open 08:00–20:00 except Friday.",
 fac:[["Site","Plot 37 · 5th Industrial Zone · 6th of October"],["Output","Interior wall slats and décor sheets"],["Library","Wood, linen and marble codes + large sheets"],["Reach","Egypt nationwide + regional export after terms"]],
 soonT:"Coming soon",soonS:"Lines under study — not for sale yet.",
-soon:[["WPC doors","Under study for a later production line."],["More colours & finishes","On trade request and order size."],["Larger catalogue photos","Added in small reviewed batches."],["Detailed tech sheets","PDF profile tables when ready."],["Extra packing options","For longer export routes on request."]]
+soon:[["WPC doors","Under study for a later production line."],["More colours & finishes","On trade request and order size."],["Larger catalogue photos","Added in small reviewed batches."],["Detailed tech sheets","PDF profile tables when ready."],["Extra packing options","For longer export routes on request."]],
+colNote:"Codes with real catalogue photos show the shot; other codes use approximate CSS swatches until photos arrive.",
+shNote:"Common large sheets ≈ 1.22 × 2.80 m at about 5 mm — confirm on order.",
+prNote:"Common catalogue widths: 13.4, 16, 18 and 20 cm × 280 cm, plus fluted, foam and trim profiles."
 });
