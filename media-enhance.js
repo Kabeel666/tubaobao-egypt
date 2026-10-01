@@ -6,12 +6,14 @@
     return '<img src="' + src + '" alt="' + (alt || "") + '" loading="lazy" decoding="async"/>';
   }
   function injectHeroPhoto() {
+    if (document.querySelector("#p-home .hero-rich")) return;
     var board = document.querySelector("#p-home .board");
     if (!board || !window.MEDIA || !MEDIA.hero) return;
     if (board.querySelector("img.hero-photo")) return;
     board.insertAdjacentHTML("afterbegin", '<img class="hero-photo" src="' + MEDIA.hero + '" alt="TuBaoBao Egypt" loading="eager"/>');
   }
   function injectFeatures() {
+    if (document.querySelector("#p-home .hero-rich")) return;
     var home = $("p-home");
     if (!home || !window.MEDIA || !MEDIA.features || !MEDIA.features.length) return;
     if (home.querySelector(".feature-strip")) return;
@@ -143,6 +145,18 @@
       }
     });
   }
+  function injectPartnerCaptions() {
+    var page = $("p-factory");
+    if (!page || !window.MEDIA || !MEDIA.partner) return;
+    if (page.querySelector(".partner-note")) return;
+    var wrap = page.querySelector(".wrap") || page;
+    var box = document.createElement("div");
+    box.className = "partner-note note";
+    box.innerHTML = (lang === "ar")
+      ? "صور الحرم الدولي (إن وُجدت في المعرض) تُعرض كشراكة توريد — <b>وليست</b> صور مصنع 6 أكتوبر."
+      : "International campus photos (if shown in gallery) are supply-partner context — <b>not</b> the 6th of October factory.";
+    wrap.appendChild(box);
+  }
   function run() {
     ensureGalleryTab();
     injectHeroPhoto();
@@ -153,6 +167,7 @@
     injectProductPhotos();
     injectGalleryPage();
     injectAboutLegal();
+    injectPartnerCaptions();
     scrubWrongPhone();
   }
   var _setTab = window.setTab;
