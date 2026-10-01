@@ -70,4 +70,24 @@
   }
   syncCounts();
 
+  if (typeof AR !== "undefined") {
+    AR.legalNote = "توباباو مصر / TuBaoBao Egypt مصنع محلي في 6 أكتوبر. الاسم التجاري المصري مستقل عن علامة 兔宝宝 الصينية المدرجة (Dehua TB) ما لم يُعلن عن ترخيص رسمي.";
+    AR.aboutP = (AR.aboutP || "") + " مساحة المصنع حوالي 10,000 م² في المنطقة الصناعية بمدينة 6 أكتوبر — فئة مصانع لا فئة مستوردين فقط.";
+    if (AR.fac && !AR.fac.some(function(x){return /10,?000|10000|م²|m²/.test(String(x[1]||x[0]||""));})) {
+      AR.fac.unshift(["المساحة","حوالي 10,000 م² · المنطقة الصناعية · 6 أكتوبر"]);
+    }
+    if (AR.stats && AR.stats[0]) AR.stats[0] = ["~10,000 م²", "المصنع"];
+    AR.galleryT = AR.galleryT || "معرض المصنع والمنتجات";
+    AR.galleryS = AR.galleryS || "صور حقيقية من أرض المصنع والإنتاج.";
+  }
+  if (typeof EN !== "undefined") {
+    EN.legalNote = "TuBaoBao Egypt / توباباو مصر is a local factory in 6th of October. The Egyptian trade name is independent of the Chinese listed brand 兔宝宝 (Dehua TB) unless an official licence is stated.";
+    EN.aboutP = (EN.aboutP || "") + " Factory footprint about 10,000 m² in the 6th of October industrial zone — a manufacturing plant, not only an importer.";
+    if (EN.fac && !EN.fac.some(function(x){return /10,?000|10000|m²|sq/.test(String(x[1]||x[0]||""));})) {
+      EN.fac.unshift(["Footprint","About 10,000 m² · industrial zone · 6th of October"]);
+    }
+    if (EN.stats && EN.stats[0]) EN.stats[0] = ["~10,000 m²", "Factory"];
+    EN.galleryT = EN.galleryT || "Factory & product gallery";
+    EN.galleryS = EN.galleryS || "Real photos from the factory floor and production.";
+  }
 })();
