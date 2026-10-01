@@ -1,0 +1,454 @@
+{
+  "products": [
+    {
+      "file": "M1-001_w13_4.jpg",
+      "bytes": 41978
+    },
+    {
+      "file": "M1-001_w16.jpg",
+      "bytes": 47834
+    },
+    {
+      "file": "M1-001_w20.jpg",
+      "bytes": 52469
+    },
+    {
+      "file": "M1-002_w13_4.jpg",
+      "bytes": 43393
+    },
+    {
+      "file": "M1-002_w20.jpg",
+      "bytes": 67803
+    },
+    {
+      "file": "M1-003_w13_4.jpg",
+      "bytes": 46064
+    },
+    {
+      "file": "M1-003_w20.jpg",
+      "bytes": 77177
+    },
+    {
+      "file": "M1-004_w20.jpg",
+      "bytes": 64538
+    },
+    {
+      "file": "M1-005_w13_4.jpg",
+      "bytes": 52882
+    },
+    {
+      "file": "M1-005_w20.jpg",
+      "bytes": 68018
+    },
+    {
+      "file": "M1-006_w13_4.jpg",
+      "bytes": 52530
+    },
+    {
+      "file": "M1-007_w13_4.jpg",
+      "bytes": 40270
+    },
+    {
+      "file": "M1-008_w13_4.jpg",
+      "bytes": 44514
+    },
+    {
+      "file": "M1-009_w13_4.jpg",
+      "bytes": 40332
+    },
+    {
+      "file": "M2-001_w13_4.jpg",
+      "bytes": 37881
+    },
+    {
+      "file": "M3-001_w13_4.jpg",
+      "bytes": 35104
+    },
+    {
+      "file": "M3-002_w20.jpg",
+      "bytes": 56060
+    },
+    {
+      "file": "M3-003_w13_4.jpg",
+      "bytes": 44745
+    },
+    {
+      "file": "catalog-08fc44a5be.jpg",
+      "bytes": 47481
+    },
+    {
+      "file": "catalog-0bf0f2d1fe.jpg",
+      "bytes": 51189
+    },
+    {
+      "file": "catalog-0c3a340b53.jpg",
+      "bytes": 56618
+    },
+    {
+      "file": "catalog-10ba231634.jpg",
+      "bytes": 56300
+    },
+    {
+      "file": "catalog-244824a518.jpg",
+      "bytes": 60688
+    },
+    {
+      "file": "catalog-2c0a14f10c.jpg",
+      "bytes": 54860
+    },
+    {
+      "file": "catalog-32c6577aed.jpg",
+      "bytes": 55993
+    },
+    {
+      "file": "catalog-4802881ef3.jpg",
+      "bytes": 45925
+    },
+    {
+      "file": "catalog-5935f4f954.jpg",
+      "bytes": 54959
+    },
+    {
+      "file": "catalog-59edc9ef09.jpg",
+      "bytes": 59817
+    },
+    {
+      "file": "catalog-6687d0e4e0.jpg",
+      "bytes": 60330
+    },
+    {
+      "file": "catalog-6bb2a27d47.jpg",
+      "bytes": 48010
+    },
+    {
+      "file": "catalog-7780bff724.jpg",
+      "bytes": 91395
+    },
+    {
+      "file": "catalog-7b4e88fee3.jpg",
+      "bytes": 57136
+    },
+    {
+      "file": "catalog-8119a303ce.jpg",
+      "bytes": 30785
+    },
+    {
+      "file": "catalog-8ab1133712.jpg",
+      "bytes": 51555
+    },
+    {
+      "file": "catalog-92d73319ae.jpg",
+      "bytes": 58762
+    },
+    {
+      "file": "catalog-9a7121bf71.jpg",
+      "bytes": 50738
+    },
+    {
+      "file": "catalog-aceb060695.jpg",
+      "bytes": 59703
+    },
+    {
+      "file": "catalog-c0360e06eb.jpg",
+      "bytes": 54798
+    },
+    {
+      "file": "catalog-ef76abcb9f.jpg",
+      "bytes": 58285
+    },
+    {
+      "file": "catalog-fb9c16a10c.jpg",
+      "bytes": 53326
+    },
+    {
+      "file": "catalog-fd071ce045.jpg",
+      "bytes": 50016
+    },
+    {
+      "file": "catalog-rack_wna.jpg",
+      "bytes": 42065
+    },
+    {
+      "file": "catalog-showroom_wna.jpg",
+      "bytes": 110177
+    }
+  ],
+  "home": [
+    {
+      "file": "creative-01.jpg",
+      "bytes": 137934
+    },
+    {
+      "file": "creative-02.jpg",
+      "bytes": 190699
+    },
+    {
+      "file": "creative-03.jpg",
+      "bytes": 166594
+    },
+    {
+      "file": "creative-04.jpg",
+      "bytes": 187653
+    },
+    {
+      "file": "creative-05.jpg",
+      "bytes": 132658
+    },
+    {
+      "file": "feature-install.jpg",
+      "bytes": 67725
+    },
+    {
+      "file": "feature-made-egypt.jpg",
+      "bytes": 36997
+    },
+    {
+      "file": "feature-mold.jpg",
+      "bytes": 74748
+    },
+    {
+      "file": "feature-waterproof.jpg",
+      "bytes": 36335
+    },
+    {
+      "file": "lifestyle-01.jpg",
+      "bytes": 54090
+    },
+    {
+      "file": "lifestyle-02.jpg",
+      "bytes": 66360
+    },
+    {
+      "file": "product-01.jpg",
+      "bytes": 44341
+    },
+    {
+      "file": "product-02.jpg",
+      "bytes": 47192
+    },
+    {
+      "file": "product-03.jpg",
+      "bytes": 39793
+    },
+    {
+      "file": "product-04.jpg",
+      "bytes": 21082
+    },
+    {
+      "file": "product-05.jpg",
+      "bytes": 47839
+    },
+    {
+      "file": "product-06.jpg",
+      "bytes": 44388
+    },
+    {
+      "file": "showroom-collage.jpg",
+      "bytes": 183635
+    }
+  ],
+  "works": [
+    {
+      "file": "catalog-rack.jpg",
+      "bytes": 42065
+    },
+    {
+      "file": "gallery-08fc44a5be.jpg",
+      "bytes": 54595
+    },
+    {
+      "file": "gallery-0bf0f2d1fe.jpg",
+      "bytes": 51189
+    },
+    {
+      "file": "gallery-0c3a340b53.jpg",
+      "bytes": 65747
+    },
+    {
+      "file": "gallery-10ba231634.jpg",
+      "bytes": 56300
+    },
+    {
+      "file": "gallery-244824a518.jpg",
+      "bytes": 69957
+    },
+    {
+      "file": "gallery-2c0a14f10c.jpg",
+      "bytes": 54860
+    },
+    {
+      "file": "gallery-32c6577aed.jpg",
+      "bytes": 63929
+    },
+    {
+      "file": "gallery-4802881ef3.jpg",
+      "bytes": 54781
+    },
+    {
+      "file": "gallery-5935f4f954.jpg",
+      "bytes": 62926
+    },
+    {
+      "file": "gallery-59edc9ef09.jpg",
+      "bytes": 59817
+    },
+    {
+      "file": "gallery-6687d0e4e0.jpg",
+      "bytes": 60330
+    },
+    {
+      "file": "gallery-6bb2a27d47.jpg",
+      "bytes": 48010
+    },
+    {
+      "file": "gallery-7780bff724.jpg",
+      "bytes": 104033
+    },
+    {
+      "file": "gallery-8ab1133712.jpg",
+      "bytes": 58877
+    },
+    {
+      "file": "gallery-92d73319ae.jpg",
+      "bytes": 58762
+    },
+    {
+      "file": "gallery-9a7121bf71.jpg",
+      "bytes": 50738
+    },
+    {
+      "file": "gallery-aceb060695.jpg",
+      "bytes": 59703
+    },
+    {
+      "file": "gallery-c0360e06eb.jpg",
+      "bytes": 65000
+    },
+    {
+      "file": "gallery-ef76abcb9f.jpg",
+      "bytes": 66223
+    },
+    {
+      "file": "gallery-fb9c16a10c.jpg",
+      "bytes": 61290
+    },
+    {
+      "file": "gallery-fd071ce045.jpg",
+      "bytes": 50016
+    },
+    {
+      "file": "product-01.jpg",
+      "bytes": 44341
+    },
+    {
+      "file": "product-02.jpg",
+      "bytes": 47192
+    },
+    {
+      "file": "product-03.jpg",
+      "bytes": 39793
+    },
+    {
+      "file": "product-04.jpg",
+      "bytes": 21082
+    },
+    {
+      "file": "product-05.jpg",
+      "bytes": 47839
+    },
+    {
+      "file": "product-06.jpg",
+      "bytes": 44388
+    },
+    {
+      "file": "showroom-collage.jpg",
+      "bytes": 183635
+    }
+  ],
+  "factory": [
+    {
+      "file": "manufacturing-panels.jpg",
+      "bytes": 183635
+    },
+    {
+      "file": "sample-rack.jpg",
+      "bytes": 42065
+    }
+  ],
+  "partner": [
+    {
+      "file": "china-campus-01.jpg",
+      "bytes": 102851
+    },
+    {
+      "file": "china-campus-02.jpg",
+      "bytes": 94856
+    },
+    {
+      "file": "china-campus-03.jpg",
+      "bytes": 134248
+    },
+    {
+      "file": "china-campus-04.jpg",
+      "bytes": 106479
+    }
+  ],
+  "marketing": [
+    {
+      "file": "creative-01.jpg",
+      "bytes": 137934
+    },
+    {
+      "file": "creative-02.jpg",
+      "bytes": 190699
+    },
+    {
+      "file": "creative-03.jpg",
+      "bytes": 166594
+    },
+    {
+      "file": "creative-04.jpg",
+      "bytes": 187653
+    },
+    {
+      "file": "creative-05.jpg",
+      "bytes": 132658
+    },
+    {
+      "file": "feature-install.jpg",
+      "bytes": 67725
+    },
+    {
+      "file": "feature-made-egypt.jpg",
+      "bytes": 36997
+    },
+    {
+      "file": "feature-mold.jpg",
+      "bytes": 74748
+    },
+    {
+      "file": "feature-waterproof.jpg",
+      "bytes": 36335
+    },
+    {
+      "file": "lifestyle-01.jpg",
+      "bytes": 54090
+    },
+    {
+      "file": "lifestyle-02.jpg",
+      "bytes": 66360
+    }
+  ],
+  "excluded_chat": [
+    "0cb51070770805926ac459e5d0dd71d2cd31155c3aac45a7be397d000add331f.jpg",
+    "1863bc067c504c2ea742c1de334ab7044e0f51cdbc778c8014e382d0ffef4e91.jpg",
+    "1c1ed4d7b36a243d68251c2a57864e5e18b6d37537c9f04e645ab732ad8ae706.jpg",
+    "2ac8f7c52fc63893e0478ad7e1a5d81362192dfd39e16882e58faf84c003f0bf.jpg",
+    "3dca0412b4978b2ce1f75527fcfada2a4a4f80969de0d9e65a6c1cf68316aee0.jpg",
+    "4401ca77efa4e7149ff5ff4e5da7680a3a7dd2957809e5709a8b22cf4538ccab.jpg",
+    "4ad0dfaff8662f1b21a267a46ad8618f347c6692b566366b9d686fd4ec2ca337.jpg",
+    "9d0d778929336c689245655d9d6225ea724bab85238d813b21983f29190afd93.jpg",
+    "bf45fa5e7595e26f1ac3981ab37c82c64fadc9b6a1b034662a21147abd5e9546.jpg",
+    "c82d8349c8bb72ad1ab18c99d89da5d639b8597c3bf6ac56e621e7a8f42979bd.jpg"
+  ]
+}
