@@ -52,7 +52,7 @@ window.MEDIA={
   Object.keys(CODE_MEDIA).sort().forEach(function(code){
     var src=codePrimary(code); if(src) g.push([src, code, code]);
   });
-  (MEDIA.works||[]).forEach(function(src,i){ g.push([src, "أعمال "+(i+1), "Works "+(i+1)]); });
+  (MEDIA.works||[]).forEach(function(src,i){ g.push([src, "فكرة تطبيق "+(i+1), "Concept "+(i+1)]); });
   (MEDIA.lifestyle||[]).forEach(function(src,i){ g.push([src, "لايف ستايل "+(i+1), "Lifestyle "+(i+1)]); });
   (MEDIA.factory||[]).forEach(function(src,i){ g.push([src, "تصنيع "+(i+1), "Manufacturing "+(i+1)]); });
   (MEDIA.partner||[]).forEach(function(row){ if(row&&row.img) g.push([row.img, row.ar, row.en]); });
