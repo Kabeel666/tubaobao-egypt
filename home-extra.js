@@ -52,6 +52,74 @@
     return msg ? (base + "?text=" + encodeURIComponent(msg)) : base;
   }
 
+
+  window.USE_SPOTS = [
+    {id:"use-shop", media:"boutique", arT:"محلات تجارية", enT:"Shops",
+      ar:"فلوت خشب أو WPC أو رخام فاتح على حائط المحل وظهر العرض. داخلي فقط، والكمية والسعر عرض على واتساب 01116208881.",
+      en:"Wood flute, WPC, or light marble on the shop wall and display back. Interior only. Quantity and price are a WhatsApp quote on 01116208881."},
+    {id:"use-mall", media:"mall", arT:"مولات", enT:"Malls",
+      ar:"ساده محايد أو رخام لوك للوبي، وفلوت يلف العمود وممر المحلات. مش واجهة شمس. السعر عند الطلب.",
+      en:"Neutral solid or marble look for the lobby, and a flute that wraps columns and shop corridors. Not a sun façade. Price on request."},
+    {id:"use-office", media:"office", arT:"مكاتب", enT:"Offices",
+      ar:"رمادي أو كتان أو خشب هادي لغرف الاجتماع والاستقبال. مكان جاف. مفيش سعر منشور — للطلب.",
+      en:"Grey, linen, or quiet wood for meeting rooms and reception. A dry room. No published price — to order."},
+    {id:"use-hotel", media:"hotel", arT:"فنادق", enT:"Hotels",
+      ar:"كود واحد يتكرر في الغرف والممرات: خشب فاتح أو كتان أو رخام هادي. المعاينة شكل تقريبي مش رسم مختوم.",
+      en:"One code repeated in rooms and corridors: light wood, linen, or quiet marble. The preview is a look, not a stamped drawing."},
+    {id:"use-cafe", media:"cafe", arT:"كافيهات", enT:"Cafés",
+      ar:"خشب دافئ أو كتان حول البار وحائط الجلوس. ابعد عن رش المياه المباشر. العرض بالكود والكمية.",
+      en:"Warm wood or linen around the bar and the seating wall. Keep it off direct water spray. The quote is by code and quantity."},
+    {id:"use-clinic", media:"", arT:"عيادات", enT:"Clinics",
+      ar:"ساده فاتح أو سيراميك لوك يتمسح يوميًا في الانتظار والممرات. مش عزل طبي ومش سعر منشور. مفيش صورة مخصصة للعيادة في المكتبة.",
+      en:"Light solid or ceramic look that wipes clean in waiting rooms and corridors. Not medical tanking and not a listed price. No dedicated clinic photo in the library."},
+    {id:"use-3d", media:"studio", tab:"viz", arT:"معاينة 3D", enT:"3D preview",
+      ctaAr:"تفاصيل المعاينة", ctaEn:"Preview details",
+      ar:"ابعت صور الأوضة والمقاسات والكود، ونرجّع معاينة شكل قبل التركيب. فكرة تطبيق للاستوديو — ليست مشروعًا حقيقيًا، ومش لوحة تنفيذ.",
+      en:"Send room photos, sizes and a code, and we return a look preview before install. The studio picture is an application idea — not a real project, and not a construction sheet."},
+    {id:"use-chooser", media:"", tab:"chooser", arT:"اختار إيه", enT:"Chooser",
+      ctaAr:"افتح دليل الاختيار", ctaEn:"Open the chooser",
+      ar:"دليل من غير أسعار: رخام، خشب، سيراميك لوك، شيبورد/WPC، أو كتان، والعروض 13.4 و16 و20 واللوح 5مم. العيّنة من المصنع تحسم اللون.",
+      en:"A guide with no prices: marble, wood, ceramic look, chipboard/WPC, or linen, and widths 13.4, 16 and 20 plus the 5mm sheet. The factory sample decides the colour."}
+  ];
+
+  function spotImg(id) {
+    if (!id || !window.MEDIA || !MEDIA.uses) return "";
+    for (var i = 0; i < MEDIA.uses.length; i++) {
+      if (MEDIA.uses[i].id === id && MEDIA.uses[i].img) return MEDIA.uses[i].img;
+    }
+    return "";
+  }
+
+  window.useJumpHtml = function () {
+    var ar = (typeof lang === "undefined" || lang === "ar");
+    var h = '<nav class="use-jump">';
+    window.USE_SPOTS.forEach(function (s) {
+      h += '<a href="#spaces:' + s.id + '" data-tab="spaces" data-anchor="' + s.id + '">' + (ar ? s.arT : s.enT) + "</a>";
+    });
+    h += "</nav>";
+    return h;
+  };
+
+  window.usePlacesHtml = function () {
+    var ar = (typeof lang === "undefined" || lang === "ar");
+    var h = window.useJumpHtml();
+    window.USE_SPOTS.forEach(function (s) {
+      var img = spotImg(s.media);
+      var title = ar ? s.arT : s.enT;
+      h += '<article class="use-spot' + (img ? "" : " no-photo") + '" id="' + s.id + '">';
+      if (img) {
+        h += '<figure class="photo-card"><img src="' + img + '" alt="' + title + '" width="640" height="480" loading="lazy" decoding="async"/>';
+        h += "<figcaption>" + (ar ? "فكرة تطبيق — ليست سابقة أعمال" : "Application idea — not a past project") + "</figcaption></figure>";
+      }
+      h += "<div><h3>" + title + "</h3><p>" + (ar ? s.ar : s.en) + "</p>";
+      if (s.tab) {
+        h += '<button class="btn navy" type="button" data-tab="' + s.tab + '">' + (ar ? s.ctaAr : s.ctaEn) + "</button>";
+      }
+      h += "</div></article>";
+    });
+    return h;
+  };
+
   window.chooserInner = function (d) {
     var ar = (typeof lang === "undefined" || lang === "ar");
     var rows = [
@@ -129,7 +197,7 @@
     h += '<p class="lead">' + (ar
       ? "نبعتلك معاينة شكل تقريبية للحائط بالخامة اللي اخترتها: خشب، رخام، سيراميك لوك، شيبورد/WPC، أو كتان. كده تشوف الاتجاه قبل ما نفصل الكمية."
       : "We send an approximate look preview of the wall in the finish you picked: wood, marble, ceramic look, chipboard/WPC, or linen. You see the direction before quantity is cut.") + "</p>";
-    if (img) h += '<figure class="photo-card" style="max-width:720px"><img src="' + img + '" alt="' + (ar ? "فكرة استوديو معاينة" : "Preview studio idea") + '"/><figcaption>' + (ar ? "فكرة تطبيق لاستوديو المعاينة — ليست صورة مشروع حقيقي" : "Application idea of a preview studio — not a real project photo") + "</figcaption></figure>";
+    if (img) h += '<figure class="photo-card" style="max-width:720px"><img src="' + img + '" alt="' + (ar ? "فكرة استوديو معاينة" : "Preview studio idea") + '" width="640" height="480" loading="lazy" decoding="async"/><figcaption>' + (ar ? "فكرة تطبيق لاستوديو المعاينة — ليست صورة مشروع حقيقي" : "Application idea of a preview studio — not a real project photo") + "</figcaption></figure>";
     h += '<div class="grid3" style="margin-top:16px">';
     var steps = [
       ["1. صور الأوضة", "1. Room photos", "صورة واضحة للحائط من قدام، وصورة جانبية لو فيه عمود أو فتحة.", "A clear front photo of the wall, plus a side photo if there is a column or opening."],
@@ -150,23 +218,19 @@
 
   function extraHome(d) {
     var ar = (typeof lang === "undefined" || lang === "ar");
-    var uses = (window.MEDIA && MEDIA.uses) ? MEDIA.uses : [];
-    var h = '<section class="home-sec" id="home-uses"><h2>' + (ar ? "أفكار تطبيق — استخدامات" : "Application ideas — uses") + "</h2>";
-    h += '<p class="lead">' + (ar ? "صور استرشادية للشكل في المحل والمول والمكتب والكافيه والفندق. ليست سابقة أعمال وليست أسماء عملاء." : "Guide images for a shop, mall, office, café and hotel. Not past projects and not client names.") + "</p>";
-    h += '<div class="photo-carousel">';
-    uses.forEach(function (u) {
-      h += '<figure class="photo-card"><img src="' + u.img + '" alt="' + (ar ? u.ar : u.en) + '" loading="lazy"/><figcaption>' + (ar ? u.ar : u.en) + "<br/><small>" + (ar ? "فكرة تطبيق — ليست سابقة أعمال" : "Application idea — not a past project") + "</small></figcaption></figure>";
-    });
-    h += "</div>";
-    h += '<div class="center-actions"><button class="btn navy" type="button" data-tab="spaces">' + (ar ? "كل أماكن الاستخدام" : "All use places") + "</button>";
-    h += '<button class="btn ghost" type="button" data-tab="chooser">' + (ar ? "اختار إيه" : "Chooser") + "</button></div></section>";
+    var h = '<section class="home-sec" id="home-uses"><h2>' + (ar ? "أماكن الاستخدام" : "Where it is used") + "</h2>";
+    h += '<p class="lead">' + (ar ? "محلات، مولات، مكاتب، فنادق، كافيهات، وعيادات، ومعاينة 3D ودليل الاختيار. الصور أفكار تطبيق وليست سابقة أعمال." : "Shops, malls, offices, hotels, cafés and clinics, plus a 3D preview and the chooser. Photos are application ideas, not past projects.") + "</p>";
+    h += (typeof useJumpHtml === "function" ? useJumpHtml() : "");
+    h += '<div class="center-actions"><button class="btn navy" type="button" data-tab="spaces" data-anchor="use-shop">' + (ar ? "كل أماكن الاستخدام" : "All use places") + "</button>";
+    h += '<button class="btn navy" type="button" data-tab="chooser">' + (ar ? "اختار إيه" : "Chooser") + "</button></div></section>";
     h += '<section class="home-sec"><h2>' + (ar ? "اختار الخامة قبل ما تطلب الكمية" : "Pick the finish before you order volume") + "</h2>";
     h += '<p class="lead">' + (ar ? "رخام للمظهر الفاخر، خشب للدفء، سيراميك للمسح، شيبورد/WPC للفلوت والأعمدة، كتان للأماكن الجافة الهادية. العروض 13.4 و16 و20، والألواح 5مم." : "Marble for a luxury look, wood for warmth, ceramic for wiping, chipboard/WPC for flutes and columns, linen for quiet dry rooms. Widths 13.4, 16 and 20; sheets are 5mm.") + "</p>";
     h += '<div class="center-actions"><button class="btn navy" type="button" data-tab="chooser">' + (ar ? "افتح دليل الاختيار" : "Open the chooser") + "</button></div></section>";
     var studio = "";
+    var uses = (window.MEDIA && MEDIA.uses) ? MEDIA.uses : [];
     uses.forEach(function (u) { if (u.id === "studio") studio = u.img; });
     h += '<section class="home-sec cta-3d"><div class="cta-3d-in">';
-    if (studio) h += '<img src="' + studio + '" alt="" style="width:220px;height:140px;object-fit:cover;border-radius:12px"/>';
+    if (studio) h += '<img src="' + studio + '" alt="" width="220" height="140" loading="lazy" decoding="async" style="width:220px;height:140px;object-fit:cover;border-radius:12px"/>';
     h += "<div><h2>" + (ar ? "معاينة 3D للحائط" : "3D wall preview") + "</h2><p>" + (ar
       ? "ابعت صور الأوضة والمقاسات على واتساب، ونرجّع معاينة شكل قبل التركيب. معاينة تصميم، مش رسم مختوم."
       : "Send room photos and sizes on WhatsApp and we return a look preview before install. A design preview, not a stamped drawing.") + "</p></div>";

@@ -3,13 +3,13 @@
   function t() { return (typeof lang !== "undefined" && lang === "en") ? EN : AR; }
   function img(src, alt) {
     if (!src) return "";
-    return '<img src="' + src + '" alt="' + (alt || "") + '" loading="lazy" decoding="async"/>';
+    return '<img src="' + src + '" alt="' + (alt || "") + '" width="640" height="480" loading="lazy" decoding="async"/>';
   }
   function injectHeroPhoto() {
     var board = document.querySelector("#p-home .board");
     if (!board || !window.MEDIA || !MEDIA.hero) return;
     if (board.querySelector("img.hero-photo")) return;
-    board.insertAdjacentHTML("afterbegin", '<img class="hero-photo" src="' + MEDIA.hero + '" alt="TuBaoBao Egypt" loading="eager"/>');
+    board.insertAdjacentHTML("afterbegin", '<img class="hero-photo" src="' + MEDIA.hero + '" alt="TuBaoBao Egypt" width="1280" height="800" loading="eager" decoding="async"/>');
   }
   function injectFeatures() {
     var home = $("p-home");
@@ -52,7 +52,10 @@
       im.className = "finish-photo";
       im.src = src;
       im.alt = code;
+      im.setAttribute("width", "640");
+      im.setAttribute("height", "480");
       im.loading = "lazy";
+      im.decoding = "async";
       if (chip) card.insertBefore(im, chip);
       else card.insertBefore(im, card.firstChild);
       if (m.variants && m.variants.length) {
@@ -95,22 +98,80 @@
   }
   function injectGalleryPage() {
     if (!window.MEDIA || !MEDIA.gallery) return;
-    var existing = $("p-gallery");
-    if (existing) existing.remove();
     var app = $("app");
     if (!app) return;
+    var batch = 12;
+    var shown = window.__galleryShown || batch;
+    if (shown > MEDIA.gallery.length) shown = MEDIA.gallery.length;
+    var existing = $("p-gallery");
+    if (existing && existing.getAttribute("data-shown") === String(shown) && existing.getAttribute("data-lang") === String(lang)) return;
+    if (existing) existing.remove();
     var d = t();
     var sec = document.createElement("section");
     sec.id = "p-gallery";
     sec.className = "page" + (typeof tab !== "undefined" && tab === "gallery" ? " on" : "");
+    sec.setAttribute("data-shown", String(shown));
+    sec.setAttribute("data-lang", String(lang));
     var title = (d && d.galleryT) || (lang === "ar" ? "المعرض" : "Gallery");
     var lead = (d && d.galleryS) || "";
+    var rows = MEDIA.gallery.slice(0, shown);
+    var more = MEDIA.gallery.length > shown;
+    var moreLabel = lang === "ar" ? ("صور أكتر (" + shown + " / " + MEDIA.gallery.length + ")") : ("More photos (" + shown + " / " + MEDIA.gallery.length + ")");
     sec.innerHTML = '<div class="wrap"><h2>' + title + '</h2><p class="lead">' + lead + '</p><div class="photo-grid">' +
-      MEDIA.gallery.map(function (row) {
+      rows.map(function (row) {
         return '<figure class="photo-card">' + img(row[0], lang === "ar" ? row[1] : row[2]) +
           "<figcaption>" + (lang === "ar" ? row[1] : row[2]) + "</figcaption></figure>";
-      }).join("") + "</div></div>";
+      }).join("") + "</div>" +
+      (more ? '<div class="center-actions"><button type="button" class="btn navy" id="galleryMore">' + moreLabel + "</button></div>" : "") +
+      "</div>";
     app.appendChild(sec);
+    var btn = $("galleryMore");
+    if (btn) btn.onclick = function () {
+      window.__galleryShown = shown + batch;
+      injectGalleryPage();
+    };
+  }
+  function stampImgs() {
+    document.querySelectorAll("#app img").forEach(function (im) {
+      if (!im.getAttribute("decoding")) im.decoding = "async";
+      if (im.classList.contains("hero-photo")) {
+        if (!im.getAttribute("width")) im.setAttribute("width", "1280");
+        if (!im.getAttribute("height")) im.setAttribute("height", "800");
+        im.loading = "eager";
+        return;
+      }
+      var thumbs = im.parentElement && im.parentElement.classList.contains("hero-thumbs");
+      if (!im.getAttribute("width")) im.setAttribute("width", thumbs ? "320" : "640");
+      if (!im.getAttribute("height")) im.setAttribute("height", thumbs ? "320" : "480");
+      if (!im.getAttribute("loading")) im.loading = "lazy";
+    });
+  }
+  function deferCarousels() {
+    document.querySelectorAll(".photo-carousel").forEach(function (car) {
+      var imgs = car.querySelectorAll("img");
+      if (imgs.length <= 4) return;
+      for (var i = 4; i < imgs.length; i++) {
+        var im = imgs[i];
+        if (im.getAttribute("src") && !im.getAttribute("data-src")) {
+          im.setAttribute("data-src", im.getAttribute("src"));
+          im.removeAttribute("src");
+        }
+      }
+      if (car.querySelector(".more-photos")) return;
+      if (!car.querySelector("img[data-src]")) return;
+      var b = document.createElement("button");
+      b.type = "button";
+      b.className = "btn navy more-photos";
+      b.textContent = (typeof lang !== "undefined" && lang === "en") ? "Show more photos" : "صور أكتر";
+      b.onclick = function () {
+        car.querySelectorAll("img[data-src]").forEach(function (im) {
+          im.setAttribute("src", im.getAttribute("data-src"));
+          im.removeAttribute("data-src");
+        });
+        b.remove();
+      };
+      car.appendChild(b);
+    });
   }
   function injectAboutLegal() {
     var about = document.querySelector("#p-about .about-card");
@@ -166,12 +227,21 @@
     injectGalleryPage();
     injectUsePhotos();
     injectAboutLegal();
+    stampImgs();
+    deferCarousels();
     scrubWrongPhone();
   }
   var _setTab = window.setTab;
   if (typeof _setTab === "function") {
     window.setTab = function (id) {
       _setTab(id);
+      setTimeout(run, 0);
+    };
+  }
+  var _render = window.render;
+  if (typeof _render === "function") {
+    window.render = function () {
+      _render();
       setTimeout(run, 0);
     };
   }
