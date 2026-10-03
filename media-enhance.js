@@ -143,6 +143,18 @@
       }
     });
   }
+
+  function injectUsePhotos() {
+    var mount = document.getElementById("usesPhotoMount");
+    if (!mount || mount.childNodes.length) return;
+    if (!window.MEDIA || !MEDIA.uses) return;
+    var note = (typeof lang !== "undefined" && lang === "en") ? "Application idea — not a past project" : "فكرة تطبيق — ليست سابقة أعمال";
+    mount.className = "photo-carousel";
+    mount.innerHTML = MEDIA.uses.map(function (u) {
+      var cap = (typeof lang !== "undefined" && lang === "en") ? u.en : u.ar;
+      return '<figure class="photo-card"><img src="' + u.img + '" alt="' + cap + '" loading="lazy"/><figcaption>' + cap + '<small>' + note + '</small></figcaption></figure>';
+    }).join("");
+  }
   function run() {
     ensureGalleryTab();
     injectHeroPhoto();
@@ -152,6 +164,7 @@
     injectFactoryPhotos();
     injectProductPhotos();
     injectGalleryPage();
+    injectUsePhotos();
     injectAboutLegal();
     scrubWrongPhone();
   }

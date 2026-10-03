@@ -39,6 +39,14 @@ window.MEDIA={
     "media/home/product-04.jpg","media/home/product-05.jpg","media/home/product-06.jpg",
     "media/home/creative-04.jpg","media/home/creative-05.jpg"
   ].map(fileUrl).filter(Boolean),
+  uses: [
+    {id:"boutique", img:fileUrl("media/uses/boutique.jpg"), ar:"بوتيك — فكرة تطبيق", en:"Boutique — application idea"},
+    {id:"mall", img:fileUrl("media/uses/mall.jpg"), ar:"مول — فكرة تطبيق", en:"Mall — application idea"},
+    {id:"office", img:fileUrl("media/uses/office.jpg"), ar:"مكتب — فكرة تطبيق", en:"Office — application idea"},
+    {id:"cafe", img:fileUrl("media/uses/cafe.jpg"), ar:"كافيه — فكرة تطبيق", en:"Café — application idea"},
+    {id:"studio", img:fileUrl("media/uses/studio-3d.jpg"), ar:"استوديو معاينة 3D — فكرة تطبيق", en:"3D preview studio — application idea"},
+    {id:"hotel", img:fileUrl("media/uses/hotel.jpg"), ar:"فندق — فكرة تطبيق", en:"Hotel — application idea"}
+  ],
   partner: [
     {img:fileUrl("media/partner/china-campus-01.jpg"), ar:"حرم شريك دولي (الصين) — ليس مصنع 6 أكتوبر", en:"International partner campus (China) — not the 6th of October factory"},
     {img:fileUrl("media/partner/china-campus-02.jpg"), ar:"شراكة توريد دولية — للتوضيح فقط", en:"International supply partner — captioned carefully"},
@@ -52,7 +60,8 @@ window.MEDIA={
   Object.keys(CODE_MEDIA).sort().forEach(function(code){
     var src=codePrimary(code); if(src) g.push([src, code, code]);
   });
-  (MEDIA.works||[]).forEach(function(src,i){ g.push([src, "فكرة تطبيق "+(i+1), "Concept "+(i+1)]); });
+  (MEDIA.uses||[]).forEach(function(u){ if(u&&u.img) g.push([u.img, u.ar+" — ليست سابقة أعمال", u.en+" — not a past project"]); });
+  (MEDIA.works||[]).forEach(function(src,i){ g.push([src, "فكرة تطبيق "+(i+1)+" — ليست سابقة أعمال", "Concept "+(i+1)+" — not a past project"]); });
   (MEDIA.lifestyle||[]).forEach(function(src,i){ g.push([src, "لايف ستايل "+(i+1), "Lifestyle "+(i+1)]); });
   (MEDIA.factory||[]).forEach(function(src,i){ g.push([src, "تصنيع "+(i+1), "Manufacturing "+(i+1)]); });
   (MEDIA.partner||[]).forEach(function(row){ if(row&&row.img) g.push([row.img, row.ar, row.en]); });
