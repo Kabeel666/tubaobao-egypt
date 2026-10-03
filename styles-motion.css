@@ -1,0 +1,100 @@
+/* Light motion. Reduced-motion users get a still page. */
+@keyframes tbb-rise {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: none; }
+}
+.hero-rich .hero-in > * {
+  animation: tbb-rise .72s ease both;
+}
+.hero-rich .hero-in > *:nth-child(2) { animation-delay: .12s; }
+.hero-rich .stat { animation: tbb-rise .55s ease both; }
+.hero-rich .stat:nth-child(1) { animation-delay: .16s; }
+.hero-rich .stat:nth-child(2) { animation-delay: .24s; }
+.hero-rich .stat:nth-child(3) { animation-delay: .32s; }
+.hero-rich .stat:nth-child(4) { animation-delay: .40s; }
+
+.card,
+.edu-card,
+.feature-card,
+.use-spot,
+.process-card,
+.photo-card,
+.fam-card {
+  transition: transform .22s ease, box-shadow .22s ease, border-color .15s ease;
+}
+.card:hover,
+.edu-card:hover,
+.feature-card:hover,
+.use-spot:hover,
+.process-card:hover,
+.photo-card:hover,
+.fam-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 14px 30px rgba(27,36,48,.1);
+}
+
+.family-marquee {
+  overflow: hidden;
+  background: #fff;
+  border-bottom: 1px solid var(--line);
+  padding: 10px 0;
+}
+.mq-track {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  width: max-content;
+  direction: ltr;
+  animation: tbb-marquee 48s linear infinite;
+}
+.mq-item { direction: rtl; }
+html[dir="ltr"] .mq-item, body.en .mq-item { direction: ltr; }
+.family-marquee:hover .mq-track { animation-play-state: paused; }
+.mq-item {
+  color: var(--navy);
+  font-weight: 700;
+  font-size: 14px;
+  white-space: nowrap;
+}
+.mq-dot { color: var(--gold); font-weight: 800; }
+@keyframes tbb-marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .hero-rich .hero-in > *,
+  .hero-rich .stat,
+  .mq-track {
+    animation: none !important;
+  }
+  .card,
+  .edu-card,
+  .feature-card,
+  .use-spot,
+  .process-card,
+  .photo-card,
+  .fam-card,
+  .btn,
+  .fab-wa {
+    transition: none;
+  }
+  .card:hover,
+  .edu-card:hover,
+  .feature-card:hover,
+  .use-spot:hover,
+  .process-card:hover,
+  .photo-card:hover,
+  .fam-card:hover,
+  .btn:hover,
+  .fab-wa:hover {
+    transform: none;
+  }
+  .mq-track {
+    width: auto;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 0 16px;
+  }
+}
