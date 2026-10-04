@@ -47,6 +47,7 @@
     document.documentElement.lang = lang === "zh" ? "zh-CN" : lang;
     document.documentElement.dir = d.dir || (lang === "ar" ? "rtl" : "ltr");
     document.body.className = lang === "ar" ? "" : (lang === "zh" ? "zh en" : "en");
+    if (d && d.brand) document.title = d.brand + " — " + (d.sub || "");
   }
 
   function wire() {
