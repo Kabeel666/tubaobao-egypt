@@ -1,6 +1,6 @@
 (function () {
   var W = window.WA || "";
-  function primaryIds() { return window.PRIMARY || ["home", "products", "colors", "chooser", "viz", "contact"]; }
+  function primaryIds() { return window.PRIMARY || ["home", "products", "colors", "chooser", "viz"]; }
 
   function $(id) { return document.getElementById(id); }
   function t() { if (typeof lang !== "undefined" && lang === "zh" && typeof ZH !== "undefined") return ZH; return (typeof lang !== "undefined" && lang === "en") ? EN : (typeof lang !== "undefined" && lang === "ar" ? AR : EN); }

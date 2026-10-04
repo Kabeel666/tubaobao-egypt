@@ -51,7 +51,7 @@
   addTab("looks","ألوان وتشطيبات","Colors & finishes","花色与饰面","colors");
   addTab("videos","فيديو","Videos","视频","spaces");
   addTab("install","تركيب","Install","安装","videos");
-  window.PRIMARY=["home","products","colors","looks","videos","install","contact"];
+  window.PRIMARY=["home","products","colors","looks","videos","install"];
   window.IDEA_VIDEOS=[
     {src:"media/videos/idea-cafe.mp4", gif:"media/videos/gif/idea-cafe.gif", poster:"media/uses/cafe.jpg", ar:"كافيه", en:"Café", zh:"咖啡店"},
     {src:"media/videos/idea-hotel.mp4", gif:"media/videos/gif/idea-hotel.gif", poster:"media/uses/hotel.jpg", ar:"فندق", en:"Hotel", zh:"酒店"},
@@ -98,5 +98,5 @@
     return h;
   };
 })();
-window.PRIMARY=["home","products","colors","chooser","viz","contact"];
+window.PRIMARY=["home","products","colors","chooser","viz"];
 

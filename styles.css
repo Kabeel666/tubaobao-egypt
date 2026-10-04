@@ -69,7 +69,7 @@ footer img.brand-logo{width:64px;height:64px;object-fit:cover;border-radius:10px
 /* Pages */
 .page{display:none;padding:28px 0 80px;min-height:58vh}
 .page.on{display:block}
-.hero{color:#fff;background:linear-gradient(165deg,#1b2430 0%,#243044 100%);padding:56px 0 52px;margin:-28px 0 0;position:relative;overflow:hidden}
+.hero{color:#fff;background:linear-gradient(165deg,#1b2430 0%,#243044 100%);padding:18px 0 44px;margin:-28px 0 0;position:relative;overflow:hidden}
 .hero::after{content:"";position:absolute;inset:auto -20% -40% 40%;height:280px;background:radial-gradient(circle,rgba(194,163,107,.18),transparent 70%);pointer-events:none}
 .hero-in{display:grid;grid-template-columns:1.05fr .95fr;gap:48px;align-items:center;position:relative;z-index:1}
 .k{color:var(--gold2);font-weight:600;margin:0 0 14px;font-size:12px;letter-spacing:.04em}

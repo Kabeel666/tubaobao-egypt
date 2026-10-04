@@ -55,5 +55,5 @@
   else hook();
 })();
 
-window.PRIMARY = ["home", "products", "colors", "chooser", "viz", "contact"];
+window.PRIMARY = ["home", "products", "colors", "chooser", "viz"];
 

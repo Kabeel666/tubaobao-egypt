@@ -8,7 +8,7 @@
       ["viz", "معاينة 3D", "3D preview", "3D 预览"]
     );
   }
-  window.PRIMARY = ["home", "products", "colors", "chooser", "viz", "contact"];
+  window.PRIMARY = ["home", "products", "colors", "chooser", "viz"];
 
   function L(ar, en, zh) {
     if (typeof lang !== "undefined" && lang === "ar") return ar;

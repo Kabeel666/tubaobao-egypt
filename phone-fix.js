@@ -3,7 +3,7 @@
   var fab=document.getElementById("fabWa");
   var W=(hdr&&hdr.getAttribute("href"))||(fab&&fab.getAttribute("href"))||"";
   window.WA=W;
-  window.PRIMARY = ["home", "products", "colors", "trade", "factory", "contact"];
+  window.PRIMARY = ["home", "products", "colors", "chooser", "viz"];
 
   function patchFaq(list, phoneQ, phoneA) {
     for (var i = 0; i < list.length; i++) {
