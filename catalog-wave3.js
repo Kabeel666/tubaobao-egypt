@@ -62,7 +62,9 @@
     {src:"media/videos/idea-kitchen.mp4", gif:"media/videos/gif/idea-kitchen.gif", poster:"media/uses/kitchen-grey-marble.jpg", ar:"مطبخ", en:"Kitchen", zh:"厨房"},
     {src:"media/videos/idea-living.mp4", gif:"media/videos/gif/idea-living.gif", poster:"media/uses/living-walnut.jpg", ar:"صالة", en:"Living room", zh:"客厅"}
   ];
-  window.IDEA_GIFS=(window.IDEA_VIDEOS||[]).filter(function(v){return !!v.gif;});
+  window.IDEA_GIFS=(window.IDEA_VIDEOS||[]).filter(function(v){
+    return v.gif==="media/videos/gif/idea-cafe.gif" || v.gif==="media/videos/gif/idea-pharmacy.gif";
+  });
   function L3(ar,en,zh){ if(typeof lang!=="undefined"&&lang==="ar") return ar; if(typeof lang!=="undefined"&&lang==="zh") return zh||en; return en; }
   window.videosInner=function(){
     var vids=window.IDEA_VIDEOS||[];
@@ -96,3 +98,5 @@
     return h;
   };
 })();
+window.PRIMARY=["home","products","colors","chooser","viz","contact"];
+

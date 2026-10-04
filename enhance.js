@@ -1,6 +1,6 @@
 (function () {
   var W = window.WA || "";
-  var PRIMARY = window.PRIMARY || ["home", "products", "colors", "trade", "factory", "contact"];
+  function primaryIds() { return window.PRIMARY || ["home", "products", "colors", "chooser", "viz", "contact"]; }
 
   function $(id) { return document.getElementById(id); }
   function t() { if (typeof lang !== "undefined" && lang === "zh" && typeof ZH !== "undefined") return ZH; return (typeof lang !== "undefined" && lang === "en") ? EN : (typeof lang !== "undefined" && lang === "ar" ? AR : EN); }
@@ -26,8 +26,8 @@
     if (tabs && tabs.parentElement) tabs.parentElement.style.display = "none";
 
     if (!primaryNav) return;
-    var primary = TABS.filter(function (x) { return PRIMARY.indexOf(x[0]) >= 0; });
-    var secondary = TABS.filter(function (x) { return PRIMARY.indexOf(x[0]) < 0; });
+    var primary = TABS.filter(function (x) { return primaryIds().indexOf(x[0]) >= 0; });
+    var secondary = TABS.filter(function (x) { return primaryIds().indexOf(x[0]) < 0; });
     var secondaryOn = secondary.some(function (x) { return x[0] === tab; });
 
     primaryNav.innerHTML = primary.map(function (x) {
@@ -65,7 +65,7 @@
       el.onclick = function (e) {
         e.preventDefault();
         menuOpen = false;
-        if (PRIMARY.indexOf(el.dataset.tab) >= 0) moreOpen = false;
+        if (primaryIds().indexOf(el.dataset.tab) >= 0) moreOpen = false;
         else moreOpen = true;
         if (typeof setTab === "function") setTab(el.dataset.tab);
         else location.hash = el.dataset.tab;

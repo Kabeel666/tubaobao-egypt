@@ -1,3 +1,18 @@
+function spZh(x){
+  var ZHMAP={
+    SP01:["电视墙","住宅"],SP02:["别墅入口","住宅"],SP03:["主卧","住宅"],SP04:["家庭办公","住宅"],SP05:["开放式厨房","住宅"],
+    SP06:["室内卫生间","住宅"],SP07:["公寓走廊","住宅"],SP08:["封闭阳台","住宅"],SP09:["儿童房","住宅"],SP10:["客厅","住宅"],
+    SP11:["酒店大堂","商业"],SP12:["酒店客房","商业"],SP13:["餐厅","商业"],SP14:["咖啡店","商业"],SP15:["诊所","商业"],
+    SP16:["办公套间","商业"],SP17:["展厅","商业"],SP18:["零售店","商业"],SP19:["健身房","商业"],SP20:["礼拜空间","商业"],
+    SP21:["学校 / 托儿所","商业"],SP22:["牙科诊所","商业"],SP23:["美容沙龙","商业"],SP24:["摄影工作室","商业"],SP25:["会议室","商业"],
+    SP26:["公司前台","商业"],SP27:["酒店式公寓","商业"],SP28:["海滨别墅","住宅"],SP29:["复式住宅","住宅"],SP30:["顶层公寓","住宅"],
+    SP31:["行政单元","商业"],SP32:["医疗中心","商业"],SP33:["阅读角","住宅"],SP34:["洗衣房","住宅"],SP35:["室内楼梯墙","住宅"],
+    SP36:["装饰天花带","商业"],SP37:["包柱","商业"],SP38:["舞台背景","商业"],SP39:["等候区","商业"],SP40:["小型商用厨房","商业"]
+  };
+  if(lang==="ar") return [x[1], x[3]];
+  if(lang==="zh") return ZHMAP[x[0]] || [x[2], x[4]==="Residential"?"住宅":"商业"];
+  return [x[2], x[4]];
+}
 function render(){
   const d=t();
   document.documentElement.lang=lang;
@@ -6,7 +21,7 @@ function render(){
   $("brandName").innerHTML=d.brand+"<small>"+d.sub+"</small>";
   if(typeof window.__tbbSyncLang==="function") window.__tbbSyncLang();
   $("tabs").innerHTML=TABS.map((row)=>`<button type="button" data-tab="${row[0]}" class="${tab===row[0]?"on":""}">${typeof tabLabel==="function"?tabLabel(row):(lang==="ar"?row[1]:row[2])}</button>`).join("");
-  const shown=F.filter(x=>fam==="all"||finishFam(x)===fam);
+  const shown=F.filter(x=>fam==="all"||x[1]===fam);
   const famBtns=[["all",d.all|| (lang==="ar"?"الكل":"All")],["wood",d.wood|| (lang==="ar"?"خشب":"Wood")],["marble",d.marble|| (lang==="ar"?"رخام":"Marble")],["ceramic",d.ceramic|| (lang==="ar"?"سيراميك":"Ceramic")],["chipboard",d.chipboard|| (lang==="ar"?"شيبورد/WPC":"Chipboard/WPC")],["textile",d.textile|| (lang==="ar"?"كتان":"Linen")],["solid",d.solid|| (lang==="ar"?"ساده":"Solid")],["leather",d.leather|| (lang==="ar"?"جلد":"Leather")]];
   $("app").innerHTML=
     page("home", richHome(d)) +
@@ -19,7 +34,7 @@ function render(){
     page("looks", (typeof looksInner==="function"?looksInner(d):"")) +
     page("videos", (typeof videosInner==="function"?videosInner(d):"")) +
     page("viz", (typeof vizInner==="function"?vizInner(d):"")) +
-    page("spaces", `<div class="wrap"><h2>${d.spT}</h2><p class="lead">${d.spS}</p><p class="note">${lang==="ar"?"الأقسام دي أفكار استخدام. الصور المولَّدة مش سابقة أعمال ومش أسماء عملاء. الأسعار للطلب فقط.":(lang==="zh"?"这些分区是用途构思。生成图片不是既往工程，也不是客户名称。价格仅询价。":"These sections are use ideas. Generated photos are not past projects and not client names. Prices are quote-only.")}</p>${typeof usePlacesHtml==="function"?usePlacesHtml():""}<div class="grid4">${SP.map(x=>`<article class="card"><div class="meta"><b>${lang==="ar"?x[1]:x[2]}</b><p>${lang==="ar"?x[3]:x[4]}</p><small>${lang==="ar"?"فكرة استخدام":(lang==="zh"?"用途构思":"Use idea")}</small></div></article>`).join("")}</div></div>`) +
+    page("spaces", `<div class="wrap"><h2>${d.spT}</h2><p class="lead">${d.spS}</p><p class="note">${lang==="ar"?"الأقسام دي أفكار استخدام. الصور المولَّدة مش سابقة أعمال ومش أسماء عملاء. الأسعار للطلب فقط.":(lang==="zh"?"这些分区是用途构思。生成图片不是既往工程，也不是客户名称。价格仅询价。":"These sections are use ideas. Generated photos are not past projects and not client names. Prices are quote-only.")}</p>${typeof usePlacesHtml==="function"?usePlacesHtml():""}<div class="grid4">${SP.map(x=>{const sp=spZh(x);return `<article class="card"><div class="meta"><b>${sp[0]}</b><p>${sp[1]}</p><small>${lang==="ar"?"فكرة استخدام":(lang==="zh"?"用途构思":"Use idea")}</small></div></article>`;}).join("")}</div></div>`) +
     page("specs", `<div class="wrap"><h2>${d.spxT}</h2><p class="lead">${d.spxS}</p><div class="scroll"><table><tr>${d.specH.map(h=>`<th>${h}</th>`).join("")}</tr>${d.spec.map(r=>`<tr>${r.map(c=>`<td>${c}</td>`).join("")}</tr>`).join("")}</table></div></div>`) +
     page("calc", `<div class="wrap"><h2>${d.calcT}</h2><p class="lead">${d.calcS}</p><div class="calc"><div><label>${d.lbW}</label><input id="wallW" type="number" step="0.1" value="4"/><label>${d.lbH}</label><input id="wallH" type="number" step="0.1" value="2.8"/><label>${d.lbSz}</label><select id="slatW"><option value="0.134">13.4</option><option value="0.16">16</option><option value="0.18" selected>18</option><option value="0.20">20</option></select><p class="note">${d.calcNote}</p></div><div class="result"><div id="resA"></div><div id="resP"></div><div id="resS"></div></div></div></div>`) +
     page("install", `<div class="wrap"><h2>${d.insT}</h2><p class="lead">${d.insS}</p>${d.steps.map((s,i)=>`<div class="step"><div class="num">${i+1}</div><div><b>${s[0]}</b><div>${s[1]}</div></div></div>`).join("")}</div>`) +

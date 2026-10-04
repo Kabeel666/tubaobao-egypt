@@ -19,6 +19,19 @@
     return en;
   };
 
+
+  window.finishFam = function (x) {
+    var key = (typeof x === "string") ? x : ((x && x[1]) || "");
+    var zh = { wood: "木材", marble: "大理石", leather: "皮革", textile: "亚麻", ceramic: "陶瓷", chipboard: "刨花板", solid: "纯色", sheet: "板材" };
+    var en = { wood: "Wood", marble: "Marble", leather: "Leather", textile: "Linen", ceramic: "Ceramic", chipboard: "Chipboard", solid: "Solid", sheet: "Sheet" };
+    var ar = { wood: "خشب", marble: "رخام", leather: "جلد", textile: "كتان", ceramic: "سيراميك", chipboard: "شيبورد", solid: "ساده", sheet: "لوح" };
+    var d = (typeof window.t === "function") ? window.t() : null;
+    if (typeof lang !== "undefined" && lang === "zh") return zh[key] || key;
+    if (d && d[key]) return d[key];
+    var bag = (typeof lang !== "undefined" && lang === "ar") ? ar : en;
+    return bag[key] || key;
+  };
+
   if (typeof finishLabel === "function" || typeof window.finishLabel === "function") {
     window.finishLabel = function (x) {
       if (lang === "ar") return x[2];

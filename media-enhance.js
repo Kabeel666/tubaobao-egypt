@@ -1,6 +1,15 @@
 (function () {
   function $(id) { return document.getElementById(id); }
-  function t() { return (typeof lang !== "undefined" && lang === "en") ? EN : AR; }
+  function t() {
+    if (typeof lang !== "undefined" && lang === "zh" && typeof ZH !== "undefined") return ZH;
+    if (typeof lang !== "undefined" && lang === "en") return EN;
+    return (typeof lang !== "undefined" && lang === "ar") ? AR : EN;
+  }
+  function L(ar, en, zh) {
+    if (typeof lang !== "undefined" && lang === "ar") return ar;
+    if (typeof lang !== "undefined" && lang === "zh") return zh || en;
+    return en;
+  }
   function img(src, alt) {
     if (!src) return "";
     return '<img src="' + src + '" alt="' + (alt || "") + '" width="640" height="480" loading="lazy" decoding="async"/>';
@@ -32,13 +41,13 @@
       if (card.querySelector(".approx-swatch")) return;
       var note = document.createElement("span");
       note.className = "approx-swatch";
-      note.textContent = (typeof lang !== "undefined" && lang === "en") ? "Approx. swatch" : "عينة تقريبية";
+      note.textContent = L("عينة تقريبية", "Approx. swatch", "近似色块");
       card.appendChild(note);
     });
   }
   function injectFinishPhotos() {
     if (!window.CODE_MEDIA) return;
-    document.querySelectorAll("#p-colors .card").forEach(function (card) {
+    document.querySelectorAll("#p-colors .card, #p-sheets .card").forEach(function (card) {
       var codeEl = card.querySelector(".code");
       if (!codeEl) return;
       var code = codeEl.textContent.trim();
@@ -112,11 +121,11 @@
     sec.className = "page" + (typeof tab !== "undefined" && tab === "gallery" ? " on" : "");
     sec.setAttribute("data-shown", String(shown));
     sec.setAttribute("data-lang", String(lang));
-    var title = (d && d.galleryT) || (lang === "ar" ? "المعرض" : "Gallery");
+    var title = (d && d.galleryT) || L("المعرض", "Gallery", "图库");
     var lead = (d && d.galleryS) || "";
     var rows = MEDIA.gallery.slice(0, shown);
     var more = MEDIA.gallery.length > shown;
-    var moreLabel = lang === "ar" ? ("صور أكتر (" + shown + " / " + MEDIA.gallery.length + ")") : ("More photos (" + shown + " / " + MEDIA.gallery.length + ")");
+    var moreLabel = L("صور أكتر", "More photos", "更多照片") + " (" + shown + " / " + MEDIA.gallery.length + ")";
     sec.innerHTML = '<div class="wrap"><h2>' + title + '</h2><p class="lead">' + lead + '</p><div class="photo-grid">' +
       rows.map(function (row) {
         return '<figure class="photo-card">' + img(row[0], lang === "ar" ? row[1] : row[2]) +
@@ -162,7 +171,7 @@
       var b = document.createElement("button");
       b.type = "button";
       b.className = "btn navy more-photos";
-      b.textContent = (typeof lang !== "undefined" && lang === "en") ? "Show more photos" : "صور أكتر";
+      b.textContent = L("صور أكتر", "Show more photos", "显示更多照片");
       b.onclick = function () {
         car.querySelectorAll("img[data-src]").forEach(function (im) {
           im.setAttribute("src", im.getAttribute("data-src"));
@@ -209,10 +218,10 @@
     var mount = document.getElementById("usesPhotoMount");
     if (!mount || mount.childNodes.length) return;
     if (!window.MEDIA || !MEDIA.uses) return;
-    var note = (typeof lang !== "undefined" && lang === "en") ? "Application idea — not a past project" : "فكرة تطبيق — ليست سابقة أعمال";
+    var note = L("فكرة تطبيق — ليست سابقة أعمال", "Application idea — not a past project", "上墙构想，不是已完工项目");
     mount.className = "photo-carousel";
     mount.innerHTML = MEDIA.uses.map(function (u) {
-      var cap = (typeof lang !== "undefined" && lang === "en") ? u.en : u.ar;
+      var cap = L(u.ar, u.en, u.zh || u.en);
       return '<figure class="photo-card"><img src="' + u.img + '" alt="' + cap + '" loading="lazy"/><figcaption>' + cap + '<small>' + note + '</small></figcaption></figure>';
     }).join("");
   }

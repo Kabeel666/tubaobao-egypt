@@ -393,7 +393,7 @@
     h += '<p class="lead">' + tx(d, "videoS", "", "", "") + "</p>";
     h += '<div class="video-strip-grid">';
     var gifs = (window.IDEA_GIFS && window.IDEA_GIFS.length) ? window.IDEA_GIFS : (window.IDEA_VIDEOS || []).filter(function (v) { return v.gif; });
-    gifs.slice(0, 6).forEach(function (v) {
+    gifs.slice(0, 2).forEach(function (v) {
       var cap = L(v.ar, v.en, v.zh);
       var note = tx(d, "videoNote", "فكرة بصرية للتطبيق — مش تصوير موقع حقيقي", "A visual application idea — not a filmed job", "视觉构想，并非实拍工程");
       h += '<figure class="photo-card"><img class="gif-loop" src="' + v.gif + '" alt="' + cap + '" width="480" height="300" loading="lazy" decoding="async"/>';
@@ -434,7 +434,7 @@
         var famZh = {wood:"木材",marble:"大理石",leather:"皮革",textile:"亚麻",ceramic:"陶瓷",chipboard:"刨花板",solid:"纯色",sheet:"板材"};
         name = p.en + (famZh[p.fam] ? " · " + famZh[p.fam] : "");
       }
-      var kind = p.kind === "sheet" ? L("لوح", "Sheet", "大板") : p.fam;
+      var kind = p.kind === "sheet" ? L("لوح", "Sheet", "大板") : (typeof finishFam === "function" ? finishFam(p.fam) : p.fam);
       h += '<article class="card finish-mini" data-tab="' + (p.kind === "sheet" ? "sheets" : "colors") + '">';
       h += '<span class="chip" style="background:' + (p.color || "#ccc") + '"></span>';
       h += '<div class="meta"><b class="code">' + p.code + "</b><div>" + name + "</div><small>" + kind + "</small></div></article>";

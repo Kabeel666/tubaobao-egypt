@@ -54,3 +54,6 @@
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", hook);
   else hook();
 })();
+
+window.PRIMARY = ["home", "products", "colors", "chooser", "viz", "contact"];
+
