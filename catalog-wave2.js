@@ -31,24 +31,24 @@
 
 (function(){
   var faqAr=[
-    ["الصيدليات وواجهات المعمل الأمامية؟","حوائط داخلية جافة أو يتم مسحها: ساده فاتح أو سيراميك لوك أو رخام هادي. مش سطح معمّق ومفيش شهادة طبية. الكود والكمية عرض على واتساب 01116208881."],
+    ["الصيدليات وواجهات المعمل الأمامية؟","حوائط داخلية جافة أو يتم مسحها: ساده فاتح أو سيراميك لوك أو رخام هادي. مش سطح معمّق ومفيش شهادة طبية. الكود والكمية عرض من زر تواصل في القائمة."],
     ["الشقق وغرف النوم والأطفال؟","خشب أو كتان أو ساده في الأوض الجافة، ورخام أو سيراميك لوك في المطبخ والحمام للاستخدام اليومي بالمسح. ليست سابقة أعمال. السعر للطلب."],
     ["المكتبات وقاعات الانتظار؟","خشب هادي أو كتان أو ساده محايد على الحائط الجاف. مفيش اسم مكان منشور. العيّنة تحسم اللون قبل الكمية."],
-    ["مصلى أو ركن داخلي؟","ينفع على الحوائط الداخلية الجافة فقط، بلون هادي. مش واجهة خارجية ومش أرضية. الكمية تتأكد على واتساب 01116208881."],
+    ["مصلى أو ركن داخلي؟","ينفع على الحوائط الداخلية الجافة فقط، بلون هادي. مش واجهة خارجية ومش أرضية. الكمية تتأكد من زر تواصل في القائمة."],
     ["المعارض وغرف العرض الداخلية؟","حائط خلف المعروض أو عمود داخلي. الصور على الموقع أفكار تطبيق مش مشاريع متسلمة. مفيش سعر منشور."],
     ["المقاول يطلب كمية كبيرة؟","أيوه. ابعت الكود أو الاتجاه، والمتر، والمكان (جاف / مسح يومي). بنراجع التوفر والمدة من المصنع من غير رقم أيام ثابت على الموقع، ومن غير سعر مكتوب."],
     ["المطبخ المفتوح والبلكونة المغطاة؟","المطبخ الداخلي: رخام أو سيراميك لوك بعيد عن الشعلة المباشرة. البلكونة المغطاة الجافة فقط، ومش شمس دائمة ومش مطر. العيّنة قبل القص."],
-    ["ليه في أكواد من غير صورة؟","اللي عليه صورة كتالوج صورة حقيقية. الباقي اتجاهات «للطلب» بلون تقريبي على الشاشة، من غير سعر. المرجع عيّنة المصنع على واتساب 01116208881."]
+    ["ليه في أكواد من غير صورة؟","اللي عليه صورة كتالوج صورة حقيقية. الباقي اتجاهات «للطلب» بلون تقريبي على الشاشة، من غير سعر. المرجع عيّنة المصنع من زر تواصل في القائمة."]
   ];
   var faqEn=[
-    ["Pharmacies and a lab front wall?","Dry interior walls, or walls that only need a wipe: light solid, ceramic look, or quiet marble. Not a sterile surface and not a medical certificate. Code and quantity are a quote on WhatsApp 01116208881."],
+    ["Pharmacies and a lab front wall?","Dry interior walls, or walls that only need a wipe: light solid, ceramic look, or quiet marble. Not a sterile surface and not a medical certificate. Code and quantity are a quote from the Contact button."],
     ["Apartments, bedrooms and kids’ rooms?","Wood, linen or solid in dry rooms, and marble or ceramic look in the kitchen and bath for a daily wipe. Not past projects. Price to order."],
     ["Libraries and waiting rooms?","Quiet wood, linen or a neutral solid on a dry wall. No venue name is published. The sample decides the colour before quantity."],
-    ["An indoor prayer corner?","Interior dry walls only, in a calm colour. Not an exterior façade and not a floor. Quantity is confirmed on WhatsApp 01116208881."],
+    ["An indoor prayer corner?","Interior dry walls only, in a calm colour. Not an exterior façade and not a floor. Quantity is confirmed from the Contact button."],
     ["Indoor galleries and display rooms?","A wall behind the display, or an interior column. Photos on this site are application ideas, not handed-over jobs. No published price."],
     ["Can a contractor order volume?","Yes. Send the code or the direction, the metres, and the room (dry / daily wipe). The factory checks availability and timing, with no fixed day-count on the site and no written price."],
     ["Open kitchens and covered balconies?","Interior kitchen: marble or ceramic look kept off the direct flame. A covered balcony only if it stays dry — not permanent sun and not rain. Sample before cutting."],
-    ["Why are some codes photo-less?","Codes with a catalog photo are real shots. The rest are to-order directions with an approximate screen colour and no price. The factory sample on WhatsApp 01116208881 is the reference."]
+    ["Why are some codes photo-less?","Codes with a catalog photo are real shots. The rest are to-order directions with an approximate screen colour and no price. The factory sample from the Contact button is the reference."]
   ];
   function add(bag, rows){
     if(!bag) return;

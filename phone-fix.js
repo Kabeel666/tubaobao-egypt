@@ -1,8 +1,8 @@
 (function () {
-  var P = "01116208881";
-  var W = "https://wa.me/201116208881";
-  window.PHONE = P;
-  window.WA = W;
+  var hdr=document.getElementById("hdrWa");
+  var fab=document.getElementById("fabWa");
+  var W=(hdr&&hdr.getAttribute("href"))||(fab&&fab.getAttribute("href"))||"";
+  window.WA=W;
   window.PRIMARY = ["home", "products", "colors", "trade", "factory", "contact"];
 
   function patchFaq(list, phoneQ, phoneA) {
@@ -15,35 +15,29 @@
 
   if (typeof AR !== "undefined") {
     if (AR.stats && AR.stats[3]) AR.stats[3] = ["داخلي", "الاستخدام"];
-    AR.ctaWa = "اطلب عرض سعر عبر واتساب";
+    AR.ctaWa = "اطلب عرض سعر";
     AR.more = "المزيد";
-    AR.waBtn = "واتساب " + P;
-    AR.waShort = "واتساب";
-    AR.exS = "تعبئة ومسار بعد الاتفاق. تواصل عبر واتساب " + P + ".";
+    AR.waBtn = "تواصل";
+    AR.waShort = "تواصل";
+    AR.exS = "تعبئة ومسار بعد الاتفاق. استخدم زر تواصل في القائمة.";
     AR.ctS = "لطلب عرض سعر أو عيّنة أو توريد — راسلنا على واتساب.";
-    AR.ctNote = "وسيلة التواصل الرسمية: واتساب " + P + " · من 8ص إلى 8م عدا الجمعة.";
-    AR.foot = "توباباو مصر · مصنع 6 أكتوبر · قطعة 37 · واتساب " + P;
-    if (AR.fac && !AR.fac.some(function (x) { return /واتساب|WhatsApp/i.test(String(x[1] || "")); })) {
-      AR.fac.push(["التواصل", "واتساب " + P]);
-    }
-    patchFaq(AR.faq, "رقم؟", "واتساب فقط: " + P + ".");
+    AR.ctNote = "التواصل من زر «تواصل» في القائمة أو زر واتساب. من 8ص إلى 8م عدا الجمعة.";
+    AR.foot = "توباباو مصر · مصنع 6 أكتوبر · قطعة 37";
+    patchFaq(AR.faq, "رقم؟", "من زر تواصل في القائمة أو زر واتساب.");
     AR.cta1 = AR.cta1 || "استعرض المنتجات";
     AR.cta2 = AR.cta2 || "بيانات المصنع";
   }
 
   if (typeof EN !== "undefined") {
-    EN.ctaWa = "Request a quote on WhatsApp";
+    EN.ctaWa = "Request a quote";
     EN.more = "More";
-    EN.waBtn = "WhatsApp " + P;
-    EN.waShort = "WhatsApp";
-    EN.exS = "Packing and route after terms. Reach us on WhatsApp " + P + ".";
+    EN.waBtn = "Contact";
+    EN.waShort = "Contact";
+    EN.exS = "Packing and route after terms. Use the Contact button in the menu.";
     EN.ctS = "For a quote, sample or supply order — message us on WhatsApp.";
-    EN.ctNote = "Official contact: WhatsApp " + P + " · 08:00–20:00 except Friday.";
-    EN.foot = "TuBaoBao Egypt · 6th of October factory · Plot 37 · WhatsApp " + P;
-    if (EN.fac && !EN.fac.some(function (x) { return /واتساب|WhatsApp/i.test(String(x[1] || "")); })) {
-      EN.fac.push(["Contact", "WhatsApp " + P]);
-    }
-    patchFaq(EN.faq, "Phone?", "WhatsApp only: " + P + ".");
+    EN.ctNote = "Use the Contact button in the menu, or the WhatsApp button. 08:00–20:00 except Friday.";
+    EN.foot = "TuBaoBao Egypt · 6th of October factory · Plot 37";
+    patchFaq(EN.faq, "Phone?", "Use the Contact button in the menu, or the WhatsApp button.");
   }
 
   function syncCounts() {

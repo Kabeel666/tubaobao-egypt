@@ -17,7 +17,7 @@
     AR.projS = "مخططات نصية استرشادية فقط. مفيش أسماء عملاء، ومفيش صور متقدّمة على إنها سابقة أعمال.";
     AR.galleryT = "صور المصنع وأفكار التطبيق";
     AR.galleryS = "صور الأكواد والتصنيع من الكتالوج. صور المحلات والمول والمكتب والكافيه والفندق والاستوديو أفكار تطبيق مولَّدة — ليست سابقة أعمال.";
-    AR.heroS = (AR.heroS || "") + " اختار الخامة حسب المكان، واطلب معاينة 3D للحائط قبل التركيب على واتساب 01116208881.";
+    AR.heroS = (AR.heroS || "") + " اختار الخامة حسب المكان، واطلب معاينة 3D للحائط قبل التركيب من زر تواصل في القائمة.";
     var extraFaq = [
       ["أختار رخام ولا خشب ولا سيراميك؟", "من غير أرقام قياسية: الرخام لوك والسيراميك لوك للحمام والمطبخ والاستقبال. الخشب والكتان للصالة والمكتب والكافيه. الشيبورد/WPC للفلوت والأعمدة والمحلات. التفاصيل في تبويب «اختار إيه»."],
       ["إيه فرق 13.4 و16 و20 واللوح 5مم؟", "13.4 سم فلوت أضيق ويلف الأعمدة. 16 سم توازن شائع. 20 سم أقل فواصل على الحوائط الواسعة. اللوح 5مم مقاس 1.22 × 2.80 م للمسطح الكبير. كله داخلي، والسعر عند الطلب."],
@@ -35,7 +35,7 @@
     EN.projS = "Text sketches only. No client names, and no photos presented as completed jobs.";
     EN.galleryT = "Factory photos and application ideas";
     EN.galleryS = "Catalog and manufacturing photos are real. Shop, mall, office, café, hotel and studio images are generated application ideas — not past projects.";
-    EN.heroS = (EN.heroS || "") + " Choose the finish by room, and request a 3D wall preview before install on WhatsApp 01116208881.";
+    EN.heroS = (EN.heroS || "") + " Choose the finish by room, and request a 3D wall preview before install from the Contact button.";
     var extraEn = [
       ["Marble, wood, or ceramic?", "No standards claimed: marble look and ceramic look for baths, kitchens and reception. Wood and linen for living rooms, offices and cafés. Chipboard/WPC for flutes, columns and shops. See the Chooser tab."],
       ["What is 13.4 vs 16 vs 20 vs the 5mm sheet?", "13.4 cm is a tighter flute and wraps columns. 16 cm is the common balance. 20 cm means fewer joints on wide walls. The 5 mm sheet is 1.22 × 2.80 m for a large plane. Interior use; price on request."],
@@ -47,16 +47,12 @@
     }));
   }
 
-  function wa(msg) {
-    var base = (window.WA || "https://wa.me/201116208881");
-    return msg ? (base + "?text=" + encodeURIComponent(msg)) : base;
-  }
 
 
   window.USE_SPOTS = [
     {id:"use-shop", media:"boutique", arT:"محلات تجارية", enT:"Shops",
-      ar:"فلوت خشب أو WPC أو رخام فاتح على حائط المحل وظهر العرض. داخلي فقط، والكمية والسعر عرض على واتساب 01116208881.",
-      en:"Wood flute, WPC, or light marble on the shop wall and display back. Interior only. Quantity and price are a WhatsApp quote on 01116208881."},
+      ar:"فلوت خشب أو WPC أو رخام فاتح على حائط المحل وظهر العرض. داخلي فقط، والكمية والسعر عرض من زر تواصل في القائمة.",
+      en:"Wood flute, WPC, or light marble on the shop wall and display back. Interior only. Quantity and price are to order from the Contact button."},
     {id:"use-mall", media:"mall", arT:"مولات", enT:"Malls",
       ar:"ساده محايد أو رخام لوك للوبي، وفلوت يلف العمود وممر المحلات. مش واجهة شمس. السعر عند الطلب.",
       en:"Neutral solid or marble look for the lobby, and a flute that wraps columns and shop corridors. Not a sun façade. Price on request."},
@@ -177,10 +173,7 @@
     h += '<p class="note">' + (ar
       ? "مفيش سعر هنا. العرض على واتساب حسب الكود والكمية. 18 سم كمان متاح مع 16 و20 في الحاسبة."
       : "No price here. The quote is on WhatsApp by code and volume. 18 cm is also available with 16 and 20 in the calculator.") + "</p>";
-    var msg = ar
-      ? "السلام عليكم، عايز أختار خامة لتوباباو. المكان: ... المقاس: ... الرطوبة: جاف / يومي. ابعتولي اقتراح كود من غير سعر منشور."
-      : "Hello, I need help choosing a TuBaoBao finish. Room: ... Size: ... Moisture: dry / daily. Please suggest a code. Quote only, no listed price.";
-    h += '<div class="center-actions"><a class="btn wa" href="' + wa(msg) + '" target="_blank" rel="noopener">' + (ar ? "ساعدني أختار على واتساب" : "Help me choose on WhatsApp") + "</a></div></div>";
+    h += '<p class="note">' + (ar ? "لو محتاج مساعدة في الاختيار، استخدم زر تواصل في القائمة أو زر واتساب." : "If you want help choosing, use the Contact button in the menu or the WhatsApp button.") + "</p></div>";
     return h;
   };
 
@@ -190,9 +183,7 @@
     if (window.MEDIA && MEDIA.uses) {
       for (var i = 0; i < MEDIA.uses.length; i++) if (MEDIA.uses[i].id === "studio") img = MEDIA.uses[i].img;
     }
-    var msg = ar
-      ? "السلام عليكم، عايز معاينة 3D لحائط قبل التركيب. هبعت صور الأوضة والمقاسات (عرض × ارتفاع) والكود أو الخامة اللي مايل ليها. فاهم إن دي معاينة شكل مش رسم تنفيذ مختوم."
-      : "Hello, I want a 3D look preview of a wall before install. I will send room photos, sizes (width × height) and the code or finish I prefer. I understand this is a design preview, not a stamped construction drawing.";
+    var msg = "";
     var h = '<div class="wrap"><h2>' + (ar ? "شوف الحائط قبل ما يتركّب" : "See the wall before it is installed") + "</h2>";
     h += '<p class="lead">' + (ar
       ? "نبعتلك معاينة شكل تقريبية للحائط بالخامة اللي اخترتها: خشب، رخام، سيراميك لوك، شيبورد/WPC، أو كتان. كده تشوف الاتجاه قبل ما نفصل الكمية."
@@ -210,9 +201,9 @@
     });
     h += "</div>";
     h += '<div class="honest-box"><b>' + (ar ? "بصدق" : "Honest limit") + "</b><p>" + (ar
-      ? "دي معاينة تصميم عشان تشوف الشكل قبل التركيب. ليست رسم تنفيذ مختوم، وليست لوحة إنشائية، ومش مقياس موقع، ومش بديل المعاينة على الطبيعة. التوريد والأسعار يتأكدوا بعد كده على واتساب 01116208881."
-      : "This is a design preview so you can see the look before install. It is not a stamped construction drawing, not a structural sheet, not a site survey, and not a substitute for seeing the real sample. Supply and prices are confirmed afterwards on WhatsApp 01116208881.") + "</p></div>";
-    h += '<div class="center-actions"><a class="btn wa" href="' + wa(msg) + '" target="_blank" rel="noopener">' + (ar ? "اطلب المعاينة على واتساب" : "Request the preview on WhatsApp") + "</a></div></div>";
+      ? "دي معاينة تصميم عشان تشوف الشكل قبل التركيب. ليست رسم تنفيذ مختوم، وليست لوحة إنشائية، ومش مقياس موقع، ومش بديل المعاينة على الطبيعة. التوريد والأسعار يتأكدوا بعد كده من زر تواصل في القائمة."
+      : "This is a design preview so you can see the look before install. It is not a stamped construction drawing, not a structural sheet, not a site survey, and not a substitute for seeing the real sample. Supply and prices are confirmed afterwards from the Contact button.") + "</p></div>";
+    h += '<p class="note">' + (ar ? "اطلب المعاينة من زر تواصل في القائمة أو زر واتساب." : "Request the preview from the Contact button in the menu or the WhatsApp button.") + "</p></div>";
     return h;
   };
 

@@ -65,3 +65,7 @@
 @media (max-width:700px){
   .use-spot{grid-template-columns:1fr}
 }
+
+.video-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;margin-top:12px}
+.video-card video{width:100%;aspect-ratio:16/9;background:#1b2430;display:block}
+.video-card figcaption{padding:.45rem .65rem;font-size:.82rem}

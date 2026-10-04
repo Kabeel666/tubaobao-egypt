@@ -24,7 +24,7 @@ cmpT:"PVC vs wood vs marble",cmpS:"Each material has a job.",
 cmpH:["Topic","TuBaoBao PVC","Natural wood","Marble / stone"],
 cmp:[["Wall weight","Light","Medium","Heavy"],["Install speed","Fast","Longer","Heavier / slower"],["Daily moisture","Good indoors","Swell-sensitive","Excellent as stone"],["Care","Periodic wipe","Paint / sand","Polish"],["Look stability","Stable factory print","Variable grain","Natural stone"],["Best fit","Fast décor & repeat codes","Joinery","Heavy stone"]],
 faqT:"FAQ",faq:[],
-ctT:"Contact",ctS:"For a quote, sample or supply — WhatsApp.",ctNote:"Official contact: WhatsApp 01116208881 · 08:00–20:00 except Friday.",
+ctT:"Contact",ctS:"For a quote, sample or supply — WhatsApp.",ctNote:"Use the Contact button in the menu, or the WhatsApp button. 08:00–20:00 except Friday.",
 addr:"5th Industrial Zone — 6th of October City — Plot 37",hours:"08:00–20:00 · closed Friday",
 foot:"TuBaoBao Egypt · 6th of October factory · Plot 37",
-more:"More",waBtn:"WhatsApp 01116208881",waShort:"WhatsApp"};
+more:"More",waBtn:"Contact",waShort:"WhatsApp"};

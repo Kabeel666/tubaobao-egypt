@@ -196,11 +196,11 @@
       if (!el.childNodes) return;
       el.childNodes.forEach(function (n) {
         if (n.nodeType === 3 && /01005007592/.test(n.nodeValue || "")) {
-          n.nodeValue = n.nodeValue.replace(bad, "01116208881");
+          n.nodeValue = n.nodeValue.replace(bad, "");
         }
       });
       if (el.tagName === "A" && el.href && /01005007592|201005007592/.test(el.href)) {
-        el.href = el.href.replace(/01005007592/g,"01116208881").replace(/201005007592/g,"201116208881");
+        el.href = "#";
       }
     });
   }

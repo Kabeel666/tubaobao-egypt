@@ -34,7 +34,7 @@ const PACK=[
 ['P11','طبقة فوم بين الألواح','Foam interlayer','للألواح الكبيرة','for large sheets'],
 ['P12','حزام ربط','Strapping','ثبات الحزمة','bundle stability'],
 ['P13','كيس عينات','Sample pouch','كود واحد','single code'],
-['P14','ملصق واتساب','WhatsApp label','01116208881','01116208881'],
+['P14','ملصق تعريف الحزمة','Bundle id label','كود التشطيب','finish code'],
 ['P15','تعبئة ليبيا/سودان','Libya/Sudan pack','مسار إقليمي','regional route'],
 ];
 const PROJ=[

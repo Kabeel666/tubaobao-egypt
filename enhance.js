@@ -1,6 +1,5 @@
 (function () {
-  var P = window.PHONE || "01116208881";
-  var W = window.WA || "https://wa.me/201116208881";
+  var W = window.WA || "";
   var PRIMARY = window.PRIMARY || ["home", "products", "colors", "trade", "factory", "contact"];
 
   function $(id) { return document.getElementById(id); }
@@ -13,8 +12,7 @@
       var el = $(id);
       if (!el) return;
       el.href = W;
-      if (id === "hdrWa") el.textContent = t().waShort || (lang === "ar" ? "واتساب" : "WhatsApp");
-      if (id === "footWa") el.textContent = P;
+      if (id === "hdrWa") el.textContent = (lang === "ar" ? "تواصل" : "Contact");
     });
   }
 
@@ -55,7 +53,7 @@
         secondary.map(function (x) {
           return '<button type="button" data-tab="' + x[0] + '" class="' + (tab === x[0] ? "on" : "") + '">' + (lang === "ar" ? x[1] : x[2]) + "</button>";
         }).join("") +
-        '<a class="m-wa" href="' + W + '" target="_blank" rel="noopener">' + (d.waBtn || P) + "</a>";
+        '<a class="m-wa" href="' + W + '" target="_blank" rel="noopener">' + (lang === "ar" ? "تواصل" : "Contact") + "</a>";
       mobileMenu.classList.toggle("open", menuOpen);
       mobileMenu.hidden = !menuOpen;
     }
@@ -87,24 +85,11 @@
   }
 
   function injectContactPhone() {
-    var contact = $("p-contact");
-    if (contact && !contact.querySelector(".phone-line")) {
-      var box = document.createElement("div");
-      box.className = "phone-line";
-      box.innerHTML = '<a href="' + W + '" target="_blank" rel="noopener">' + P + "</a>";
-      contact.appendChild(box);
-      var actions = document.createElement("div");
-      actions.className = "contact-actions";
-      actions.innerHTML =
-        '<a class="btn wa" href="' + W + '" target="_blank" rel="noopener">' + (t().waBtn || P) + "</a>" +
-        '<a class="btn navy" href="tel:+20' + P.slice(1) + '">' + (lang === "ar" ? "اتصال " : "Call ") + P + "</a>";
-      contact.appendChild(actions);
-    }
     document.querySelectorAll("#app .note, #app .lead, #app details p").forEach(function (el) {
       if (/سيُضاف|غير ظاهر|empty on purpose|To be added later|phone is empty/i.test(el.textContent || "")) {
         el.textContent = (lang === "ar")
-          ? ("وسيلة التواصل الرسمية: واتساب " + P + " · من 8ص إلى 8م عدا الجمعة.")
-          : ("Official contact: WhatsApp " + P + " · 08:00–20:00 except Friday.");
+          ? "للتواصل استخدم زر «تواصل» في القائمة أو زر واتساب."
+          : "Use the Contact button in the menu, or the WhatsApp button.";
       }
     });
   }
