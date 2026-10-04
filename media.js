@@ -45,7 +45,15 @@ window.MEDIA={
     {id:"office", img:fileUrl("media/uses/office.jpg"), ar:"مكتب — فكرة تطبيق", en:"Office — application idea"},
     {id:"cafe", img:fileUrl("media/uses/cafe.jpg"), ar:"كافيه — فكرة تطبيق", en:"Café — application idea"},
     {id:"studio", img:fileUrl("media/uses/studio-3d.jpg"), ar:"استوديو معاينة 3D — فكرة تطبيق", en:"3D preview studio — application idea"},
-    {id:"hotel", img:fileUrl("media/uses/hotel.jpg"), ar:"فندق — فكرة تطبيق", en:"Hotel — application idea"}
+    {id:"hotel", img:fileUrl("media/uses/hotel.jpg"), ar:"فندق — فكرة تطبيق", en:"Hotel — application idea"},
+    {id:"pharmacy", img:fileUrl("media/uses/pharmacy-marble.jpg"), ar:"صيدلية — فكرة تطبيق", en:"Pharmacy — application idea"},
+    {id:"clinic", img:fileUrl("media/uses/clinic-wood.jpg"), ar:"ممر عيادة — فكرة تطبيق", en:"Clinic corridor — application idea"},
+    {id:"living", img:fileUrl("media/uses/living-walnut.jpg"), ar:"صالة — فكرة تطبيق", en:"Living room — application idea"},
+    {id:"kitchen", img:fileUrl("media/uses/kitchen-grey-marble.jpg"), ar:"مطبخ — فكرة تطبيق", en:"Kitchen — application idea"},
+    {id:"kids", img:fileUrl("media/uses/kids-oak.jpg"), ar:"غرفة أطفال — فكرة تطبيق", en:"Kids room — application idea"},
+    {id:"prayer", img:fileUrl("media/uses/prayer-cream.jpg"), ar:"مصلى — فكرة تطبيق", en:"Prayer room — application idea"},
+    {id:"lobby", img:fileUrl("media/uses/lobby-bookmatch.jpg"), ar:"لوبي فندق — فكرة تطبيق", en:"Hotel lobby — application idea"},
+    {id:"meeting", img:fileUrl("media/uses/meeting-walnut.jpg"), ar:"غرفة اجتماعات — فكرة تطبيق", en:"Meeting room — application idea"}
   ],
   partner: [
     {img:fileUrl("media/partner/china-campus-01.jpg"), ar:"حرم شريك دولي (الصين) — ليس مصنع 6 أكتوبر", en:"International partner campus (China) — not the 6th of October factory"},
@@ -60,8 +68,8 @@ window.MEDIA={
   Object.keys(CODE_MEDIA).sort().forEach(function(code){
     var src=codePrimary(code); if(src) g.push([src, code, code]);
   });
-  (MEDIA.uses||[]).forEach(function(u){ if(u&&u.img) g.push([u.img, u.ar+" — ليست سابقة أعمال", u.en+" — not a past project"]); });
-  (MEDIA.works||[]).forEach(function(src,i){ g.push([src, "فكرة تطبيق "+(i+1)+" — ليست سابقة أعمال", "Concept "+(i+1)+" — not a past project"]); });
+  (MEDIA.uses||[]).forEach(function(u){ if(u&&u.img) g.push([u.img, u.ar, u.en]); });
+  (MEDIA.works||[]).forEach(function(src,i){ g.push([src, "فكرة تطبيق "+(i+1), "Application idea "+(i+1)]); });
   (MEDIA.lifestyle||[]).forEach(function(src,i){ g.push([src, "لايف ستايل "+(i+1), "Lifestyle "+(i+1)]); });
   (MEDIA.factory||[]).forEach(function(src,i){ g.push([src, "تصنيع "+(i+1), "Manufacturing "+(i+1)]); });
   (MEDIA.partner||[]).forEach(function(row){ if(row&&row.img) g.push([row.img, row.ar, row.en]); });
