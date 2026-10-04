@@ -265,7 +265,7 @@
     life.slice(0, 4).forEach(function (src) {
       h += '<img src="' + src + '" alt="" width="320" height="320" loading="lazy" decoding="async"/>';
     });
-    h += "</div></div></div>";
+    h += "</div></div></div></div>";
     h += '<div class="wrap preview-3d rise-in"><div class="preview-3d-in">';
     if (wall) {
       h += '<figure class="photo-card"><img src="' + wall.img + '" alt="' + (ar ? "معاينة 3D للحائط" : "3D wall preview") + '" width="1280" height="720" loading="eager" decoding="async"/>';
@@ -276,7 +276,7 @@
       ? "شوف اتجاه الحائط قبل التركيب: صور الأوضة والمقاسات والكود، ونرجّع معاينة شكل. معاينة تصميم تقريبية، مش رسم تنفيذ."
       : "See the wall direction before install: room photos, sizes and a code, and we return a look preview. An approximate design preview, not a construction drawing.") + "</p>";
     h += '<button class="btn gold" type="button" data-tab="viz">' + (ar ? "تفاصيل المعاينة" : "Preview details") + "</button></div>";
-    h += "</div></div></div>";
+    h += "</div></div>";
 
     h += '<div class="wrap home-rich">';
     h += '<section class="home-sec chooser-band rise-in">';

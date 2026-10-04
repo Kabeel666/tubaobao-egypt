@@ -63,16 +63,11 @@ html[dir="ltr"] .mq-item, body.en .mq-item { direction: ltr; }
 }
 
 .brand-logo{
-  animation: tbb-logo-float 5.4s ease-in-out infinite, tbb-logo-shine 5.4s ease-in-out infinite;
-  transform-origin: center;
+  animation: tbb-logo-pulse 7s ease-in-out infinite;
 }
-@keyframes tbb-logo-float{
-  0%,100%{transform:translateY(0)}
-  50%{transform:translateY(-5px)}
-}
-@keyframes tbb-logo-shine{
-  0%,78%,100%{filter:brightness(1)}
-  88%{filter:brightness(1.18)}
+@keyframes tbb-logo-pulse{
+  0%,100%{opacity:1}
+  50%{opacity:.84}
 }
 .rise-in{animation:tbb-rise .9s ease both}
 .chooser-photo{animation:tbb-rise 1s ease .08s both}
