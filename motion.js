@@ -33,21 +33,9 @@
   function mount() {
     var home = document.getElementById("p-home");
     if (!home) return;
-    var hero = home.querySelector(".hero");
-    if (!hero) return;
     var token = ++gen;
     var old = home.querySelector(".family-marquee");
     if (old) old.remove();
-    var list = phrases();
-    var bits = list.concat(list).map(function (label, i) {
-      var hidden = i >= list.length ? ' aria-hidden="true"' : "";
-      return '<span class="mq-item"' + hidden + ">" + label + "</span>";
-    });
-    var bar = document.createElement("div");
-    bar.className = "family-marquee";
-    bar.setAttribute("aria-label", (typeof lang === "undefined" || lang === "ar") ? "عائلات المنتج وأماكن الاستخدام" : "Product families and use places");
-    bar.innerHTML = '<div class="mq-track">' + bits.join('<span class="mq-dot" aria-hidden="true">·</span>') + "</div>";
-    hero.insertAdjacentElement("afterend", bar);
     countUp(token);
   }
   function hook() {

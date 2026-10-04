@@ -76,9 +76,11 @@
     ZH.more = "更多";
     ZH.waBtn = "联系";
     ZH.waShort = "联系";
-    ZH.ctS = "询价、样品或供货 — WhatsApp。";
-    ZH.ctNote = "请用菜单「联系」按钮或 WhatsApp 按钮。08:00–20:00，周五休息。";
-    ZH.foot = "TuBaoBao Egypt · 十月六日城工厂 · 37 号地块";
+    ZH.ctS = "报价、样品和供货，请通过 WhatsApp 沟通。";
+    ZH.ctNote = "请用页眉的「联系」，或右下角的 WhatsApp。每天 8:00–20:00，周五休息。";
+    ZH.brand = "埃及兔宝宝";
+    ZH.sub = ZH.sub || "十月六日城 · PVC 工厂";
+    ZH.foot = "埃及兔宝宝 · 十月六日城工厂 · 37 号地块";
     ZH.galleryT = ZH.galleryT || "工厂与产品图库";
     ZH.galleryS = ZH.galleryS || "工厂现场与生产实拍。";
   }

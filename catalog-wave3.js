@@ -53,25 +53,25 @@
   addTab("install","تركيب","Install","安装","videos");
   window.PRIMARY=["home","products","colors","looks","videos","install","contact"];
   window.IDEA_VIDEOS=[
-    {src:"media/videos/idea-cafe.mp4", gif:"media/videos/gif/idea-cafe.gif", poster:"media/uses/cafe.jpg", ar:"كافيه — فكرة بصرية للتطبيق", en:"Café — a visual application idea", zh:"咖啡 — 视觉应用构思"},
-    {src:"media/videos/idea-hotel.mp4", gif:"media/videos/gif/idea-hotel.gif", poster:"media/uses/hotel.jpg", ar:"فندق — فكرة بصرية للتطبيق", en:"Hotel — a visual application idea", zh:"酒店 — 视觉应用构思"},
-    {src:"media/videos/idea-office.mp4", gif:"media/videos/gif/idea-office.gif", poster:"media/uses/office.jpg", ar:"مكتب — فكرة بصرية للتطبيق", en:"Office — a visual application idea", zh:"办公 — 视觉应用构思"},
-    {src:"media/videos/idea-studio.mp4", poster:"media/uses/studio-3d.jpg", ar:"استوديو معاينة — فكرة بصرية للتطبيق", en:"Preview studio — a visual application idea", zh:"预览工作室 — 视觉应用构思"},
-    {src:"media/videos/idea-shop-mall.mp4", poster:"media/uses/boutique.jpg", ar:"محل ومول — فكرة بصرية للتطبيق", en:"Shop and mall — a visual application idea", zh:"商铺与商场 — 视觉应用构思"},
-    {src:"media/videos/idea-pharmacy.mp4", gif:"media/videos/gif/idea-pharmacy.gif", poster:"media/uses/pharmacy-marble.jpg", ar:"صيدلية — فكرة بصرية للتطبيق", en:"Pharmacy — a visual application idea", zh:"药店 — 视觉应用构思"},
-    {src:"media/videos/idea-kitchen.mp4", gif:"media/videos/gif/idea-kitchen.gif", poster:"media/uses/kitchen-grey-marble.jpg", ar:"مطبخ — فكرة بصرية للتطبيق", en:"Kitchen — a visual application idea", zh:"厨房 — 视觉应用构思"},
-    {src:"media/videos/idea-living.mp4", gif:"media/videos/gif/idea-living.gif", poster:"media/uses/living-walnut.jpg", ar:"صالة — فكرة بصرية للتطبيق", en:"Living room — a visual application idea", zh:"客厅 — 视觉应用构思"}
+    {src:"media/videos/idea-cafe.mp4", gif:"media/videos/gif/idea-cafe.gif", poster:"media/uses/cafe.jpg", ar:"كافيه", en:"Café", zh:"咖啡店"},
+    {src:"media/videos/idea-hotel.mp4", gif:"media/videos/gif/idea-hotel.gif", poster:"media/uses/hotel.jpg", ar:"فندق", en:"Hotel", zh:"酒店"},
+    {src:"media/videos/idea-office.mp4", gif:"media/videos/gif/idea-office.gif", poster:"media/uses/office.jpg", ar:"مكتب", en:"Office", zh:"办公室"},
+    {src:"media/videos/idea-studio.mp4", poster:"media/uses/studio-3d.jpg", ar:"استوديو المعاينة", en:"Preview studio", zh:"预览工作室"},
+    {src:"media/videos/idea-shop-mall.mp4", poster:"media/uses/boutique.jpg", ar:"محل ومول", en:"Shop and mall", zh:"商铺与商场"},
+    {src:"media/videos/idea-pharmacy.mp4", gif:"media/videos/gif/idea-pharmacy.gif", poster:"media/uses/pharmacy-marble.jpg", ar:"صيدلية", en:"Pharmacy", zh:"药店"},
+    {src:"media/videos/idea-kitchen.mp4", gif:"media/videos/gif/idea-kitchen.gif", poster:"media/uses/kitchen-grey-marble.jpg", ar:"مطبخ", en:"Kitchen", zh:"厨房"},
+    {src:"media/videos/idea-living.mp4", gif:"media/videos/gif/idea-living.gif", poster:"media/uses/living-walnut.jpg", ar:"صالة", en:"Living room", zh:"客厅"}
   ];
   window.IDEA_GIFS=(window.IDEA_VIDEOS||[]).filter(function(v){return !!v.gif;});
   function L3(ar,en,zh){ if(typeof lang!=="undefined"&&lang==="ar") return ar; if(typeof lang!=="undefined"&&lang==="zh") return zh||en; return en; }
   window.videosInner=function(){
     var vids=window.IDEA_VIDEOS||[];
     var h='<div class="wrap"><h2>'+L3("فيديو","Videos","视频")+'</h2>';
-    h+='<p class="lead">'+L3("مقاطع قصيرة صامتة اتعملت حركة بسيطة على صور أفكار التطبيق. فكرة بصرية للتطبيق — مش تصوير موقع حقيقي.","Short silent clips with a slow move across application-idea stills. A visual idea — not a filmed job.","短静音片段：在应用构思静帧上缓慢移动。视觉想法 — 不是实地拍摄。")+'</p>';
+    h+='<p class="lead">'+L3("مقاطع قصيرة صامتة اتعملت حركة بسيطة على صور أفكار التطبيق. فكرة بصرية للتطبيق — مش تصوير موقع حقيقي.","Short silent clips with a slow move across application-idea stills. A visual idea — not a filmed job.","几段没有声音的短片，在上墙构想的静帧上慢慢移动。这是视觉构想，不是工地实拍。")+'</p>';
     h+='<div class="video-grid">';
     vids.forEach(function(v){
       var cap=L3(v.ar,v.en,v.zh);
-      var note=L3("فكرة بصرية للتطبيق — مش تصوير موقع حقيقي","A visual application idea — not a filmed job","视觉应用构思 — 不是真实工地拍摄");
+      var note=L3("فكرة بصرية للتطبيق — مش تصوير موقع حقيقي","A visual application idea — not a filmed job","视觉构想，并非实拍工程");
       if(v.gif){
         h+='<figure class="video-card photo-card"><img class="gif-loop" src="'+v.gif+'" alt="'+cap+'" width="480" height="300" loading="lazy" decoding="async"/><figcaption>'+cap+'<small>'+note+'</small></figcaption></figure>';
       } else {
