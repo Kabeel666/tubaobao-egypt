@@ -40,6 +40,13 @@ window.MEDIA={
     "media/home/creative-04.jpg","media/home/creative-05.jpg"
   ].map(fileUrl).filter(Boolean),
   uses: [
+    {id:"preview3d", img:fileUrl("media/uses/preview-3d-wall.jpg"), ar:"معاينة 3D للحائط — فكرة تطبيق", en:"3D wall preview — application idea"},
+    {id:"chooser", img:fileUrl("media/uses/chooser-samples.jpg"), ar:"دليل الاختيار — فكرة تطبيق", en:"Chooser samples — application idea"},
+    {id:"restaurant", img:fileUrl("media/uses/restaurant-slats.jpg"), ar:"مطعم — فكرة تطبيق", en:"Restaurant — application idea"},
+    {id:"salon", img:fileUrl("media/uses/salon-beige.jpg"), ar:"صالون — فكرة تطبيق", en:"Salon — application idea"},
+    {id:"gym", img:fileUrl("media/uses/gym-dark.jpg"), ar:"جيم — فكرة تطبيق", en:"Gym — application idea"},
+    {id:"leatherbed", img:fileUrl("media/uses/leather-bedroom.jpg"), ar:"غرفة نوم جلد — فكرة تطبيق", en:"Leather bedroom — application idea"},
+    {id:"reception", img:fileUrl("media/uses/reception-leather.jpg"), ar:"استقبال — فكرة تطبيق", en:"Reception — application idea"},
     {id:"boutique", img:fileUrl("media/uses/boutique.jpg"), ar:"بوتيك — فكرة تطبيق", en:"Boutique — application idea"},
     {id:"mall", img:fileUrl("media/uses/mall.jpg"), ar:"مول — فكرة تطبيق", en:"Mall — application idea"},
     {id:"office", img:fileUrl("media/uses/office.jpg"), ar:"مكتب — فكرة تطبيق", en:"Office — application idea"},

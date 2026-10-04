@@ -7,7 +7,7 @@ function render(){
   $("langBtn").textContent=d.lang;
   $("tabs").innerHTML=TABS.map(([id,ar,en])=>`<button type="button" data-tab="${id}" class="${tab===id?"on":""}">${lang==="ar"?ar:en}</button>`).join("");
   const shown=F.filter(x=>fam==="all"||finishFam(x)===fam);
-  const famBtns=[["all",d.all|| (lang==="ar"?"الكل":"All")],["wood",d.wood|| (lang==="ar"?"خشب":"Wood")],["marble",d.marble|| (lang==="ar"?"رخام":"Marble")],["ceramic",d.ceramic|| (lang==="ar"?"سيراميك":"Ceramic")],["chipboard",d.chipboard|| (lang==="ar"?"شيبورد/WPC":"Chipboard/WPC")],["textile",d.textile|| (lang==="ar"?"كتان":"Linen")],["solid",d.solid|| (lang==="ar"?"ساده":"Solid")]];
+  const famBtns=[["all",d.all|| (lang==="ar"?"الكل":"All")],["wood",d.wood|| (lang==="ar"?"خشب":"Wood")],["marble",d.marble|| (lang==="ar"?"رخام":"Marble")],["ceramic",d.ceramic|| (lang==="ar"?"سيراميك":"Ceramic")],["chipboard",d.chipboard|| (lang==="ar"?"شيبورد/WPC":"Chipboard/WPC")],["textile",d.textile|| (lang==="ar"?"كتان":"Linen")],["solid",d.solid|| (lang==="ar"?"ساده":"Solid")],["leather",d.leather|| (lang==="ar"?"جلد":"Leather")]];
   $("app").innerHTML=
     page("home", richHome(d)) +
     page("about", `<div class="wrap"><div class="about-card"><h2>${d.aboutT}</h2><p>${d.aboutP}</p></div></div>`) +

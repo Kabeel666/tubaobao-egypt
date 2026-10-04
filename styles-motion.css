@@ -29,8 +29,8 @@
 .process-card:hover,
 .photo-card:hover,
 .fam-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 14px 30px rgba(27,36,48,.1);
+  transform: translateY(-7px);
+  box-shadow: 0 18px 38px rgba(27,36,48,.16);
 }
 
 .family-marquee {
@@ -62,11 +62,31 @@ html[dir="ltr"] .mq-item, body.en .mq-item { direction: ltr; }
   to { transform: translateX(-50%); }
 }
 
+.brand-logo{
+  animation: tbb-logo-float 5.4s ease-in-out infinite, tbb-logo-shine 5.4s ease-in-out infinite;
+  transform-origin: center;
+}
+@keyframes tbb-logo-float{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(-5px)}
+}
+@keyframes tbb-logo-shine{
+  0%,78%,100%{filter:brightness(1)}
+  88%{filter:brightness(1.18)}
+}
+.rise-in{animation:tbb-rise .9s ease both}
+.chooser-photo{animation:tbb-rise 1s ease .08s both}
+.home-stats .stat{animation:tbb-rise .55s ease both}
+
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   .hero-rich .hero-in > *,
   .hero-rich .stat,
-  .mq-track {
+  .mq-track,
+  .brand-logo,
+  .rise-in,
+  .chooser-photo,
+  .home-stats .stat {
     animation: none !important;
   }
   .card,

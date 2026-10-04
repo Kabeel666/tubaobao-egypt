@@ -4,9 +4,9 @@
   function phrases() {
     var ar = (typeof lang === "undefined" || lang === "ar");
     if (ar) {
-      return ["خشب","رخام","سيراميك لوك","شيبورد","WPC","كتان","ساده","ألواح 5مم","فلوت 13.4","محلات","مولات","مكاتب","فنادق","كافيهات","عيادات","مدارس","صيدليات","شقق","مكتبات","أعمدة","أسقف داخلية","معاينة 3D","اختار إيه"];
+      return ["خشب","رخام","سيراميك لوك","شيبورد","WPC","كتان","جلد","ساده","ألواح 5مم","فلوت 13.4","محلات","مولات","مكاتب","فنادق","كافيهات","عيادات","مدارس","صيدليات","شقق","مكتبات","أعمدة","أسقف داخلية","معاينة 3D","اختار إيه"];
     }
-    return ["Wood","Marble","Ceramic look","Chipboard","WPC","Linen","Solid","5mm sheets","13.4 flute","Shops","Malls","Offices","Hotels","Cafés","Clinics","Schools","Pharmacies","Apartments","Libraries","Columns","Interior ceilings","3D preview","Chooser"];
+    return ["Wood","Marble","Ceramic look","Chipboard","WPC","Linen","Leather","Solid","5mm sheets","13.4 flute","Shops","Malls","Offices","Hotels","Cafés","Clinics","Schools","Pharmacies","Apartments","Libraries","Columns","Interior ceilings","3D preview","Chooser"];
   }
   function countUp(token) {
     if (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
