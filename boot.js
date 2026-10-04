@@ -2,10 +2,10 @@ function render(){
   const d=t();
   document.documentElement.lang=lang;
   document.documentElement.dir=d.dir;
-  document.body.className=lang==="en"?"en":"";
+  document.body.className=lang==="ar"?"":(lang==="zh"?"zh en":"en");
   $("brandName").innerHTML=d.brand+"<small>"+d.sub+"</small>";
-  $("langBtn").textContent=d.lang;
-  $("tabs").innerHTML=TABS.map(([id,ar,en])=>`<button type="button" data-tab="${id}" class="${tab===id?"on":""}">${lang==="ar"?ar:en}</button>`).join("");
+  if(typeof window.__tbbSyncLang==="function") window.__tbbSyncLang();
+  $("tabs").innerHTML=TABS.map((row)=>`<button type="button" data-tab="${row[0]}" class="${tab===row[0]?"on":""}">${typeof tabLabel==="function"?tabLabel(row):(lang==="ar"?row[1]:row[2])}</button>`).join("");
   const shown=F.filter(x=>fam==="all"||finishFam(x)===fam);
   const famBtns=[["all",d.all|| (lang==="ar"?"الكل":"All")],["wood",d.wood|| (lang==="ar"?"خشب":"Wood")],["marble",d.marble|| (lang==="ar"?"رخام":"Marble")],["ceramic",d.ceramic|| (lang==="ar"?"سيراميك":"Ceramic")],["chipboard",d.chipboard|| (lang==="ar"?"شيبورد/WPC":"Chipboard/WPC")],["textile",d.textile|| (lang==="ar"?"كتان":"Linen")],["solid",d.solid|| (lang==="ar"?"ساده":"Solid")],["leather",d.leather|| (lang==="ar"?"جلد":"Leather")]];
   $("app").innerHTML=
@@ -19,7 +19,7 @@ function render(){
     page("looks", (typeof looksInner==="function"?looksInner(d):"")) +
     page("videos", (typeof videosInner==="function"?videosInner(d):"")) +
     page("viz", (typeof vizInner==="function"?vizInner(d):"")) +
-    page("spaces", `<div class="wrap"><h2>${d.spT}</h2><p class="lead">${d.spS}</p><p class="note">${lang==="ar"?"الأقسام دي أفكار استخدام. الصور المولَّدة مش سابقة أعمال ومش أسماء عملاء. الأسعار للطلب فقط.":"These sections are use ideas. Generated photos are not past projects and not client names. Prices are quote-only."}</p>${typeof usePlacesHtml==="function"?usePlacesHtml():""}<div class="grid4">${SP.map(x=>`<article class="card"><div class="meta"><b>${lang==="ar"?x[1]:x[2]}</b><p>${lang==="ar"?x[3]:x[4]}</p><small>${lang==="ar"?"فكرة استخدام":"Use idea"}</small></div></article>`).join("")}</div></div>`) +
+    page("spaces", `<div class="wrap"><h2>${d.spT}</h2><p class="lead">${d.spS}</p><p class="note">${lang==="ar"?"الأقسام دي أفكار استخدام. الصور المولَّدة مش سابقة أعمال ومش أسماء عملاء. الأسعار للطلب فقط.":(lang==="zh"?"这些分区是用途构思。生成图片不是既往工程，也不是客户名称。价格仅询价。":"These sections are use ideas. Generated photos are not past projects and not client names. Prices are quote-only.")}</p>${typeof usePlacesHtml==="function"?usePlacesHtml():""}<div class="grid4">${SP.map(x=>`<article class="card"><div class="meta"><b>${lang==="ar"?x[1]:x[2]}</b><p>${lang==="ar"?x[3]:x[4]}</p><small>${lang==="ar"?"فكرة استخدام":(lang==="zh"?"用途构思":"Use idea")}</small></div></article>`).join("")}</div></div>`) +
     page("specs", `<div class="wrap"><h2>${d.spxT}</h2><p class="lead">${d.spxS}</p><div class="scroll"><table><tr>${d.specH.map(h=>`<th>${h}</th>`).join("")}</tr>${d.spec.map(r=>`<tr>${r.map(c=>`<td>${c}</td>`).join("")}</tr>`).join("")}</table></div></div>`) +
     page("calc", `<div class="wrap"><h2>${d.calcT}</h2><p class="lead">${d.calcS}</p><div class="calc"><div><label>${d.lbW}</label><input id="wallW" type="number" step="0.1" value="4"/><label>${d.lbH}</label><input id="wallH" type="number" step="0.1" value="2.8"/><label>${d.lbSz}</label><select id="slatW"><option value="0.134">13.4</option><option value="0.16">16</option><option value="0.18" selected>18</option><option value="0.20">20</option></select><p class="note">${d.calcNote}</p></div><div class="result"><div id="resA"></div><div id="resP"></div><div id="resS"></div></div></div></div>`) +
     page("install", `<div class="wrap"><h2>${d.insT}</h2><p class="lead">${d.insS}</p>${d.steps.map((s,i)=>`<div class="step"><div class="num">${i+1}</div><div><b>${s[0]}</b><div>${s[1]}</div></div></div>`).join("")}</div>`) +
@@ -34,7 +34,7 @@ function render(){
     page("soon", `<div class="wrap"><h2>${d.soonT}</h2><p class="lead">${d.soonS}</p>${cards(d.soon)}</div>`) +
     page("faq", `<div class="wrap"><h2>${d.faqT}</h2>${d.faq.map(([q,a])=>`<details><summary>${q}</summary><p>${a}</p></details>`).join("")}</div>`) +
     page("contact", `<div class="wrap"><h2>${d.ctT}</h2><p class="lead">${d.ctS}</p><p class="note">${d.ctNote}</p><p class="addr">${d.addr}</p><p class="lead">${d.hours}</p></div>`) +
-    page("projects", `<div class="wrap"><h2>${d.projT|| (lang==="ar"?"مشاريع":"Projects")}</h2><p class="lead">${d.projS||""}</p><div class="grid3">${(typeof PROJ!=="undefined"?PROJ:[]).map(x=>`<article class="card"><div class="meta"><b>${lang==="ar"?x[1]:x[2]}</b><p>${lang==="ar"?x[3]:x[4]}</p><small>${lang==="ar"?"مخطط نصي — ليس مشروع منشور":"Text sketch — not a published project"}</small></div></article>`).join("")}</div></div>`);
+    page("projects", `<div class="wrap"><h2>${d.projT|| (lang==="ar"?"مشاريع":"Projects")}</h2><p class="lead">${d.projS||""}</p><div class="grid3">${(typeof PROJ!=="undefined"?PROJ:[]).map(x=>`<article class="card"><div class="meta"><b>${lang==="ar"?x[1]:x[2]}</b><p>${lang==="ar"?x[3]:x[4]}</p><small>${lang==="ar"?"مخطط نصي — ليس مشروع منشور":(lang==="zh"?"文字草图 — 非已发布项目":"Text sketch — not a published project")}</small></div></article>`).join("")}</div></div>`);
   $("foot").textContent=d.foot;
   bind();
   if(tab==="calc") calc();
@@ -73,6 +73,6 @@ function calc(){
   if($("resP")) $("resP").innerHTML=d.resP+`<br/><b>${slats}</b>`;
   if($("resS")) $("resS").innerHTML=d.resS+`<br/><b>${sh}</b>`;
 }
-$("langBtn").onclick=()=>{lang=lang==="ar"?"en":"ar";render();};
+/* language switch wired in i18n.js */
 window.addEventListener("hashchange",()=>setTab((location.hash||"#home").slice(1)));
 setTab((location.hash||"#home").slice(1));

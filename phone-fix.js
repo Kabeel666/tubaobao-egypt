@@ -14,6 +14,7 @@
   }
 
   if (typeof AR !== "undefined") {
+    AR.leather = AR.leather || "جلد";
     if (AR.stats && AR.stats[3]) AR.stats[3] = ["داخلي", "الاستخدام"];
     AR.ctaWa = "اطلب عرض سعر";
     AR.more = "المزيد";
@@ -60,9 +61,27 @@
         EN.stats[2] = [sc, "Sheet codes"];
         if (EN.shS) EN.shS = EN.shS.replace(/\d+ sheet codes/i, sc + " sheet codes");
       }
+      if (fc && typeof ZH !== "undefined" && ZH.stats) {
+        ZH.stats[1] = [fc, "花色编码"];
+      }
+      if (sc && typeof ZH !== "undefined" && ZH.stats) {
+        ZH.stats[2] = [sc, "大板编码"];
+      }
     } catch (e) {}
   }
   syncCounts();
+
+  if (typeof ZH !== "undefined") {
+    ZH.ctaWa = "询价";
+    ZH.more = "更多";
+    ZH.waBtn = "联系";
+    ZH.waShort = "联系";
+    ZH.ctS = "询价、样品或供货 — WhatsApp。";
+    ZH.ctNote = "请用菜单「联系」按钮或 WhatsApp 按钮。08:00–20:00，周五休息。";
+    ZH.foot = "TuBaoBao Egypt · 十月六日城工厂 · 37 号地块";
+    ZH.galleryT = ZH.galleryT || "工厂与产品图库";
+    ZH.galleryS = ZH.galleryS || "工厂现场与生产实拍。";
+  }
 
   if (typeof AR !== "undefined") {
     AR.legalNote = "توباباو مصر / TuBaoBao Egypt مصنع محلي في 6 أكتوبر. الاسم التجاري المصري مستقل عن علامة 兔宝宝 الصينية المدرجة (Dehua TB) ما لم يُعلن عن ترخيص رسمي.";

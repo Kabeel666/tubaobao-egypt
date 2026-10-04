@@ -6,7 +6,7 @@ stats:[["~10,000 m²","Factory"],["144+","Finish codes"],["74+","Sheets / square
 aboutT:"About",aboutP:"TuBaoBao Egypt is an interior décor factory at Plot 37, 5th Industrial Zone, 6th of October City. We make PVC wall slats and wood-look / marble-look sheets for apartments, shops, cafés, restaurants, offices, clinics, hotels and commercial fit-outs. Factory footprint about 10,000 m².",
 prodT:"Product lines",prodS:"Three clear families on the factory floor.",
 lines:[["Fluted slats","Hollow PVC / WPC language, 280 cm, widths 13.4–20 cm with 5 mm foam.","#8b6a4a"],["Marble & ceramic look","122 × 280 sheets and squares for kitchens and reception.","#d9d2c8"],["Chipboard / system","Chipboard & WPC language + corners, end caps, foam. WPC doors later.","#c2a36b"]],
-colT:"Finish library",colS:"Wide library: wood · marble · ceramic look · chipboard/WPC · linen · solid. Quoted by volume.",all:"All",wood:"Wood",textile:"Linen",marble:"Marble",ceramic:"Ceramic",chipboard:"Chipboard/WPC",solid:"Solid",
+colT:"Finish library",colS:"Wide library: wood · marble · ceramic look · chipboard/WPC · linen · solid. Quoted by volume.",all:"All",wood:"Wood",textile:"Linen",marble:"Marble",ceramic:"Ceramic",chipboard:"Chipboard/WPC",solid:"Solid",leather:"Leather",
 colNote:"Screen colour is approximate; catalog photos are factory samples.",
 shT:"Large sheets",shS:"74+ sheet/square codes · 5 mm · 1.22 × 2.80 m · about 3.416 m² each.",
 szT:"Sizes and profiles",szS:"Catalog widths 13.4 / 16 / 18 / 20 × 280 plus fluted / foam / trims.",

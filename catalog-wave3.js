@@ -43,52 +43,56 @@
     var photoFor={"use-living":"living","use-kids":"kids","use-clinic-corridor":"clinic","use-clinic-2":"clinic","use-mosque":"prayer","use-prayer":"prayer","use-hotel-lobby":"lobby","use-meeting":"meeting","use-kitchen-wall":"kitchen","use-pharmacy":"pharmacy"};
     window.USE_SPOTS.forEach(function(s){ if(photoFor[s.id]) s.media=photoFor[s.id]; });
   }
-  function addTab(id, ar, en, after){
+  function addTab(id, ar, en, zh, after){
     if(typeof TABS==="undefined" || TABS.some(function(x){return x[0]===id;})) return;
     var i=TABS.length-1; for(var n=0;n<TABS.length;n++) if(TABS[n][0]===after) i=n;
-    TABS.splice(i+1,0,[id,ar,en]);
+    TABS.splice(i+1,0,[id,ar,en,zh||en]);
   }
-  addTab("looks","ألوان وتشطيبات","Colors & finishes","colors");
-  addTab("videos","فيديو","Videos","spaces");
-  addTab("install","تركيب","Install","videos");
+  addTab("looks","ألوان وتشطيبات","Colors & finishes","花色与饰面","colors");
+  addTab("videos","فيديو","Videos","视频","spaces");
+  addTab("install","تركيب","Install","安装","videos");
   window.PRIMARY=["home","products","colors","looks","videos","install","contact"];
   window.IDEA_VIDEOS=[
-    {src:"media/videos/idea-cafe.mp4", poster:"media/uses/cafe.jpg", ar:"كافيه — فكرة بصرية للتطبيق", en:"Café — a visual application idea"},
-    {src:"media/videos/idea-hotel.mp4", poster:"media/uses/hotel.jpg", ar:"فندق — فكرة بصرية للتطبيق", en:"Hotel — a visual application idea"},
-    {src:"media/videos/idea-office.mp4", poster:"media/uses/office.jpg", ar:"مكتب — فكرة بصرية للتطبيق", en:"Office — a visual application idea"},
-    {src:"media/videos/idea-studio.mp4", poster:"media/uses/studio-3d.jpg", ar:"استوديو معاينة — فكرة بصرية للتطبيق", en:"Preview studio — a visual application idea"},
-    {src:"media/videos/idea-shop-mall.mp4", poster:"media/uses/boutique.jpg", ar:"محل ومول — فكرة بصرية للتطبيق", en:"Shop and mall — a visual application idea"},
-    {src:"media/videos/idea-pharmacy.mp4", poster:"media/uses/pharmacy-marble.jpg", ar:"صيدلية — فكرة بصرية للتطبيق", en:"Pharmacy — a visual application idea"},
-    {src:"media/videos/idea-kitchen.mp4", poster:"media/uses/kitchen-grey-marble.jpg", ar:"مطبخ — فكرة بصرية للتطبيق", en:"Kitchen — a visual application idea"},
-    {src:"media/videos/idea-living.mp4", poster:"media/uses/living-walnut.jpg", ar:"صالة — فكرة بصرية للتطبيق", en:"Living room — a visual application idea"}
+    {src:"media/videos/idea-cafe.mp4", gif:"media/videos/gif/idea-cafe.gif", poster:"media/uses/cafe.jpg", ar:"كافيه — فكرة بصرية للتطبيق", en:"Café — a visual application idea", zh:"咖啡 — 视觉应用构思"},
+    {src:"media/videos/idea-hotel.mp4", gif:"media/videos/gif/idea-hotel.gif", poster:"media/uses/hotel.jpg", ar:"فندق — فكرة بصرية للتطبيق", en:"Hotel — a visual application idea", zh:"酒店 — 视觉应用构思"},
+    {src:"media/videos/idea-office.mp4", gif:"media/videos/gif/idea-office.gif", poster:"media/uses/office.jpg", ar:"مكتب — فكرة بصرية للتطبيق", en:"Office — a visual application idea", zh:"办公 — 视觉应用构思"},
+    {src:"media/videos/idea-studio.mp4", poster:"media/uses/studio-3d.jpg", ar:"استوديو معاينة — فكرة بصرية للتطبيق", en:"Preview studio — a visual application idea", zh:"预览工作室 — 视觉应用构思"},
+    {src:"media/videos/idea-shop-mall.mp4", poster:"media/uses/boutique.jpg", ar:"محل ومول — فكرة بصرية للتطبيق", en:"Shop and mall — a visual application idea", zh:"商铺与商场 — 视觉应用构思"},
+    {src:"media/videos/idea-pharmacy.mp4", gif:"media/videos/gif/idea-pharmacy.gif", poster:"media/uses/pharmacy-marble.jpg", ar:"صيدلية — فكرة بصرية للتطبيق", en:"Pharmacy — a visual application idea", zh:"药店 — 视觉应用构思"},
+    {src:"media/videos/idea-kitchen.mp4", gif:"media/videos/gif/idea-kitchen.gif", poster:"media/uses/kitchen-grey-marble.jpg", ar:"مطبخ — فكرة بصرية للتطبيق", en:"Kitchen — a visual application idea", zh:"厨房 — 视觉应用构思"},
+    {src:"media/videos/idea-living.mp4", gif:"media/videos/gif/idea-living.gif", poster:"media/uses/living-walnut.jpg", ar:"صالة — فكرة بصرية للتطبيق", en:"Living room — a visual application idea", zh:"客厅 — 视觉应用构思"}
   ];
+  window.IDEA_GIFS=(window.IDEA_VIDEOS||[]).filter(function(v){return !!v.gif;});
+  function L3(ar,en,zh){ if(typeof lang!=="undefined"&&lang==="ar") return ar; if(typeof lang!=="undefined"&&lang==="zh") return zh||en; return en; }
   window.videosInner=function(){
-    var ar=(typeof lang==="undefined"||lang==="ar");
     var vids=window.IDEA_VIDEOS||[];
-    var h='<div class="wrap"><h2>'+(ar?"فيديو":"Videos")+'</h2>';
-    h+='<p class="lead">'+(ar?"مقاطع قصيرة صامتة اتعملت حركة بسيطة على صور أفكار التطبيق. فكرة بصرية للتطبيق — مش تصوير موقع حقيقي.":"Short silent clips with a slow move across application-idea stills. A visual idea — not a filmed job.")+'</p>';
+    var h='<div class="wrap"><h2>'+L3("فيديو","Videos","视频")+'</h2>';
+    h+='<p class="lead">'+L3("مقاطع قصيرة صامتة اتعملت حركة بسيطة على صور أفكار التطبيق. فكرة بصرية للتطبيق — مش تصوير موقع حقيقي.","Short silent clips with a slow move across application-idea stills. A visual idea — not a filmed job.","短静音片段：在应用构思静帧上缓慢移动。视觉想法 — 不是实地拍摄。")+'</p>';
     h+='<div class="video-grid">';
     vids.forEach(function(v){
-      var cap=ar?v.ar:v.en;
-      var note=ar?"فكرة بصرية للتطبيق — مش تصوير موقع حقيقي":"A visual application idea — not a filmed job";
-      h+='<figure class="video-card photo-card"><video controls muted playsinline loop poster="'+v.poster+'" preload="metadata"><source src="'+v.src+'" type="video/mp4"/></video><figcaption>'+cap+'<small>'+note+'</small></figcaption></figure>';
+      var cap=L3(v.ar,v.en,v.zh);
+      var note=L3("فكرة بصرية للتطبيق — مش تصوير موقع حقيقي","A visual application idea — not a filmed job","视觉应用构思 — 不是真实工地拍摄");
+      if(v.gif){
+        h+='<figure class="video-card photo-card"><img class="gif-loop" src="'+v.gif+'" alt="'+cap+'" width="480" height="300" loading="lazy" decoding="async"/><figcaption>'+cap+'<small>'+note+'</small></figcaption></figure>';
+      } else {
+        h+='<figure class="video-card photo-card"><video controls muted playsinline loop poster="'+v.poster+'" preload="metadata"><source src="'+v.src+'" type="video/mp4"/></video><figcaption>'+cap+'<small>'+note+'</small></figcaption></figure>';
+      }
     });
     h+='</div></div>';
     return h;
   };
   window.looksInner=function(){
-    var ar=(typeof lang==="undefined"||lang==="ar");
     var items=(window.MEDIA&&MEDIA.uses)?MEDIA.uses:[];
-    var h='<div class="wrap"><h2>'+(ar?"ألوان وتشطيبات":"Colors & finishes")+'</h2>';
-    h+='<p class="lead">'+(ar?"صور أفكار تطبيق لشكل الخشب والرخام والفلوت في أماكن مختلفة. فكرة تطبيق فقط. أكواد التشطيب نفسها في تبويب التشطيبات.":"Application-idea photos of wood, marble and flute looks in different rooms. Application ideas only. The finish codes themselves are on the Finishes tab.")+'</p>';
+    var h='<div class="wrap"><h2>'+L3("ألوان وتشطيبات","Colors & finishes","花色与饰面")+'</h2>';
+    h+='<p class="lead">'+L3("صور أفكار تطبيق لشكل الخشب والرخام والفلوت في أماكن مختلفة. فكرة تطبيق فقط. أكواد التشطيب نفسها في تبويب التشطيبات.","Application-idea photos of wood, marble and flute looks in different rooms. Application ideas only. The finish codes themselves are on the Finishes tab.","木材、大理石与格栅在不同空间的应用构思图。仅构思。花色编码在「花色」页。")+'</p>';
     h+='<div class="photo-grid">';
     items.forEach(function(u){
       if(!u||!u.img) return;
-      var cap=ar?u.ar:u.en;
-      h+='<figure class="photo-card"><img src="'+u.img+'" alt="'+cap+'" width="640" height="480" loading="lazy" decoding="async"/><figcaption>'+cap+'<small>'+(ar?"فكرة تطبيق":"Application idea")+'</small></figcaption></figure>';
+      var cap=(typeof lang!=="undefined"&&lang==="ar")?u.ar:u.en;
+      h+='<figure class="photo-card"><img src="'+u.img+'" alt="'+cap+'" width="640" height="480" loading="lazy" decoding="async"/><figcaption>'+cap+'<small>'+L3("فكرة تطبيق","Application idea","应用构思")+'</small></figcaption></figure>';
     });
     h+='</div>';
-    h+='<p class="note">'+(ar?"الأكواد اللي من غير صورة مكتوب عليها «للطلب». اللون على الشاشة تقريبي.":"Codes without a photo are marked to order. Colour on screen is approximate.")+'</p></div>';
+    h+='<p class="note">'+L3("الأكواد اللي من غير صورة مكتوب عليها «للطلب». اللون على الشاشة تقريبي.","Codes without a photo are marked to order. Colour on screen is approximate.","无图编码标注为询价。屏幕颜色仅供参考。")+'</p></div>';
     return h;
   };
 })();

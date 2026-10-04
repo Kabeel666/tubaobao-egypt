@@ -3,7 +3,7 @@
   var PRIMARY = window.PRIMARY || ["home", "products", "colors", "trade", "factory", "contact"];
 
   function $(id) { return document.getElementById(id); }
-  function t() { return (typeof lang !== "undefined" && lang === "en") ? EN : AR; }
+  function t() { if (typeof lang !== "undefined" && lang === "zh" && typeof ZH !== "undefined") return ZH; return (typeof lang !== "undefined" && lang === "en") ? EN : (typeof lang !== "undefined" && lang === "ar" ? AR : EN); }
 
   var moreOpen = false, menuOpen = false;
 
@@ -12,7 +12,7 @@
       var el = $(id);
       if (!el) return;
       el.href = W;
-      if (id === "hdrWa") el.textContent = (lang === "ar" ? "تواصل" : "Contact");
+      if (id === "hdrWa") el.textContent = (lang === "ar" ? "تواصل" : (lang === "zh" ? "联系" : "Contact"));
     });
   }
 
@@ -31,29 +31,29 @@
     var secondaryOn = secondary.some(function (x) { return x[0] === tab; });
 
     primaryNav.innerHTML = primary.map(function (x) {
-      return '<button type="button" data-tab="' + x[0] + '" class="' + (tab === x[0] ? "on" : "") + '">' + (lang === "ar" ? x[1] : x[2]) + "</button>";
+      return '<button type="button" data-tab="' + x[0] + '" class="' + (tab === x[0] ? "on" : "") + '">' + (typeof tabLabel === "function" ? tabLabel(x) : (lang === "ar" ? x[1] : x[2])) + "</button>";
     }).join("") +
-      '<button type="button" class="more-toggle' + (moreOpen || secondaryOn ? " on" : "") + '" id="moreBtn" aria-expanded="' + (moreOpen ? "true" : "false") + '">' + (d.more || (lang === "ar" ? "المزيد" : "More")) + "</button>";
+      '<button type="button" class="more-toggle' + (moreOpen || secondaryOn ? " on" : "") + '" id="moreBtn" aria-expanded="' + (moreOpen ? "true" : "false") + '">' + (d.more || (lang === "ar" ? "المزيد" : (lang === "zh" ? "更多" : "More"))) + "</button>";
 
     if (moreTabs) {
       moreTabs.innerHTML = secondary.map(function (x) {
-        return '<button type="button" data-tab="' + x[0] + '" class="' + (tab === x[0] ? "on" : "") + '">' + (lang === "ar" ? x[1] : x[2]) + "</button>";
+        return '<button type="button" data-tab="' + x[0] + '" class="' + (tab === x[0] ? "on" : "") + '">' + (typeof tabLabel === "function" ? tabLabel(x) : (lang === "ar" ? x[1] : x[2])) + "</button>";
       }).join("");
     }
     if (moreWrap) moreWrap.classList.toggle("open", moreOpen);
 
     if (mobileMenu) {
-      var secTitle = lang === "ar" ? "أقسام إضافية" : "More sections";
+      var secTitle = lang === "ar" ? "أقسام إضافية" : (lang === "zh" ? "更多栏目" : "More sections");
       mobileMenu.innerHTML =
-        '<div class="m-sec">' + (lang === "ar" ? "الأساسي" : "Primary") + "</div>" +
+        '<div class="m-sec">' + (lang === "ar" ? "الأساسي" : (lang === "zh" ? "主要" : "Primary")) + "</div>" +
         primary.map(function (x) {
-          return '<button type="button" data-tab="' + x[0] + '" class="' + (tab === x[0] ? "on" : "") + '">' + (lang === "ar" ? x[1] : x[2]) + "</button>";
+          return '<button type="button" data-tab="' + x[0] + '" class="' + (tab === x[0] ? "on" : "") + '">' + (typeof tabLabel === "function" ? tabLabel(x) : (lang === "ar" ? x[1] : x[2])) + "</button>";
         }).join("") +
         '<div class="m-sec">' + secTitle + "</div>" +
         secondary.map(function (x) {
-          return '<button type="button" data-tab="' + x[0] + '" class="' + (tab === x[0] ? "on" : "") + '">' + (lang === "ar" ? x[1] : x[2]) + "</button>";
+          return '<button type="button" data-tab="' + x[0] + '" class="' + (tab === x[0] ? "on" : "") + '">' + (typeof tabLabel === "function" ? tabLabel(x) : (lang === "ar" ? x[1] : x[2])) + "</button>";
         }).join("") +
-        '<a class="m-wa" href="' + W + '" target="_blank" rel="noopener">' + (lang === "ar" ? "تواصل" : "Contact") + "</a>";
+        '<a class="m-wa" href="' + W + '" target="_blank" rel="noopener">' + (lang === "ar" ? "تواصل" : (lang === "zh" ? "联系" : "Contact")) + "</a>";
       mobileMenu.classList.toggle("open", menuOpen);
       mobileMenu.hidden = !menuOpen;
     }
@@ -89,7 +89,7 @@
       if (/سيُضاف|غير ظاهر|empty on purpose|To be added later|phone is empty/i.test(el.textContent || "")) {
         el.textContent = (lang === "ar")
           ? "للتواصل استخدم زر «تواصل» في القائمة أو زر واتساب."
-          : "Use the Contact button in the menu, or the WhatsApp button.";
+          : (lang === "zh" ? "请使用菜单中的「联系」按钮或 WhatsApp 按钮。" : "Use the Contact button in the menu, or the WhatsApp button.");
       }
     });
   }
@@ -108,14 +108,8 @@
     };
   }
 
-  var langBtn = $("langBtn");
-  if (langBtn) {
-    var prev = langBtn.onclick;
-    langBtn.onclick = function () {
-      if (typeof prev === "function") prev();
-      setTimeout(enhance, 0);
-    };
-  }
+  window.__tbbEnhance = enhance;
+  if (typeof window.__tbbSyncLang === "function") window.__tbbSyncLang();
 
   var burger = $("burger");
   if (burger) {

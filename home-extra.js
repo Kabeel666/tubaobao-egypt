@@ -4,11 +4,19 @@
     var i = 0;
     for (var n = 0; n < TABS.length; n++) if (TABS[n][0] === "colors") i = n + 1;
     TABS.splice(i, 0,
-      ["chooser", "اختار إيه", "Chooser"],
-      ["viz", "معاينة 3D", "3D preview"]
+      ["chooser", "اختار إيه", "Chooser", "如何选择"],
+      ["viz", "معاينة 3D", "3D preview", "3D 预览"]
     );
   }
   window.PRIMARY = ["home", "products", "colors", "chooser", "viz", "contact"];
+
+  function L(ar, en, zh) {
+    if (typeof lang !== "undefined" && lang === "ar") return ar;
+    if (typeof lang !== "undefined" && lang === "zh") return (zh != null && zh !== "") ? zh : en;
+    return en;
+  }
+  function isAr() { return typeof lang !== "undefined" && lang === "ar"; }
+
 
   if (typeof AR !== "undefined") {
     AR.spT = "فين ينفع يتركّب";
@@ -87,7 +95,7 @@
   }
 
   window.useJumpHtml = function () {
-    var ar = (typeof lang === "undefined" || lang === "ar");
+    var ar = isAr();
     var h = '<nav class="use-jump">';
     window.USE_SPOTS.forEach(function (s) {
       h += '<a href="#spaces:' + s.id + '" data-tab="spaces" data-anchor="' + s.id + '">' + (ar ? s.arT : s.enT) + "</a>";
@@ -97,7 +105,7 @@
   };
 
   window.usePlacesHtml = function () {
-    var ar = (typeof lang === "undefined" || lang === "ar");
+    var ar = isAr();
     var h = window.useJumpHtml();
     var shapes = ar ? [
       ["فلوت رأسي", "شرائح طولية على الحائط أو العمود."],
@@ -137,7 +145,7 @@
   };
 
   window.chooserInner = function (d) {
-    var ar = (typeof lang === "undefined" || lang === "ar");
+    var ar = isAr();
     var rows = [
       ["بديل رخام", "Marble look", "استقبال، لوبي، حائط مميز، ظهر مطبخ، حمام داخلي جاف نسبياً", "Reception, lobby, feature wall, kitchen back, interior bath", "رطوبة يومية بالمسح. مش عزل حمّام ومش أرضية غرقانة.", "Daily wipe moisture. Not tanking and not a flooded floor.", "لوح 5مم للمسطح الواسع، أو شرائح 16/20 لو عايز فواصل أقل.", "5mm sheet for a wide plane, or 16/20 slats for fewer joints."],
       ["بديل خشب", "Wood look", "صالة، تلفزيون، كافيه، مطعم، مكتب، غرف فندق، محل", "Living, TV wall, café, restaurant, office, hotel rooms, shop", "أماكن جافة إلى رطوبة خفيفة. ابعد عن رش المياه المباشر.", "Dry to light moisture. Keep off direct water spray.", "13.4 للفلوت والعمود، 16 توازن، 20 للحوائط العريضة.", "13.4 for flutes and columns, 16 as the balance, 20 for wide walls."],
@@ -199,7 +207,7 @@
   };
 
   window.vizInner = function () {
-    var ar = (typeof lang === "undefined" || lang === "ar");
+    var ar = isAr();
     var img = "";
     if (window.MEDIA && MEDIA.uses) {
       var prefer = {preview3d:1, studio:2};
@@ -234,7 +242,7 @@
   };
 
   window.richHome = function (d) {
-    var ar = (typeof lang === "undefined" || lang === "ar");
+    var ar = isAr();
     var M = window.MEDIA || {};
     var heroImg = M.hero || "media/home/creative-01.jpg";
     var life = (M.lifestyle && M.lifestyle.length) ? M.lifestyle : [];
@@ -242,7 +250,7 @@
     var works = (M.works && M.works.length) ? M.works : [];
     var results = (typeof filterPool === "function") ? filterPool(typeof homeQ === "undefined" ? "" : homeQ) : [];
     var q = (typeof homeQ === "undefined" ? "" : (homeQ || "")).replace(/"/g, "");
-    var searchPh = ar ? "ابحث بكود أو اسم تشطيب / لوح…" : "Search by code or finish / sheet name…";
+    var searchPh = L("ابحث بكود أو اسم تشطيب / لوح…", "Search by code or finish / sheet name…", "按编码或花色 / 大板名搜索…");
     var stats = (d && d.stats) ? d.stats : [];
     function useSrc(id) {
       var list = M.uses || [];
@@ -269,68 +277,94 @@
     h += '<div class="wrap preview-3d rise-in"><div class="preview-3d-in">';
     if (wall) {
       h += '<figure class="photo-card"><img src="' + wall.img + '" alt="' + (ar ? "معاينة 3D للحائط" : "3D wall preview") + '" width="1280" height="720" loading="eager" decoding="async"/>';
-      h += "<figcaption>" + (ar ? "فكرة تطبيق — ليست رسم تنفيذ" : "Application idea — not a construction drawing") + "</figcaption></figure>";
+      h += "<figcaption>" + L("فكرة تطبيق — ليست رسم تنفيذ", "Application idea — not a construction drawing", "应用构思 — 不是施工图") + "</figcaption></figure>";
     }
-    h += "<div><h2>" + (ar ? "معاينة 3D للحائط" : "3D wall preview") + "</h2>";
-    h += "<p>" + (ar
-      ? "شوف اتجاه الحائط قبل التركيب: صور الأوضة والمقاسات والكود، ونرجّع معاينة شكل. معاينة تصميم تقريبية، مش رسم تنفيذ."
-      : "See the wall direction before install: room photos, sizes and a code, and we return a look preview. An approximate design preview, not a construction drawing.") + "</p>";
-    h += '<button class="btn gold" type="button" data-tab="viz">' + (ar ? "تفاصيل المعاينة" : "Preview details") + "</button></div>";
+    h += "<div><h2>" + L("معاينة 3D للحائط", "3D wall preview", "墙面 3D 预览") + "</h2>";
+    h += "<p>" + L(
+      "شوف اتجاه الحائط قبل التركيب: صور الأوضة والمقاسات والكود، ونرجّع معاينة شكل. معاينة تصميم تقريبية، مش رسم تنفيذ.",
+      "See the wall direction before install: room photos, sizes and a code, and we return a look preview. An approximate design preview, not a construction drawing.",
+      "安装前查看墙面方向：房间照片、尺寸与编码，我们回传外观预览。约略设计预览，不是施工图。"
+    ) + "</p>";
+    h += '<button class="btn gold" type="button" data-tab="viz">' + L("تفاصيل المعاينة", "Preview details", "预览详情") + "</button></div>";
     h += "</div></div>";
 
     h += '<div class="wrap home-rich">';
+    h += '<section class="home-sec video-strip rise-in" id="home-videos"><h2>' + L("فيديو", "Videos", "视频") + "</h2>";
+    h += '<p class="lead">' + L(
+      "مقاطع GIF قصيرة صامتة — فكرة بصرية للتطبيق، مش تصوير موقع حقيقي.",
+      "Short silent GIF loops — a visual application idea, not a filmed job.",
+      "短静音 GIF 循环 — 视觉应用构思，不是实地拍摄。"
+    ) + "</p>";
+    h += '<div class="video-strip-grid">';
+    var gifs = (window.IDEA_GIFS && window.IDEA_GIFS.length) ? window.IDEA_GIFS : (window.IDEA_VIDEOS || []).filter(function (v) { return v.gif; });
+    gifs.slice(0, 6).forEach(function (v) {
+      var cap = L(v.ar, v.en, v.zh);
+      var note = L("فكرة بصرية للتطبيق — مش تصوير موقع حقيقي", "A visual application idea — not a filmed job", "视觉应用构思 — 不是真实工地拍摄");
+      h += '<figure class="photo-card"><img class="gif-loop" src="' + v.gif + '" alt="' + cap + '" width="480" height="300" loading="lazy" decoding="async"/>';
+      h += "<figcaption>" + cap + "<small>" + note + "</small></figcaption></figure>";
+    });
+    h += '</div><div class="center-actions"><button class="btn navy" type="button" data-tab="videos">' + L("كل الفيديوهات", "All videos", "全部视频") + "</button></div></section>";
+
     h += '<section class="home-sec chooser-band rise-in">';
     h += '<div class="chooser-band-in">';
     if (chooser) {
-      h += '<img class="chooser-photo" src="' + chooser.img + '" alt="' + (ar ? "دليل الاختيار" : "Selection guide") + '" width="1280" height="720" loading="lazy" decoding="async"/>';
+      h += '<img class="chooser-photo" src="' + chooser.img + '" alt="' + L("دليل الاختيار", "Selection guide", "选择指南") + '" width="1280" height="720" loading="lazy" decoding="async"/>';
     }
-    h += "<div><h2>" + (ar ? "اختار إيه" : "What to choose") + "</h2>";
-    h += '<p class="lead">' + (ar
-      ? "دليل سريع قبل المكتبة: رخام، خشب، سيراميك، شيبورد، كتان، أو جلد — حسب المكان والرطوبة. العيّنة من المصنع تحسم اللون، ومن غير سعر على الصفحة."
-      : "A quick guide before the library: marble, wood, ceramic, chipboard, linen, or leather — by room and moisture. The factory sample decides the colour, and there is no price on the page.") + "</p>";
-    h += '<button class="btn gold" type="button" data-tab="chooser">' + (ar ? "افتح دليل الاختيار" : "Open the chooser") + "</button></div>";
+    h += "<div><h2>" + L("اختار إيه", "What to choose", "如何选择") + "</h2>";
+    h += '<p class="lead">' + L(
+      "دليل سريع قبل المكتبة: رخام، خشب، سيراميك، شيبورد، كتان، أو جلد — حسب المكان والرطوبة. العيّنة من المصنع تحسم اللون، ومن غير سعر على الصفحة.",
+      "A quick guide before the library: marble, wood, ceramic, chipboard, linen, or leather — by room and moisture. The factory sample decides the colour, and there is no price on the page.",
+      "图库前的快速指南：大理石、木材、陶瓷、刨花板、亚麻或皮革 — 按空间与湿度。工厂样品决定颜色，页面不标价。"
+    ) + "</p>";
+    h += '<button class="btn gold" type="button" data-tab="chooser">' + L("افتح دليل الاختيار", "Open the chooser", "打开选择指南") + "</button></div>";
     h += "</div></section>";
 
-    h += '<section class="home-sec" id="home-uses"><h2>' + (ar ? "أماكن الاستخدام" : "Where it is used") + "</h2>";
-    h += '<p class="lead">' + (ar
-      ? "مطعم، صالون، جيم، غرفة جلد، واستقبال، وبعدين أماكن تانية. كلها أفكار تطبيق."
-      : "Restaurant, salon, gym, a leather bedroom and reception, then more rooms. All application ideas.") + "</p>";
+    h += '<section class="home-sec" id="home-uses"><h2>' + L("أماكن الاستخدام", "Where it is used", "使用空间") + "</h2>";
+    h += '<p class="lead">' + L(
+      "مطعم، صالون، جيم، غرفة جلد، واستقبال، وبعدين أماكن تانية. كلها أفكار تطبيق.",
+      "Restaurant, salon, gym, a leather bedroom and reception, then more rooms. All application ideas.",
+      "餐厅、沙龙、健身房、皮革卧室与前台，以及更多房间。全部为应用构思。"
+    ) + "</p>";
     h += '<div class="photo-grid home-uses">';
     roomIds.forEach(function (id) {
       var u = useSrc(id);
       if (!u) return;
       var cap = ar ? u.ar : u.en;
-      h += '<figure class="photo-card"><img src="' + u.img + '" alt="' + cap + '" width="640" height="480" loading="lazy" decoding="async"/><figcaption>' + cap + "<small>" + (ar ? "فكرة تطبيق" : "Application idea") + "</small></figcaption></figure>";
+      h += '<figure class="photo-card"><img src="' + u.img + '" alt="' + cap + '" width="640" height="480" loading="lazy" decoding="async"/><figcaption>' + cap + "<small>" + L("فكرة تطبيق", "Application idea", "应用构思") + "</small></figcaption></figure>";
     });
-    h += '</div><div class="center-actions"><button class="btn navy" type="button" data-tab="spaces">' + (ar ? "كل أماكن الاستخدام" : "All use places") + "</button></div></section>";
+    h += '</div><div class="center-actions"><button class="btn navy" type="button" data-tab="spaces">' + L("كل أماكن الاستخدام", "All use places", "全部使用空间") + "</button></div></section>";
 
     h += '<section class="home-sec search-sec">';
-    h += "<h2>" + (ar ? "ابحث في المكتبة" : "Search the library") + "</h2>";
-    h += '<p class="lead">' + (ar ? "اكتب الكود أو اسم التشطيب أو اللوح." : "Type a code or a finish or sheet name.") + "</p>";
+    h += "<h2>" + L("ابحث في المكتبة", "Search the library", "搜索图库") + "</h2>";
+    h += '<p class="lead">' + L("اكتب الكود أو اسم التشطيب أو اللوح.", "Type a code or a finish or sheet name.", "输入编码或花色 / 大板名称。") + "</p>";
     h += '<div class="home-search"><input id="homeSearch" type="search" value="' + q + '" placeholder="' + searchPh + '" autocomplete="off"/>';
-    h += '<button type="button" class="btn navy" id="homeSearchBtn">' + (ar ? "بحث" : "Search") + "</button></div>";
+    h += '<button type="button" class="btn navy" id="homeSearchBtn">' + L("بحث", "Search", "搜索") + "</button></div>";
     h += '<div class="grid4" id="homeSearchGrid">';
     results.forEach(function (p) {
       var name = ar ? p.ar : p.en;
-      var kind = p.kind === "sheet" ? (ar ? "لوح" : "Sheet") : p.fam;
+      if (!ar && lang === "zh") {
+        var famZh = {wood:"木材",marble:"大理石",leather:"皮革",textile:"亚麻",ceramic:"陶瓷",chipboard:"刨花板",solid:"纯色",sheet:"板材"};
+        name = p.en + (famZh[p.fam] ? " · " + famZh[p.fam] : "");
+      }
+      var kind = p.kind === "sheet" ? L("لوح", "Sheet", "大板") : p.fam;
       h += '<article class="card finish-mini" data-tab="' + (p.kind === "sheet" ? "sheets" : "colors") + '">';
       h += '<span class="chip" style="background:' + (p.color || "#ccc") + '"></span>';
       h += '<div class="meta"><b class="code">' + p.code + "</b><div>" + name + "</div><small>" + kind + "</small></div></article>";
     });
     h += "</div></section>";
 
-    h += '<section class="home-sec" id="home-factory"><h2>' + (ar ? "عينات المصنع والتصنيع" : "Factory samples and manufacturing") + "</h2>";
-    h += '<p class="lead">' + (ar ? "صور عينات وأرض المصنع. صور الغرف فوق أفكار تطبيق ومش صور التصنيع." : "Sample and factory-floor photos. The room pictures above are application ideas, not manufacturing shots.") + "</p>";
+    h += '<section class="home-sec" id="home-factory"><h2>' + L("عينات المصنع والتصنيع", "Factory samples and manufacturing", "工厂样品与制造") + "</h2>";
+    h += '<p class="lead">' + L("صور عينات وأرض المصنع. صور الغرف فوق أفكار تطبيق ومش صور التصنيع.", "Sample and factory-floor photos. The room pictures above are application ideas, not manufacturing shots.", "样品与车间照片。上方房间图为应用构思，不是制造实拍。") + "</p>";
     h += '<div class="photo-carousel">';
     fac.forEach(function (src) {
-      h += '<figure class="photo-card"><img src="' + src + '" alt="' + (ar ? "تصنيع" : "Manufacturing") + '" width="640" height="480" loading="lazy" decoding="async"/><figcaption>' + (ar ? "تصنيع / عينات" : "Manufacturing / samples") + "</figcaption></figure>";
+      h += '<figure class="photo-card"><img src="' + src + '" alt="' + L("تصنيع", "Manufacturing", "制造") + '" width="640" height="480" loading="lazy" decoding="async"/><figcaption>' + L("تصنيع / عينات", "Manufacturing / samples", "制造 / 样品") + "</figcaption></figure>";
     });
     works.slice(0, 6).forEach(function (src) {
       h += '<figure class="photo-card"><img src="' + src + '" alt="" width="640" height="480" loading="lazy" decoding="async"/></figure>';
     });
-    h += '</div><div class="center-actions"><button class="btn navy" type="button" data-tab="factory">' + (d.cta2 || (ar ? "المصنع" : "Factory")) + "</button></div></section>";
+    h += '</div><div class="center-actions"><button class="btn navy" type="button" data-tab="factory">' + (d.cta2 || L("المصنع", "Factory", "工厂")) + "</button></div></section>";
 
-    h += '<section class="home-sec home-stats"><h2>' + (ar ? "أرقام المصنع" : "Factory facts") + "</h2>";
+    h += '<section class="home-sec home-stats"><h2>' + L("أرقام المصنع", "Factory facts", "工厂数据") + "</h2>";
     h += '<div class="stats">';
     stats.forEach(function (row) {
       h += '<div class="stat"><b>' + row[0] + "</b><span>" + row[1] + "</span></div>";
@@ -341,8 +375,8 @@
     h += '<p class="lead">' + (d.ctS || "") + "</p>";
     h += '<p class="addr">' + (d.addr || "") + "</p>";
     h += '<p class="lead">' + (d.hours || "") + "</p>";
-    h += '<div class="contact-actions"><button class="btn navy" type="button" data-tab="contact">' + (ar ? "صفحة التواصل" : "Contact page") + "</button></div>";
-    h += '<p class="note">' + (ar ? "التواصل من زر «تواصل» في القائمة أو زر واتساب." : "Use the Contact button in the menu or the WhatsApp button.") + "</p></section>";
+    h += '<div class="contact-actions"><button class="btn navy" type="button" data-tab="contact">' + L("صفحة التواصل", "Contact page", "联系页") + "</button></div>";
+    h += '<p class="note">' + L("التواصل من زر «تواصل» في القائمة أو زر واتساب.", "Use the Contact button in the menu or the WhatsApp button.", "请用菜单「联系」按钮或 WhatsApp 按钮。") + "</p></section>";
     h += "</div>";
     return h;
   };
