@@ -126,7 +126,8 @@
   window.footHtml = function (d) {
     var brand = isAr() ? "توباباو مصر" : (isZh() ? "埃及兔宝宝" : "TuBaoBao Egypt");
     var links = [["colors", "التشطيبات", "Finishes", "花色"], ["chooser", "دليل الاختيار", "Chooser", "选材指南"], ["viz", "معاينة 3D", "3D preview", "3D 预览"],
-      ["calc", "الحاسبة", "Calculator", "计算器"], ["faq", "أسئلة", "FAQ", "问答"], ["contact", "صفحة التواصل", "Contact page", "联系页面"]];
+      ["specs", "المواصفات", "Specs", "规格"], ["calc", "الحاسبة", "Calculator", "计算器"], ["compare", "مقارنة", "Compare", "对比"],
+      ["access", "إكسسوارات", "Accessories", "配件"], ["faq", "أسئلة", "FAQ", "问答"], ["contact", "صفحة التواصل", "Contact page", "联系页面"]];
     var h = '<div class="foot-grid">';
     h += '<div class="foot-brand"><img class="brand-logo" src="media/brand/rabbit-mark.jpg" width="64" height="64" alt="TuBaoBao" loading="lazy" decoding="async"/>';
     h += "<div><b>" + brand + "</b><p>" + L("تشطيبات حوائط داخلية PVC وWPC، من مصنعنا في 6 أكتوبر.", "Interior PVC & WPC wall finishes, made at our 6th of October factory.", "室内 PVC 与 WPC 墙面饰面，十月六日城工厂自产。") + "</p>";

@@ -60,9 +60,9 @@
     "use-hotel": ["酒店", "客房和走廊重复同一个编码：浅木、亚麻或安静仿石。预览只看效果，不是盖章图纸。"],
     "use-cafe": ["咖啡店", "吧台和座位墙用暖木或亚麻。避开直接溅水。按编码和数量报价。"],
     "use-clinic": ["诊所", "候诊和走廊用浅色纯色或好擦的仿瓷。不是医用防水，页面也不标价。图库里没有单独的诊所实拍。"],
-    "use-3d": ["三维预览", "把房间照片、尺寸和编码发过来，安装前我们回一张效果。工作室那张图是上墙构想，不是真实项目，也不是施工图。"],
+    "use-3d": ["三维预览", "把房间照片、尺寸和编码发过来，安装前我们回一张效果预览。"],
     "use-chooser": ["怎么选", "一份不带价格的指南：仿石、木纹、仿瓷、刨花板/WPC 或亚麻，以及 13.4、16、20 和 5mm 大板。颜色以工厂样品为准。"],
-    "use-living": ["公寓客厅", "电视墙周围用浅木或亚麻。墙面要干燥。这是上墙构想，不是某套已交房的照片。价格面议。"],
+    "use-living": ["公寓客厅", "电视墙周围用浅木或亚麻。墙面要干燥。价格询价。"],
     "use-kids": ["儿童房", "干燥墙面上用浅色、好擦的纯色。不是游乐地面。"],
     "use-clinic-corridor": ["诊所走廊", "浅色纯色或仿瓷，只适合日常擦拭。本站不提供医疗认证。"],
     "use-cafe-counter": ["咖啡柜台", "柜台周围用暖木或格栅，远离喷水和明火。这是上墙构想。"],
@@ -103,10 +103,10 @@
   if (typeof AR !== "undefined") {
     AR.spT = "فين ينفع يتركّب";
     AR.spS = "محلات، مولات، مكاتب، عيادات، فنادق، كافيهات، مدارس، مطاعم، صالونات، جيم، مطابخ، حمامات، أعمدة، كاونتر استقبال، وحوائط مميزة. أفكار استخدام مش سابقة أعمال.";
-    AR.projT = "أفكار استخدام (مش مشاريع منشورة)";
-    AR.projS = "مخططات نصية استرشادية فقط. مفيش أسماء عملاء، ومفيش صور متقدّمة على إنها سابقة أعمال.";
+    AR.projT = "أفكار استخدام";
+    AR.projS = "مخططات نصية استرشادية للمكان والكود. من غير أسماء عملاء.";
     AR.galleryT = "صور المصنع وأفكار التطبيق";
-    AR.galleryS = "صور الأكواد والتصنيع من الكتالوج. صور المحلات والمول والمكتب والكافيه والفندق والاستوديو أفكار تطبيق مولَّدة — ليست سابقة أعمال.";
+    AR.galleryS = "صور الأكواد والتصنيع من الكتالوج. مشاهد الغرف أفكار شكل للتطبيق.";
     var extraFaq = [
       ["أختار رخام ولا خشب ولا سيراميك؟", "من غير أرقام قياسية: الرخام لوك والسيراميك لوك للحمام والمطبخ والاستقبال. الخشب والكتان للصالة والمكتب والكافيه. الشيبورد/WPC للفلوت والأعمدة والمحلات. التفاصيل في تبويب «اختار إيه»."],
       ["إيه فرق 13.4 و16 و20 واللوح 5مم؟", "13.4 سم فلوت أضيق ويلف الأعمدة. 16 سم توازن شائع. 20 سم أقل فواصل على الحوائط الواسعة. اللوح 5مم مقاس 1.22 × 2.80 م للمسطح الكبير. كله داخلي، والسعر عند الطلب."],
@@ -120,10 +120,10 @@
   if (typeof EN !== "undefined") {
     EN.spT = "Where it can go";
     EN.spS = "Shops, malls, offices, clinics, hotels, cafés, schools, restaurants, salons, gyms, kitchens, bathrooms, columns, reception desks, and feature walls. Use ideas, not past projects.";
-    EN.projT = "Use ideas (not published projects)";
-    EN.projS = "Text sketches only. No client names, and no photos presented as completed jobs.";
+    EN.projT = "Use ideas";
+    EN.projS = "Short text sketches for room and code. No client names.";
     EN.galleryT = "Factory photos and application ideas";
-    EN.galleryS = "Catalog and manufacturing photos are real. Shop, mall, office, café, hotel and studio images are generated application ideas — not past projects.";
+    EN.galleryS = "Catalog and manufacturing photos are from the factory. Room scenes are application ideas for the look.";
     var extraEn = [
       ["Marble, wood, or ceramic?", "No standards claimed: marble look and ceramic look for baths, kitchens and reception. Wood and linen for living rooms, offices and cafés. Chipboard/WPC for flutes, columns and shops. See the Chooser tab."],
       ["What is 13.4 vs 16 vs 20 vs the 5mm sheet?", "13.4 cm is a tighter flute and wraps columns. 16 cm is the common balance. 20 cm means fewer joints on wide walls. The 5 mm sheet is 1.22 × 2.80 m for a large plane. Interior use; price on request."],
@@ -158,8 +158,8 @@
       en:"Light solid or ceramic look that wipes clean in waiting rooms and corridors. Not medical tanking and not a listed price. No dedicated clinic photo in the library."},
     {id:"use-3d", media:"preview3d", tab:"viz", arT:"معاينة 3D", enT:"3D preview",
       ctaAr:"تفاصيل المعاينة", ctaEn:"Preview details",
-      ar:"ابعت صور الأوضة والمقاسات والكود، ونرجّع معاينة شكل قبل التركيب. فكرة تطبيق للاستوديو — ليست مشروعًا حقيقيًا، ومش لوحة تنفيذ.",
-      en:"Send room photos, sizes and a code, and we return a look preview before install. The studio picture is an application idea — not a real project, and not a construction sheet."},
+      ar:"ابعت صور الأوضة والمقاسات والكود، ونرجّع معاينة شكل قبل التركيب.",
+      en:"Send room photos, sizes and a code, and we return a look preview before install."},
     {id:"use-chooser", media:"chooser", tab:"chooser", arT:"اختار إيه", enT:"Chooser",
       ctaAr:"افتح دليل الاختيار", ctaEn:"Open the chooser",
       ar:"دليل من غير أسعار: رخام، خشب، سيراميك لوك، شيبورد/WPC، أو كتان، والعروض 13.4 و16 و20 واللوح 5مم. العيّنة من المصنع تحسم اللون.",
@@ -207,7 +207,7 @@
       ["Wood with leather", "Warm wood with a leather touch on a headboard or reception."]
     ]);
     h += '<h3 class="shape-title">' + L("أشكال التطبيق", "Application shapes", "上墙的几种样子") + "</h3>";
-    h += '<p class="lead">' + L("أفكار تطبيق للشكل، مش طريقة تنفيذ مختومة ومش سابقة أعمال.", "Application ideas for the look, not a stamped method and not past projects.", "这些是效果构想，不是盖章的做法，也不是完工案例。") + "</p>";
+    h += '<p class="lead">' + L("أفكار شكل للتطبيق على الحائط.", "Look ideas for how the finish sits on a wall.", "墙面效果构想。") + "</p>";
     h += '<div class="grid4 shape-notes">';
     shapes.forEach(function (s) {
       h += '<article class="card"><div class="meta"><b>' + s[0] + "</b><p>" + s[1] + "</p></div></article>";
@@ -219,7 +219,7 @@
       h += '<article class="use-spot' + (img ? "" : " no-photo") + '" id="' + s.id + '">';
       if (img) {
         h += '<figure class="photo-card"><img src="' + img + '" alt="' + title + '" width="640" height="480" loading="lazy" decoding="async"/>';
-        h += "<figcaption>" + L("فكرة تطبيق", "Application idea", "上墙构想") + "</figcaption></figure>";
+        h += "<figcaption>" + L("فكرة شكل", "Look idea", "效果构想") + "</figcaption></figure>";
       }
       h += "<div><h3>" + title + "</h3><p>" + spotBody(s) + "</p>";
       if (s.tab) {
@@ -441,6 +441,19 @@
       h += '<img src="' + src + '" alt="" width="320" height="320" loading="lazy" decoding="async"/>';
     });
     h += "</div></div></div></div>";
+
+    h += '<div class="wrap why-band rise-in"><h2>' + L("ليه من المصنع مباشرة؟", "Why factory direct?", "为什么直接找工厂？") + "</h2>";
+    h += '<p class="lead">' + L("ثلاث حاجات واضحة قبل ما تطلب كمية.", "Three plain things before you order volume.", "下单前先弄清这三件事。") + "</p>";
+    h += '<div class="why-grid">';
+    var why = [
+      [L("عيّنة على الرف", "Sample on the rack", "样品就在架上"), L("شوف الكود في مصنع 6 أكتوبر قبل الكمية. اللون على الشاشة تقريبي.", "See the code at the 6th of October factory before volume. Screen colour is approximate.", "大批量前先到十月六日城工厂看编码。屏幕颜色只是近似。")],
+      [L("مكتبة أكواد", "Code library", "编码图库"), L("خشب، رخام، كتان، جلد والمزيد — بالكود، من غير أسعار منشورة.", "Wood, marble, linen, leather and more — by code, with no published prices.", "木纹、仿石、亚麻、皮革等——按编码，页面不标价。")],
+      [L("عرض على واتساب", "WhatsApp quote", "WhatsApp 报价"), L("ابعت الكود والمقاس والمكان، والفريق بيرد من زر تواصل.", "Send the code, size and room — the team replies from Contact.", "发来编码、尺寸和空间，工厂通过「联系」回复。")]
+    ];
+    why.forEach(function (w) {
+      h += '<article class="why-card"><b>' + w[0] + "</b><p>" + w[1] + "</p></article>";
+    });
+    h += "</div></div>";
 
     h += '<div class="wrap preview-3d rise-in"><div class="preview-3d-in">';
     if (wall) {

@@ -86,12 +86,12 @@
   window.looksInner=function(){
     var items=(window.MEDIA&&MEDIA.uses)?MEDIA.uses:[];
     var h='<div class="wrap"><h2>'+L3("ألوان وتشطيبات","Colors & finishes","花色与饰面")+'</h2>';
-    h+='<p class="lead">'+L3("صور أفكار تطبيق لشكل الخشب والرخام والفلوت في أماكن مختلفة. فكرة تطبيق فقط. أكواد التشطيب نفسها في تبويب التشطيبات.","Application-idea photos of wood, marble and flute looks in different rooms. Application ideas only. The finish codes themselves are on the Finishes tab.","木材、大理石与格栅在不同空间的应用构思图。仅构思。花色编码在「花色」页。")+'</p>';
+    h+='<p class="lead">'+L3("صور شكل للخشب والرخام والفلوت في أماكن مختلفة. أكواد التشطيب في تبويب التشطيبات.","Look photos of wood, marble and flute in different rooms. Finish codes are on the Finishes tab.","木纹、大理石与格栅在不同空间的效果图。花色编码在「花色」页。")+'</p>';
     h+='<div class="photo-grid">';
     items.forEach(function(u){
       if(!u||!u.img) return;
       var cap=(typeof lang!=="undefined"&&lang==="ar")?u.ar:u.en;
-      h+='<figure class="photo-card"><img src="'+u.img+'" alt="'+cap+'" width="640" height="480" loading="lazy" decoding="async"/><figcaption>'+cap+'<small>'+L3("فكرة تطبيق","Application idea","应用构思")+'</small></figcaption></figure>';
+      h+='<figure class="photo-card"><img src="'+u.img+'" alt="'+cap+'" width="640" height="480" loading="lazy" decoding="async"/><figcaption>'+cap+'<small>'+L3("فكرة شكل","Look idea","效果构想")+'</small></figcaption></figure>';
     });
     h+='</div>';
     h+='<p class="note">'+L3("الأكواد اللي من غير صورة مكتوب عليها «للطلب». اللون على الشاشة تقريبي.","Codes without a photo are marked to order. Colour on screen is approximate.","无图编码标注为询价。屏幕颜色仅供参考。")+'</p></div>';

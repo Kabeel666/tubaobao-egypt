@@ -267,7 +267,7 @@
     var mount = document.getElementById("usesPhotoMount");
     if (!mount || mount.childNodes.length) return;
     if (!window.MEDIA || !MEDIA.uses) return;
-    var note = L("فكرة تطبيق — ليست سابقة أعمال", "Application idea — not a past project", "上墙构想，不是已完工项目");
+    var note = L("فكرة شكل", "Look idea", "效果构想");
     mount.className = "photo-carousel";
     mount.innerHTML = MEDIA.uses.map(function (u) {
       var cap = L(u.ar, u.en, u.zh || u.en);
