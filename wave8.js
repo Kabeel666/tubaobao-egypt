@@ -161,20 +161,24 @@
     var home = $("p-home");
     if (!home) return;
     var map = [
-      [".why-band", L("لماذا المصنع", "Why us", "为什么选我们")],
-      [".preview-3d", L("معاينة", "Preview", "预览")],
-      ["#home-videos", L("حركة", "Motion", "动态")],
-      [".chooser-band", L("دليل", "Guide", "指南")],
+      ["#home-families", L("المنتجات", "Products", "产品")],
       ["#home-popular", L("أكواد", "Codes", "编码")],
+      [".why-band", L("لماذا المصنع", "Why us", "为什么选我们")],
       ["#home-uses", L("أماكن", "Places", "空间")],
+      ["#home-tools", L("أدوات", "Tools", "工具")],
+      ["#home-order", L("الطلب", "Ordering", "下单")],
       [".search-sec", L("بحث", "Search", "搜索")],
       ["#home-factory", L("المصنع", "Factory", "工厂")],
-      [".home-stats", L("أرقام", "At a glance", "概览")],
+      ["#home-videos", L("حركة", "Motion", "动态")],
+      ["#home-faq", L("أسئلة", "FAQ", "问答")],
       [".contact-teaser", L("تواصل", "Contact", "联系")]
     ];
+    /* number kickers in real DOM order, whatever order the sections render in */
+    map = map.map(function (m) { return [m[0], m[1], home.querySelector(m[0])]; }).filter(function (m) { return m[2]; });
+    map.sort(function (a, b) { return (a[2].compareDocumentPosition(b[2]) & 4) ? -1 : 1; });
     var n = 0;
     map.forEach(function (m) {
-      var sec = home.querySelector(m[0]);
+      var sec = m[2];
       if (!sec) return;
       var h2 = sec.querySelector("h2");
       if (!h2) return;

@@ -18,7 +18,7 @@
     var board = document.querySelector("#p-home .board");
     if (!board || !window.MEDIA || !MEDIA.hero) return;
     if (board.querySelector("img.hero-photo")) return;
-    board.insertAdjacentHTML("afterbegin", '<img class="hero-photo" src="' + MEDIA.hero + '" alt="TuBaoBao Egypt" width="1280" height="800" loading="eager" decoding="async"/>');
+    board.insertAdjacentHTML("afterbegin", '<img class="hero-photo" src="' + MEDIA.hero + '" alt="' + (typeof window.brandName === "function" ? window.brandName() : "TuBaoBao Egypt") + '" width="1280" height="800" loading="eager" decoding="async"/>');
   }
   function injectFeatures() {
     /* Disabled: feature-strip used to land inside the navy hero and break the layout. */

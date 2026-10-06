@@ -1,0 +1,65 @@
+/* Wave 9: homepage flow — fact strip, product families, tools, ordering steps, quick FAQ */
+.hero-ticks{list-style:none;display:flex;flex-wrap:wrap;gap:8px 18px;margin:18px 0 0;padding:0;color:#d8d2c8;font-size:.92rem}
+.hero-ticks li{display:flex;align-items:center;gap:6px}
+.hero-ticks span{color:var(--gold2);font-weight:800}
+
+.fact-strip{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0;background:#fff;border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);margin-top:-22px;position:relative;z-index:2;overflow:hidden}
+.fact{padding:18px 20px;border-inline-start:1px solid var(--line)}
+.fact:first-child{border-inline-start:0}
+.fact b{display:block;color:var(--navy);font-size:1.6rem;font-weight:700;letter-spacing:-.02em;line-height:1.2}
+.fact span{display:block;color:var(--muted);font-size:.86rem;font-weight:600;margin-top:2px}
+
+.fam-sec{padding-top:44px}
+.fam-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+.fam-card{background:#fff;border:1px solid var(--line);border-radius:16px;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 4px 16px rgba(27,36,48,.05);transition:transform .2s ease,box-shadow .2s ease}
+.fam-card:hover{transform:translateY(-3px);box-shadow:var(--shadow)}
+.fam-card figure{margin:0;position:relative;aspect-ratio:16/10;overflow:hidden;background:#eee}
+.fam-card figure img{width:100%;height:100%;object-fit:cover;display:block}
+.fam-card figcaption{position:absolute;inset-inline-start:10px;bottom:10px;background:rgba(27,36,48,.72);color:#fff;font-size:.72rem;padding:3px 9px;border-radius:999px}
+.fam-body{padding:16px 18px 18px;display:flex;flex-direction:column;flex:1}
+.fam-body b{color:var(--navy);font-size:1.12rem}
+.fam-body p{margin:6px 0 10px;color:#4a5563;line-height:1.55}
+.fam-body ul{list-style:none;padding:0;margin:0 0 14px;display:flex;flex-wrap:wrap;gap:6px}
+.fam-body li{font-size:.8rem;font-weight:600;color:var(--navy);background:var(--paper);border:1px solid var(--line);border-radius:999px;padding:2px 10px}
+.fam-body .btn{margin-top:auto;align-self:flex-start}
+.btn.ghost-dark{background:transparent;color:var(--navy);border:1px solid var(--navy)}
+.btn.ghost-dark:hover{background:var(--navy);color:#fff}
+
+.tools-band{margin:8px auto 28px}
+.tools-band > h2,.tools-band > .lead{text-align:start;margin-inline:0}
+.tools-band > h2::after{content:"";display:block;width:42px;height:3px;background:var(--gold);margin-top:10px;border-radius:2px}
+.tools-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;margin-top:12px}
+.tool-card{background:var(--navy);color:#e9e4da;border-radius:16px;overflow:hidden;display:flex;flex-direction:column}
+.tool-card img{width:100%;height:240px;max-height:240px;aspect-ratio:auto;object-fit:cover;display:block}
+.tool-body{padding:18px 20px 20px;display:flex;flex-direction:column;gap:8px;flex:1}
+.tool-body b{color:#fff;font-size:1.15rem}
+.tool-body p{margin:0 0 6px;color:#c9c3ba;line-height:1.55}
+.tool-body .btn{margin-top:auto;align-self:flex-start}
+.tool-card .btn.navy{background:#fff;color:var(--navy)}
+
+.order-steps{list-style:none;padding:0;margin:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;counter-reset:none}
+.order-steps li{background:#fff;border:1px solid var(--line);border-radius:14px;padding:18px;display:flex;gap:12px;align-items:flex-start;position:relative}
+.order-num{flex:0 0 34px;height:34px;border-radius:50%;background:var(--gold);color:#fff;font-weight:800;display:flex;align-items:center;justify-content:center}
+.order-steps b{color:var(--navy);display:block}
+.order-steps p{margin:4px 0 0;color:#4a5563;font-size:.92rem;line-height:1.5}
+.order-sec .center-actions{display:flex;flex-wrap:wrap;gap:10px;justify-content:flex-start;margin-top:16px}
+
+.faq-teaser .faq-list{display:grid;gap:8px;max-width:52rem}
+.faq-teaser details{background:#fff;border:1px solid var(--line);border-radius:12px;padding:12px 16px}
+.faq-teaser summary{cursor:pointer;font-weight:700;color:var(--navy)}
+.faq-teaser details p{margin:8px 0 0;color:#4a5563}
+.faq-teaser .center-actions{justify-content:flex-start;display:flex}
+
+@media(max-width:980px){
+  .order-steps{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .fam-grid{grid-template-columns:1fr 1fr}
+}
+@media(max-width:760px){
+  .fact-strip{grid-template-columns:1fr 1fr;margin-top:-12px}
+  .fact:nth-child(3){border-inline-start:0}
+  .fact:nth-child(n+3){border-top:1px solid var(--line)}
+  .fact{padding:14px}
+  .fact b{font-size:1.3rem}
+  .fam-grid,.tools-grid,.order-steps{grid-template-columns:1fr}
+  .hero-ticks{font-size:.85rem}
+}

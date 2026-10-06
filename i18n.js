@@ -61,7 +61,38 @@
     document.documentElement.dir = d.dir || (lang === "ar" ? "rtl" : "ltr");
     document.body.className = lang === "ar" ? "" : (lang === "zh" ? "zh en" : "en");
     if (d && d.brand) document.title = d.brand + " — " + (d.sub || "");
+    applyBrandChrome(d);
   }
+
+  /* Brand name follows the UI language: EN TuBaoBao Egypt · AR توباباو مصر · ZH 埃及兔宝宝 */
+  var BRAND = { en: "TuBaoBao Egypt", ar: "توباباو مصر", zh: "埃及兔宝宝" };
+  var META_DESC = {
+    en: "TuBaoBao Egypt — interior PVC and WPC wall finishes from the 6th of October factory, Plot 37. Fluted slats, 122 × 280 sheets and trims by code. The sample decides the colour; prices on request.",
+    ar: "توباباو مصر — تشطيبات حوائط داخلية PVC وWPC من مصنع 6 أكتوبر، قطعة 37. شرائح تجاليد وألواح 122 × 280 وإكسسوارات بالكود. العيّنة هي المرجع للون، والأسعار عند الطلب.",
+    zh: "埃及兔宝宝——位于十月六日城 37 号地块的室内 PVC 与 WPC 墙面饰面工厂。格栅护墙条、122 × 280 大板与配件，按编码供货。颜色以样品为准，价格询价。"
+  };
+  window.brandName = function () { return BRAND[lang] || BRAND.en; };
+  function setMeta(sel, attr, val) {
+    var el = document.querySelector(sel);
+    if (el) el.setAttribute(attr, val);
+  }
+  function applyBrandChrome(d) {
+    var name = BRAND[lang] || BRAND.en;
+    setMeta('meta[name="description"]', "content", META_DESC[lang] || META_DESC.en);
+    setMeta('meta[property="og:title"]', "content", document.title);
+    setMeta('meta[property="og:site_name"]', "content", name);
+    setMeta('meta[property="og:description"]', "content", META_DESC[lang] || META_DESC.en);
+    setMeta('meta[property="og:locale"]', "content", lang === "ar" ? "ar_EG" : (lang === "zh" ? "zh_CN" : "en_US"));
+    document.querySelectorAll("img.brand-logo, img.hero-photo").forEach(function (img) { img.setAttribute("alt", name); });
+    var fab = document.getElementById("fabWa");
+    if (fab) fab.setAttribute("aria-label", lang === "ar" ? "واتساب — راسل المصنع" : (lang === "zh" ? "WhatsApp — 联系工厂" : "WhatsApp — message the factory"));
+  }
+
+  /* ?lang=ar|zh|en deep link (shareable per-language URL) */
+  try {
+    var qp = new URLSearchParams(location.search).get("lang");
+    if (qp === "ar" || qp === "en" || qp === "zh") { lang = qp; saveLang(qp); }
+  } catch (e) {}
 
   function wire() {
     var box = document.getElementById("langSwitch");

@@ -129,9 +129,9 @@
       ["specs", "المواصفات", "Specs", "规格"], ["calc", "الحاسبة", "Calculator", "计算器"], ["compare", "مقارنة", "Compare", "对比"],
       ["access", "إكسسوارات", "Accessories", "配件"], ["faq", "أسئلة", "FAQ", "问答"], ["contact", "صفحة التواصل", "Contact page", "联系页面"]];
     var h = '<div class="foot-grid">';
-    h += '<div class="foot-brand"><img class="brand-logo" src="media/brand/rabbit-mark.jpg" width="64" height="64" alt="TuBaoBao" loading="lazy" decoding="async"/>';
+    h += '<div class="foot-brand"><img class="brand-logo" src="media/brand/rabbit-mark.jpg" width="64" height="64" alt="' + brand + '" loading="lazy" decoding="async"/>';
     h += "<div><b>" + brand + "</b><p>" + L("تشطيبات حوائط داخلية PVC وWPC — تصنيع مصري بأكواد واضحة وعينات حقيقية.", "Interior PVC & WPC wall finishes — made in Egypt, with clear codes and real samples.", "室内 PVC 与 WPC 墙面饰面——埃及自产，编码清晰，样品真实。") + "</p>";
-    h += '<small class="foot-tri" lang="mul">TuBaoBao Egypt · <bdi lang="ar">توباباو مصر</bdi> · <bdi lang="zh-CN">埃及兔宝宝</bdi></small></div></div>';
+    h += "</div></div>";
     h += '<div class="foot-col"><h4>' + L("المصنع", "Factory", "工厂") + "</h4><p>" + d.addr + "</p><p>" + d.hours + "</p>";
     h += '<button type="button" class="btn gold foot-cta" data-wa-proxy="1">' + L("تواصل", "Contact", "联系") + "</button></div>";
     h += '<div class="foot-col"><h4>' + L("استكشف", "Explore", "浏览") + '</h4><nav class="foot-links" aria-label="Footer">';

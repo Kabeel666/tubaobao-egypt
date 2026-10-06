@@ -400,10 +400,9 @@
     var heroImg = M.hero || "media/home/creative-01.jpg";
     var life = (M.lifestyle && M.lifestyle.length) ? M.lifestyle : [];
     var fac = (M.factory && M.factory.length) ? M.factory : [];
-    var works = (M.works && M.works.length) ? M.works : [];
     var results = (typeof filterPool === "function") ? filterPool(typeof homeQ === "undefined" ? "" : homeQ) : [];
     var q = (typeof homeQ === "undefined" ? "" : (homeQ || "")).replace(/"/g, "");
-    var stats = (d && d.stats) ? d.stats : [];
+    var brand = (typeof window.brandName === "function") ? window.brandName() : ((d && d.brand) || "TuBaoBao Egypt");
     function useSrc(id) {
       var list = M.uses || [];
       for (var i = 0; i < list.length; i++) if (list[i].id === id && list[i].img) return list[i];
@@ -412,82 +411,104 @@
     var wall = useSrc("preview3d");
     var chooser = useSrc("chooser");
     var roomIds = ["restaurant", "salon", "gym", "leatherbed", "reception", "living", "kitchen", "pharmacy", "clinic", "lobby"];
-    var h = "";
-    h += '<div class="hero hero-rich"><div class="wrap hero-in">';
+    var nF = (typeof F !== "undefined" && F.length) ? F.length : 0;
+    var nSH = (typeof SH !== "undefined" && SH.length) ? SH.length : 0;
+    var nPR = (typeof PR !== "undefined" && PR.length) ? PR.length : 0;
+    var S = {};
+
+    /* ---- Hero ---- */
+    var h = '<div class="hero hero-rich"><div class="wrap hero-in">';
     h += '<div class="hero-copy"><p class="k">' + tx(d, "heroK", "", "", "") + "</p>";
     h += "<h1>" + tx(d, "heroT", "", "", "") + "</h1>";
     h += '<p class="hero-lead">' + tx(d, "heroS", "", "", "") + "</p>";
     h += '<div class="hero-cta">';
     h += '<button class="btn gold" type="button" data-tab="colors">' + tx(d, "heroFinishes", "تصفّح التشطيبات", "Browse finishes", "浏览花色") + "</button>";
-    h += '<button class="btn ghost" type="button" data-tab="contact">' + tx(d, "heroContact", "تواصل", "Contact", "联系我们") + "</button>";
-    h += "</div></div>";
+    h += '<button class="btn ghost" type="button" data-tab="chooser">' + L("دليل الاختيار", "Help me choose", "帮我选") + "</button>";
+    h += "</div>";
+    h += '<ul class="hero-ticks">';
+    [L("عيّنة حقيقية قبل الكمية", "Real sample before volume", "大批量前先看真实样品"),
+     L("تعبئة منفصلة لكل كود", "Packed separately by code", "按编码分开包装"),
+     L("توريد لكل المحافظات", "Supply nationwide", "全埃及供货")].forEach(function (x) {
+      h += '<li><span aria-hidden="true">&#10003;</span>' + x + "</li>";
+    });
+    h += "</ul></div>";
     h += '<div class="board board-photo">';
-    h += '<figure class="photo-card hero-frame"><img class="hero-photo kenburns" src="' + heroImg + '" alt="TuBaoBao Egypt" width="1280" height="800" loading="eager" decoding="async"/>';
+    h += '<figure class="photo-card hero-frame"><img class="hero-photo kenburns" src="' + heroImg + '" alt="' + brand + '" width="1280" height="800" loading="eager" decoding="async"/>';
     h += "<figcaption>" + tx(d, "heroCap", "لقطة عرض · فكرة تطبيق", "Showroom still · application idea", "展厅静帧 · 上墙构想") + "</figcaption></figure>";
     h += '<div class="hero-thumbs">';
     var thumbSrcs = [];
     life.forEach(function (src) {
-      if (!src || src === heroImg) return;
-      if (thumbSrcs.indexOf(src) >= 0) return;
+      if (!src || src === heroImg || thumbSrcs.indexOf(src) >= 0) return;
       thumbSrcs.push(src);
     });
-    if (thumbSrcs.length < 4) {
-      life.forEach(function (src) {
-        if (!src || thumbSrcs.indexOf(src) >= 0) return;
-        thumbSrcs.push(src);
-      });
-    }
     thumbSrcs.slice(0, 4).forEach(function (src) {
       h += '<img src="' + src + '" alt="" width="320" height="320" loading="lazy" decoding="async"/>';
     });
     h += "</div></div></div></div>";
+    S.hero = h;
 
-    h += '<div class="wrap why-band rise-in"><h2>' + L("ليه من المصنع مباشرة؟", "Why factory direct?", "为什么直接找工厂？") + "</h2>";
+    /* ---- Fact strip right under the hero (live counts from the catalog data) ---- */
+    var facts = [
+      [L("~10,000 م²", "~10,000 m²", "约 10,000 m²"), L("مساحة المصنع · 6 أكتوبر", "Factory floor · 6th of October", "工厂面积 · 十月六日城")],
+      [nF ? String(nF) : "—", L("كود تشطيب للشرائح", "Slat finish codes", "护墙条花色编码")],
+      [nSH ? String(nSH) : "—", L("كود لوح 122 × 280", "Sheet codes · 122 × 280", "大板编码 · 122 × 280")],
+      [nPR ? String(nPR) : "—", L("قطاع شريحة · طول 280 سم", "Slat profiles · 280 cm long", "护墙条型材 · 长 280 cm")]
+    ];
+    h = '<div class="wrap fact-strip rise-in" role="list" aria-label="' + L("أرقام المصنع", "Factory facts", "工厂数据") + '">';
+    facts.forEach(function (f) { h += '<div class="fact" role="listitem"><b>' + f[0] + "</b><span>" + f[1] + "</span></div>"; });
+    h += "</div>";
+    S.facts = h;
+
+    /* ---- Product families ---- */
+    var famImg = ["media/home/product-03.jpg", "media/home/product-01.jpg", "media/home/product-06.jpg"];
+    var famTab = ["sizes", "sheets", "access"];
+    var famSpec = [
+      [L("طول 280 سم", "280 cm long", "长 280 cm"), L("عرض 13.4 – 20 سم", "13.4 – 20 cm wide", "宽 13.4 – 20 cm"), L("فوم 5 مم", "5 mm foam backing", "5 mm 发泡垫")],
+      [L("122 × 280 سم", "122 × 280 cm", "122 × 280 cm"), L("سُمك 5 مم", "5 mm thick", "厚 5 mm"), L("رخام · سيراميك · خشب", "Marble · ceramic · wood", "大理石 · 陶瓷 · 木纹")],
+      [L("زوايا ونهايات", "Corners & end caps", "角线与收口"), L("قطاع بداية", "Start profiles", "起始条"), L("فوم ولصق", "Foam & fixing", "发泡垫与固定")]
+    ];
+    var famBtn = [L("المقاسات والقطاعات", "Sizes & profiles", "尺寸与型材"), L("الألواح", "Sheets", "大板"), L("الإكسسوارات", "Accessories", "配件")];
+    var lines = (d && d.lines) || [];
+    h = '<section class="home-sec fam-sec rise-in" id="home-families"><h2>' + tx(d, "prodT", "عائلات المنتجات", "Product lines", "产品系列") + "</h2>";
+    h += '<p class="lead">' + L("ثلاث عائلات، كلها تصنيع داخلي في المصنع. اختار العائلة، بعدين الكود.", "Three families, all made in-house. Pick the family, then the code.", "三大系列，全部工厂自产。先选系列，再选编码。") + "</p>";
+    h += '<div class="fam-grid">';
+    lines.slice(0, 3).forEach(function (ln, i) {
+      h += '<article class="fam-card"><figure><img src="' + famImg[i] + '" alt="' + ln[0] + '" width="640" height="420" loading="lazy" decoding="async"/><figcaption>' + L("فكرة تطبيق", "Application idea", "应用构想") + "</figcaption></figure>";
+      h += '<div class="fam-body"><b>' + ln[0] + "</b><p>" + ln[1] + "</p><ul>";
+      famSpec[i].forEach(function (s) { h += "<li>" + s + "</li>"; });
+      h += '</ul><button type="button" class="btn ghost-dark" data-tab="' + famTab[i] + '">' + famBtn[i] + " " + L("&larr;", "&rarr;", "&rarr;") + "</button></div></article>";
+    });
+    h += "</div></section>";
+    S.families = h;
+
+    /* ---- Why factory direct ---- */
+    h = '<div class="wrap why-band rise-in"><h2>' + L("ليه من المصنع مباشرة؟", "Why factory direct?", "为什么直接找工厂？") + "</h2>";
     h += '<p class="lead">' + L("ثلاث حاجات واضحة قبل ما تطلب كمية.", "Three plain things before you order volume.", "下单前先弄清这三件事。") + "</p>";
     h += '<div class="why-grid">';
-    var why = [
+    [
       [L("عيّنة على الرف", "Sample on the rack", "样品就在架上"), L("شوف العيّنة الحقيقية في المصنع قبل الكمية. اللون على الشاشة تقريبي.", "See the real sample at the factory before volume. Screen colour is approximate.", "大批量前先到工厂看真实样品。屏幕颜色只是近似。")],
       [L("مكتبة أكواد", "Code library", "编码图库"), L("خشب، رخام، كتان، جلد والمزيد — بالكود، من غير أسعار منشورة.", "Wood, marble, linen, leather and more — by code, with no published prices.", "木纹、仿石、亚麻、皮革等——按编码，页面不标价。")],
       [L("عرض على واتساب", "WhatsApp quote", "WhatsApp 报价"), L("ابعت الكود والمقاس والمكان، والفريق بيرد من زر تواصل.", "Send the code, size and room — the team replies from Contact.", "发来编码、尺寸和空间，工厂通过「联系」回复。")]
-    ];
-    why.forEach(function (w) {
-      h += '<article class="why-card"><b>' + w[0] + "</b><p>" + w[1] + "</p></article>";
-    });
+    ].forEach(function (w) { h += '<article class="why-card"><b>' + w[0] + "</b><p>" + w[1] + "</p></article>"; });
     h += "</div></div>";
+    S.why = h;
 
-    h += '<div class="wrap preview-3d rise-in"><div class="preview-3d-in">';
-    if (wall) {
-      h += '<figure class="photo-card"><img src="' + wall.img + '" alt="' + roomCap(d, "preview3d", wall) + '" width="1280" height="720" loading="eager" decoding="async"/>';
-      h += "<figcaption>" + tx(d, "appIdeaLong", "معاينة الشكل", "Look preview", "效果预览") + "</figcaption></figure>";
-    }
-    h += "<div><h2>" + tx(d, "vizT", "شوف الحائط قبل التركيب", "See the wall before it is installed", "安装之前，先看这面墙") + "</h2>";
-    h += "<p>" + tx(d, "vizLead", "", "", "") + "</p>";
-    h += '<button class="btn gold" type="button" data-tab="viz">' + tx(d, "vizBtn", "تفاصيل المعاينة", "Preview details", "了解预览怎么做") + "</button></div>";
+    /* ---- Tools: chooser + 3D preview side by side ---- */
+    h = '<div class="wrap tools-band rise-in" id="home-tools"><h2>' + L("أدوات تساعدك تختار", "Tools to help you decide", "帮你做决定的工具") + "</h2>";
+    h += '<p class="lead">' + L("قبل ما تكلّم المصنع: ضيّق الاختيار حسب المكان، وشوف شكل الحائط تقريبيًا.", "Before you message the factory: narrow the choice by room, and get a rough look at the wall.", "联系工厂之前：先按空间缩小范围，再大致看看墙面效果。") + "</p>";
+    h += '<div class="tools-grid">';
+    h += '<article class="tool-card">';
+    if (chooser) h += '<img src="' + chooser.img + '" alt="' + roomCap(d, "chooser", chooser) + '" width="1280" height="720" loading="lazy" decoding="async"/>';
+    h += '<div class="tool-body"><b>' + tx(d, "chooserT", "اختار إيه", "How to choose", "怎么选") + "</b><p>" + tx(d, "chooserLead", "", "", "") + "</p>";
+    h += '<button class="btn gold" type="button" data-tab="chooser">' + tx(d, "chooserBtn", "افتح دليل الاختيار", "Open the chooser", "打开选材指南") + "</button></div></article>";
+    h += '<article class="tool-card">';
+    if (wall) h += '<img src="' + wall.img + '" alt="' + roomCap(d, "preview3d", wall) + '" width="1280" height="720" loading="lazy" decoding="async"/>';
+    h += '<div class="tool-body"><b>' + tx(d, "vizT", "شوف الحائط قبل التركيب", "See the wall before it is installed", "安装之前，先看这面墙") + "</b><p>" + tx(d, "vizLead", "", "", "") + "</p>";
+    h += '<button class="btn navy" type="button" data-tab="viz">' + tx(d, "vizBtn", "تفاصيل المعاينة", "Preview details", "了解预览怎么做") + "</button></div></article>";
     h += "</div></div>";
+    S.tools = h;
 
-    h += '<div class="wrap home-rich">';
-    h += '<section class="home-sec video-strip rise-in" id="home-videos"><h2>' + tx(d, "videoStripT", "الحركة", "In motion", "动起来看") + "</h2>";
-    h += '<p class="lead">' + tx(d, "videoS", "", "", "") + "</p>";
-    h += '<div class="video-strip-grid">';
-    var gifs = (window.IDEA_GIFS && window.IDEA_GIFS.length) ? window.IDEA_GIFS : (window.IDEA_VIDEOS || []).filter(function (v) { return v.gif; });
-    gifs.slice(0, 4).forEach(function (v, gi) {
-      var cap = L(v.ar, v.en, v.zh);
-      h += '<figure class="photo-card"><img class="gif-loop" src="' + v.gif + '" alt="' + cap + '" width="480" height="300" loading="' + (gi === 0 ? "eager" : "lazy") + '" decoding="async"/>';
-      h += "<figcaption>" + cap + "</figcaption></figure>";
-    });
-    h += '</div><div class="center-actions"><button class="btn navy" type="button" data-tab="videos">' + tx(d, "videoAll", "كل الفيديوهات", "All videos", "查看全部") + "</button></div></section>";
-
-    h += '<section class="home-sec chooser-band rise-in">';
-    h += '<div class="chooser-band-in">';
-    if (chooser) {
-      h += '<img class="chooser-photo" src="' + chooser.img + '" alt="' + roomCap(d, "chooser", chooser) + '" width="1280" height="720" loading="eager" decoding="async"/>';
-    }
-    h += "<div><h2>" + tx(d, "chooserT", "اختار إيه", "How to choose", "怎么选") + "</h2>";
-    h += '<p class="lead">' + tx(d, "chooserLead", "", "", "") + "</p>";
-    h += '<button class="btn gold" type="button" data-tab="chooser">' + tx(d, "chooserBtn", "افتح دليل الاختيار", "Open the chooser", "打开选材指南") + "</button></div>";
-    h += "</div></section>";
-
-    /* Wave 5: popular codes with real catalog photos */
+    /* ---- Popular codes ---- */
     var popCodes = ["M1-001", "M1-002", "M1-003", "M1-004", "M1-005", "M1-006", "M1-008", "M1-009", "M2-001", "M3-001", "M3-002", "M3-003"];
     var popItems = [];
     popCodes.forEach(function (code) {
@@ -501,10 +522,11 @@
       var cap = fam ? (shortName ? fam + " · " + shortName : fam) : shortName;
       popItems.push({ code: code, photo: photo, fam: fam, cap: cap });
     });
+    h = "";
     if (popItems.length >= 6) {
       h += '<section class="home-sec pop-codes rise-in" id="home-popular"><div class="pop-head"><div><h2>' + L("أكواد مطلوبة", "Popular codes", "热门编码") + "</h2>";
       h += '<p class="lead">' + L("صور كتالوج من المصنع. دوس على الكود يفتح التشطيبات.", "Factory catalog shots. Tap a code to open the finishes.", "工厂图册实拍。点编码打开花色库。") + "</p></div>";
-      h += '<button class="btn navy" type="button" data-tab="colors">' + L("كل التشطيبات", "All finishes", "全部花色") + "</button></div>";
+      h += '<button class="btn navy" type="button" data-tab="colors">' + L("كل التشطيبات", "All finishes", "全部花色") + (nF ? " (" + nF + ")" : "") + "</button></div>";
       h += '<div class="pop-row">';
       popItems.forEach(function (it) {
         h += '<button type="button" class="pop-card" data-tab="colors" aria-label="' + it.code + (it.fam ? (" — " + it.fam) : "") + '"><img src="' + it.photo + '" alt="' + it.code + '" width="400" height="300" loading="lazy" decoding="async"/>';
@@ -512,8 +534,10 @@
       });
       h += "</div></section>";
     }
+    S.popular = h;
 
-    h += '<section class="home-sec" id="home-uses"><h2>' + tx(d, "usesT", "فين ينفع يتركّب", "Where it belongs", "适合用在哪里") + "</h2>";
+    /* ---- Where it belongs ---- */
+    h = '<section class="home-sec" id="home-uses"><h2>' + tx(d, "usesT", "فين ينفع يتركّب", "Where it belongs", "适合用在哪里") + "</h2>";
     h += '<p class="lead">' + tx(d, "usesLead", "", "", "") + "</p>";
     h += '<div class="photo-grid home-uses">';
     roomIds.forEach(function (id) {
@@ -523,8 +547,24 @@
       h += '<figure class="photo-card"><img src="' + u.img + '" alt="' + cap + '" width="640" height="480" loading="lazy" decoding="async"/><figcaption>' + cap + "</figcaption></figure>";
     });
     h += '</div><div class="center-actions"><button class="btn navy" type="button" data-tab="spaces">' + tx(d, "usesAll", "كل الأماكن", "All places", "查看全部空间") + "</button></div></section>";
+    S.uses = h;
 
-    h += '<section class="home-sec search-sec">';
+    /* ---- How ordering works ---- */
+    var steps = [
+      [L("اختار الكود", "Pick a code", "选编码"), L("من مكتبة التشطيبات أو دليل الاختيار. سجّل الكود وعرض الشريحة.", "From the finish library or the chooser. Note the code and the slat width.", "在花色库或选材指南里选。记下编码和护墙条宽度。")],
+      [L("شوف العيّنة", "See the sample", "看样品"), L("في المصنع بـ 6 أكتوبر أو اطلب عيّنة. اللون على الشاشة تقريبي.", "At the 6th of October factory, or ask for one. Screen colour is approximate.", "到十月六日城工厂看，或申请样品。屏幕颜色只是近似。")],
+      [L("ابعت المقاس", "Send the size", "发尺寸"), L("عرض × ارتفاع الحائط بالمتر ونوع المكان، وصورة لو موجودة.", "Wall width × height in metres, the room type, and a photo if you have one.", "墙面宽 × 高（米）、空间类型，有照片更好。")],
+      [L("تعبئة وتوريد", "Packed & supplied", "包装与供货"), L("كل كود متعبّي لوحده ومتعلّم، والتوريد لكل المحافظات بعد الاتفاق.", "Each code packed and labelled separately; nationwide supply once terms are agreed.", "每个编码单独包装、贴标；条款确认后全埃及供货。")]
+    ];
+    h = '<section class="home-sec order-sec rise-in" id="home-order"><h2>' + L("الطلب بيمشي إزاي", "How ordering works", "下单流程") + "</h2>";
+    h += '<p class="lead">' + L("أربع خطوات من الكود لحد ما البضاعة توصل. الأسعار عند الطلب.", "Four steps from code to delivery. Prices on request.", "从编码到到货，四步完成。价格询价。") + "</p>";
+    h += '<ol class="order-steps">';
+    steps.forEach(function (s, i) { h += '<li><span class="order-num">' + (i + 1) + "</span><div><b>" + s[0] + "</b><p>" + s[1] + "</p></div></li>"; });
+    h += '</ol><div class="center-actions"><button class="btn navy" type="button" data-tab="calc">' + L("احسب الكمية", "Estimate quantities", "估算用量") + '</button><button class="btn ghost-dark" type="button" data-tab="install">' + L("خطوات التركيب", "Install steps", "安装步骤") + "</button>" + '<button class="btn ghost-dark" type="button" data-tab="factory">' + L("المصنع", "The factory", "工厂") + "</button></div></section>";
+    S.order = h;
+
+    /* ---- Search ---- */
+    h = '<section class="home-sec search-sec">';
     h += "<h2>" + tx(d, "searchT", "ابحث في المكتبة", "Search the library", "在图库里找") + "</h2>";
     h += '<p class="lead">' + tx(d, "searchLead", "", "", "") + "</p>";
     h += '<div class="home-search"><input id="homeSearch" type="search" value="' + q + '" placeholder="' + tx(d, "searchPh", "ابحث بكود أو اسم التشطيب", "Search by code or finish name", "按编码或花色名称搜索") + '" autocomplete="off"/>';
@@ -539,7 +579,7 @@
     h += '<div class="grid4" id="homeSearchGrid">';
     results.forEach(function (p) {
       var name = isAr() ? p.ar : p.en;
-      if (!isAr() && typeof lang !== "undefined" && lang === "zh") {
+      if (isZh()) {
         var famZh = {wood:"木材",marble:"大理石",leather:"皮革",textile:"亚麻",ceramic:"陶瓷",chipboard:"刨花板",solid:"纯色",sheet:"板材"};
         name = p.en + (famZh[p.fam] ? " · " + famZh[p.fam] : "");
       }
@@ -550,21 +590,19 @@
       if (!photo && window.CODE_MEDIA && CODE_MEDIA[p.code] && CODE_MEDIA[p.code].primary) {
         photo = (typeof fileUrl === "function") ? fileUrl(CODE_MEDIA[p.code].primary) : CODE_MEDIA[p.code].primary;
       }
-      if (photo) {
-        h += '<img class="finish-photo" src="' + photo + '" alt="' + p.code + '" width="640" height="480" loading="lazy" decoding="async"/>';
-      } else {
-        h += '<span class="chip" style="background:' + (p.color || "#ccc") + '"></span>';
-      }
+      if (photo) h += '<img class="finish-photo" src="' + photo + '" alt="' + p.code + '" width="640" height="480" loading="lazy" decoding="async"/>';
+      else h += '<span class="chip" style="background:' + (p.color || "#ccc") + '"></span>';
       h += '<div class="meta"><b class="code">' + p.code + "</b><div>" + name + "</div><small>" + kind + "</small></div></article>";
     });
     h += "</div></section>";
+    S.search = h;
 
-    h += '<section class="home-sec" id="home-factory"><h2>' + tx(d, "factoryHomeT", "عينات المصنع", "Factory samples", "工厂样品与车间") + "</h2>";
+    /* ---- Factory samples ---- */
+    h = '<section class="home-sec" id="home-factory"><h2>' + tx(d, "factoryHomeT", "عينات المصنع", "Factory samples", "工厂样品与车间") + "</h2>";
     h += '<p class="lead">' + tx(d, "factoryHomeLead", "", "", "") + "</p>";
     h += '<div class="photo-grid home-factory-grid">';
     var facCap = tx(d, "facCap", "عيّنة من المصنع", "Factory sample", "工厂样品");
     var facItems = [];
-    /* Curated samples only: real catalog code shots + sheet stack. No door-leaf / workshop shots. */
     var noDoor = /(manufacturing-panels|sample-rack|_wna\.)/i;
     fac.forEach(function (src) {
       if (!src || noDoor.test(src)) return;
@@ -575,21 +613,49 @@
       h += '<figure class="photo-card' + (item.code ? ' is-code' : '') + '"><img class="' + (item.code ? 'is-catalog' : 'is-scene') + '" src="' + item.src + '" alt="' + item.cap + '" width="640" height="480" loading="lazy" decoding="async"/><figcaption>' + item.cap + "</figcaption></figure>";
     });
     h += '</div><div class="center-actions"><button class="btn navy" type="button" data-tab="factory">' + tx(d, "facT", "المصنع", "Factory", "工厂") + "</button></div></section>";
+    S.factory = facItems.length ? h : "";
 
-    h += '<section class="home-sec home-stats"><h2>' + tx(d, "factsT", "نظرة سريعة", "At a glance", "工厂一览") + "</h2>";
-    h += '<div class="stats">';
-    stats.forEach(function (row) {
-      h += '<div class="stat"><b>' + row[0] + "</b><span>" + row[1] + "</span></div>";
+    /* ---- Motion ---- */
+    h = '<section class="home-sec video-strip rise-in" id="home-videos"><h2>' + tx(d, "videoStripT", "الحركة", "In motion", "动起来看") + "</h2>";
+    h += '<p class="lead">' + tx(d, "videoS", "", "", "") + "</p>";
+    h += '<div class="video-strip-grid">';
+    var gifs = (window.IDEA_GIFS && window.IDEA_GIFS.length) ? window.IDEA_GIFS : (window.IDEA_VIDEOS || []).filter(function (v) { return v.gif; });
+    gifs.slice(0, 4).forEach(function (v) {
+      var cap = L(v.ar, v.en, v.zh);
+      h += '<figure class="photo-card"><img class="gif-loop" src="' + v.gif + '" alt="' + cap + '" width="480" height="300" loading="lazy" decoding="async"/>';
+      h += "<figcaption>" + cap + "</figcaption></figure>";
     });
-    h += "</div></section>";
+    h += '</div><div class="center-actions"><button class="btn navy" type="button" data-tab="videos">' + tx(d, "videoAll", "كل الفيديوهات", "All videos", "查看全部") + "</button></div></section>";
+    S.videos = gifs.length ? h : "";
 
-    h += '<section class="home-sec contact-teaser"><h2>' + tx(d, "ctT", "كلّم المصنع", "Talk to the factory", "联系工厂") + "</h2>";
+    /* ---- Quick FAQ (first questions from the language's FAQ list) ---- */
+    var faq = (d && d.faq && d.faq.length) ? d.faq.slice(0, 5) : [];
+    h = "";
+    if (faq.length) {
+      h += '<section class="home-sec faq-teaser rise-in" id="home-faq"><h2>' + L("أسئلة سريعة", "Quick answers", "常见问题") + "</h2>";
+      h += '<div class="faq-list">';
+      faq.forEach(function (x) { h += "<details><summary>" + x[0] + "</summary><p>" + x[1] + "</p></details>"; });
+      h += '</div><div class="center-actions"><button class="btn navy" type="button" data-tab="faq">' + L("كل الأسئلة", "All questions", "全部问题") + "</button></div></section>";
+    }
+    S.faq = h;
+
+    /* ---- Contact teaser ---- */
+    h = '<section class="home-sec contact-teaser"><h2>' + tx(d, "ctT", "كلّم المصنع", "Talk to the factory", "联系工厂") + "</h2>";
     h += '<p class="lead">' + tx(d, "ctS", "", "", "") + "</p>";
     h += '<p class="addr">' + tx(d, "addr", "", "", "") + "</p>";
     h += '<p class="lead hours">' + tx(d, "hours", "", "", "") + "</p>";
     h += '<div class="contact-actions"><button class="btn gold" type="button" data-tab="contact">' + tx(d, "contactPage", "صفحة التواصل", "Contact page", "联系页面") + "</button></div></section>";
-    h += "</div>";
-    return h;
+    S.contact = h;
+
+    /* Factory samples (S.factory) duplicate the Popular codes shots, so the homepage links to the Factory tab instead.
+       Flow: who we are → what we make → proof → help deciding → how to order → depth → contact */
+    return S.hero + S.facts +
+      '<div class="wrap home-rich">' + S.families + S.popular + "</div>" +
+      S.why +
+      '<div class="wrap home-rich">' + S.uses + "</div>" +
+      S.tools +
+      '<div class="wrap home-rich">' + S.order + S.search + S.videos + S.faq + S.contact + "</div>";
   };
+
 
 })();

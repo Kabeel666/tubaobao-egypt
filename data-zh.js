@@ -1,6 +1,6 @@
 /* Simplified Chinese UI. Finish cards keep the English name plus a family label. */
 const ZH={dir:"ltr",brand:"埃及兔宝宝",sub:"PVC 墙面饰面",lang:"EN",
-heroK:"埃及兔宝宝",heroT:"高端室内墙面，<br/>来自值得信赖的工厂。",
+heroK:"埃及兔宝宝 · 十月六日城工厂",heroT:"高端室内墙面，<br/>来自值得信赖的工厂。",
 heroS:"PVC 护墙条与 5 mm 大板，木纹、大理石、亚麻、皮革肌理。数百款清晰编码，大批量前先拿到真实样品。埃及本地制造，全国供货。",
 cta1:"浏览花色",cta2:"看看工厂",
 heroFinishes:"浏览花色",heroContact:"联系我们",
