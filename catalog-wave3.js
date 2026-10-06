@@ -69,15 +69,15 @@
   window.videosInner=function(){
     var vids=window.IDEA_VIDEOS||[];
     var h='<div class="wrap"><h2>'+L3("فيديو","Videos","视频")+'</h2>';
-    h+='<p class="lead">'+L3("مقاطع قصيرة صامتة اتعملت حركة بسيطة على صور أفكار التطبيق. فكرة بصرية للتطبيق — مش تصوير موقع حقيقي.","Short silent clips with a slow move across application-idea stills. A visual idea — not a filmed job.","几段没有声音的短片，在上墙构想的静帧上慢慢移动。这是视觉构想，不是工地实拍。")+'</p>';
+    h+='<p class="lead">'+L3("مقاطع قصيرة صامتة لأفكار تطبيق التشطيبات. أفكار بصرية، مش تصوير شغل منفّذ.","Short silent clips of finishes in rooms. Visual ideas, not filmed jobs.","几段无声短片，展示花色上墙的样子。是视觉构想，不是工程实拍。")+'</p>';
     h+='<div class="video-grid">';
     vids.forEach(function(v){
       var cap=L3(v.ar,v.en,v.zh);
       var note=L3("فكرة بصرية للتطبيق — مش تصوير موقع حقيقي","A visual application idea — not a filmed job","视觉构想，并非实拍工程");
       if(v.gif){
-        h+='<figure class="video-card photo-card"><img class="gif-loop" src="'+v.gif+'" alt="'+cap+'" width="480" height="300" loading="lazy" decoding="async"/><figcaption>'+cap+'<small>'+note+'</small></figcaption></figure>';
+        h+='<figure class="video-card photo-card"><img class="gif-loop" src="'+v.gif+'" alt="'+cap+'" width="480" height="300" loading="lazy" decoding="async" style="background:#e9e4dc url('+v.poster+') center/cover"/><figcaption>'+cap+'</figcaption></figure>';
       } else {
-        h+='<figure class="video-card photo-card"><video controls muted playsinline loop poster="'+v.poster+'" preload="metadata"><source src="'+v.src+'" type="video/mp4"/></video><figcaption>'+cap+'<small>'+note+'</small></figcaption></figure>';
+        h+='<figure class="video-card photo-card"><video controls muted playsinline loop poster="'+v.poster+'" preload="metadata"><source src="'+v.src+'" type="video/mp4"/></video><figcaption>'+cap+'</figcaption></figure>';
       }
     });
     h+='</div></div>';
