@@ -27,7 +27,8 @@
     if (!q) out = pool.slice(0, 10);
     else {
       out = pool.filter(function (p) {
-        var hay = (p.code + " " + p.ar + " " + p.en + " " + p.fam + " " + p.kind).toLowerCase();
+        var famZhS = {wood:"木材 木纹",marble:"大理石",leather:"皮革",textile:"亚麻",ceramic:"陶瓷",chipboard:"刨花板",solid:"纯色",sheet:"板材 大板"};
+        var hay = (p.code + " " + p.ar + " " + p.en + " " + p.fam + " " + p.kind + " " + (famZhS[p.fam] || "") + (p.kind === "sheet" ? " 大板 لوح" : "")).toLowerCase();
         return hay.indexOf(q) >= 0;
       }).slice(0, 12);
     }
@@ -471,6 +472,31 @@
     h += '<button class="btn gold" type="button" data-tab="chooser">' + tx(d, "chooserBtn", "افتح دليل الاختيار", "Open the chooser", "打开选材指南") + "</button></div>";
     h += "</div></section>";
 
+    /* Wave 5: popular codes with real catalog photos */
+    var popCodes = ["M1-001", "M1-002", "M1-003", "M1-004", "M1-005", "M1-006", "M1-008", "M1-009", "M2-001", "M3-001", "M3-002", "M3-003"];
+    var famZhP = {wood:"木材",marble:"大理石",leather:"皮革",textile:"亚麻",ceramic:"陶瓷",chipboard:"刨花板",solid:"纯色",sheet:"板材"};
+    var popItems = [];
+    popCodes.forEach(function (code) {
+      var photo = (typeof codePrimary === "function") ? codePrimary(code) : "";
+      if (!photo && window.CODE_MEDIA && CODE_MEDIA[code]) photo = CODE_MEDIA[code].primary || "";
+      if (!photo) return;
+      var row = (typeof F !== "undefined") ? F.filter(function (x) { return x[0] === code; })[0] : null;
+      var name = row ? (isAr() ? row[2] : row[3]) : "";
+      if (row && typeof lang !== "undefined" && lang === "zh") name = row[3] + (famZhP[row[1]] ? " · " + famZhP[row[1]] : "");
+      popItems.push({ code: code, photo: photo, name: name });
+    });
+    if (popItems.length >= 6) {
+      h += '<section class="home-sec pop-codes rise-in" id="home-popular"><div class="pop-head"><div><h2>' + L("أكواد مطلوبة", "Popular codes", "热门编码") + "</h2>";
+      h += '<p class="lead">' + L("صور كتالوج حقيقية من المصنع. دوس على الكود يفتح التشطيبات.", "Real catalog shots from the factory. Tap a code to open the finishes.", "工厂实拍图册照片。点编码查看花色库。") + "</p></div>";
+      h += '<button class="btn navy" type="button" data-tab="colors">' + L("كل التشطيبات", "All finishes", "全部花色") + "</button></div>";
+      h += '<div class="pop-row">';
+      popItems.forEach(function (it) {
+        h += '<button type="button" class="pop-card" data-tab="colors" aria-label="' + it.code + '"><img src="' + it.photo + '" alt="' + it.code + " " + (it.name || "").replace(/"/g, "") + '" width="400" height="300" loading="lazy" decoding="async"/>';
+        h += '<span class="pop-meta"><b>' + it.code + "</b><small>" + it.name + "</small></span></button>";
+      });
+      h += "</div></section>";
+    }
+
     h += '<section class="home-sec" id="home-uses"><h2>' + tx(d, "usesT", "فين ينفع يتركّب", "Where it belongs", "适合用在哪里") + "</h2>";
     h += '<p class="lead">' + tx(d, "usesLead", "", "", "") + "</p>";
     h += '<div class="photo-grid home-uses">';
@@ -487,6 +513,13 @@
     h += '<p class="lead">' + tx(d, "searchLead", "", "", "") + "</p>";
     h += '<div class="home-search"><input id="homeSearch" type="search" value="' + q + '" placeholder="' + tx(d, "searchPh", "ابحث بكود أو اسم التشطيب", "Search by code or finish name", "按编码或花色名称搜索") + '" autocomplete="off"/>';
     h += '<button type="button" class="btn navy" id="homeSearchBtn">' + tx(d, "searchBtn", "بحث", "Search", "搜索") + "</button></div>";
+    if (!q) {
+      var chips = [["wood", "خشب", "Wood", "木材"], ["marble", "رخام", "Marble", "大理石"], ["textile", "كتان", "Linen", "亚麻"], ["ceramic", "سيراميك", "Ceramic", "陶瓷"], ["leather", "جلد", "Leather", "皮革"], ["sheet", "ألواح", "Sheets", "大板"]];
+      h += '<div class="search-chips"><span>' + L("جرّب:", "Try:", "试试：") + "</span>";
+      chips.forEach(function (c) { h += '<button type="button" class="search-chip" data-q="' + c[0] + '">' + L(c[1], c[2], c[3]) + "</button>"; });
+      h += '<button type="button" class="search-chip" data-q="M1-003">M1-003</button></div>';
+      results = [];
+    }
     h += '<div class="grid4" id="homeSearchGrid">';
     results.forEach(function (p) {
       var name = isAr() ? p.ar : p.en;

@@ -140,6 +140,18 @@
     return h;
   };
 
+  /* Wave 5: quick search chips on the homepage */
+  document.addEventListener("click", function (e) {
+    var c = e.target.closest && e.target.closest("[data-q]");
+    if (!c) return;
+    e.preventDefault();
+    window.homeQ = c.getAttribute("data-q") || "";
+    try { homeQ = window.homeQ; } catch (err) {}
+    if (typeof render === "function") render();
+    var sec = document.querySelector("#p-home .search-sec");
+    if (sec) sec.scrollIntoView({ block: "start" });
+  });
+
   /* Contact buttons in the body reuse the header Contact link, so the number lives only in the header + FAB. */
   document.addEventListener("click", function (e) {
     var b = e.target.closest && e.target.closest("[data-wa-proxy]");
