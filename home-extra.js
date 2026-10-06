@@ -406,7 +406,7 @@
     h += "</div></div>";
     h += '<div class="board board-photo">';
     h += '<figure class="photo-card hero-frame"><img class="hero-photo kenburns" src="' + heroImg + '" alt="TuBaoBao Egypt" width="1280" height="800" loading="eager" decoding="async"/>';
-    h += "<figcaption>" + tx(d, "heroCap", "لقطة استرشادية · فكرة تطبيق", "Showroom still · an application idea", "展厅静帧 · 上墙构想") + "</figcaption></figure>";
+    h += "<figcaption>" + tx(d, "heroCap", "لقطة عرض · فكرة تطبيق", "Showroom still · application idea", "展厅静帧 · 上墙构想") + "</figcaption></figure>";
     h += '<div class="hero-thumbs">';
     var thumbSrcs = [];
     life.forEach(function (src) {
@@ -428,7 +428,7 @@
     h += '<div class="wrap preview-3d rise-in"><div class="preview-3d-in">';
     if (wall) {
       h += '<figure class="photo-card"><img src="' + wall.img + '" alt="' + roomCap(d, "preview3d", wall) + '" width="1280" height="720" loading="eager" decoding="async"/>';
-      h += "<figcaption>" + tx(d, "appIdeaLong", "فكرة تطبيق", "Look preview", "上墙预览") + "</figcaption></figure>";
+      h += "<figcaption>" + tx(d, "appIdeaLong", "معاينة الشكل", "Look preview", "效果预览") + "</figcaption></figure>";
     }
     h += "<div><h2>" + tx(d, "vizT", "شوف الحائط قبل التركيب", "See the wall before it is installed", "安装之前，先看这面墙") + "</h2>";
     h += "<p>" + tx(d, "vizLead", "", "", "") + "</p>";
@@ -440,9 +440,9 @@
     h += '<p class="lead">' + tx(d, "videoS", "", "", "") + "</p>";
     h += '<div class="video-strip-grid">';
     var gifs = (window.IDEA_GIFS && window.IDEA_GIFS.length) ? window.IDEA_GIFS : (window.IDEA_VIDEOS || []).filter(function (v) { return v.gif; });
-    gifs.slice(0, 2).forEach(function (v) {
+    gifs.slice(0, 4).forEach(function (v, gi) {
       var cap = L(v.ar, v.en, v.zh);
-      h += '<figure class="photo-card"><img class="gif-loop" src="' + v.gif + '" alt="' + cap + '" width="480" height="300" loading="lazy" decoding="async"/>';
+      h += '<figure class="photo-card"><img class="gif-loop" src="' + v.gif + '" alt="' + cap + '" width="480" height="300" loading="' + (gi === 0 ? "eager" : "lazy") + '" decoding="async"/>';
       h += "<figcaption>" + cap + "</figcaption></figure>";
     });
     h += '</div><div class="center-actions"><button class="btn navy" type="button" data-tab="videos">' + tx(d, "videoAll", "كل الفيديوهات", "All videos", "查看全部") + "</button></div></section>";
@@ -502,8 +502,9 @@
     var facCap = tx(d, "facCap", "ورشة / عينات", "Workshop / samples", "车间 / 样品");
     var facItems = [];
     fac.forEach(function (src) { if (src) facItems.push({ src: src, cap: facCap }); });
+    var roomShots = /(showroom-collage|product-0[145]|gallery-32c6577aed|gallery-8ab1133712)\.jpg/;
     works.forEach(function (src) {
-      if (!src) return;
+      if (!src || roomShots.test(src)) return;
       if (facItems.some(function (x) { return x.src === src; })) return;
       facItems.push({ src: src, cap: facCap });
     });

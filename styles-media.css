@@ -1,6 +1,6 @@
 /* Rich catalog / media UI additions */
 .approx-swatch{display:inline-block;margin-top:.35rem;font-size:.72rem;opacity:.75;border:1px solid rgba(0,0,0,.12);padding:.15rem .4rem;border-radius:999px}
-.finish-photo{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:0;margin:0;display:block}
+.finish-photo{width:100%;aspect-ratio:4/3;object-fit:contain;object-position:center;background:#0e1116;border-radius:0;margin:0;display:block}
 .feature-strip{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:.75rem;margin:1rem 0}
 .feature-card{background:var(--card,#fff);border-radius:12px;overflow:hidden;border:1px solid rgba(0,0,0,.06)}
 .feature-card img{width:100%;aspect-ratio:16/10;object-fit:cover}
@@ -125,3 +125,13 @@
 .contact-teaser .contact-actions{margin-bottom:0}
 .chip{border-bottom:1px solid rgba(27,36,48,.12);box-shadow:inset 0 0 0 1px rgba(27,36,48,.14)}
 .finish-mini .chip,.card > .chip{border:1px solid rgba(27,36,48,.18);box-shadow:none}
+
+/* Catalog / coded product photos: never crop the CODE label or size text */
+.finish-photo,.finish-mini .finish-photo,.line-photo,.card .finish-photo{
+  width:100%;aspect-ratio:4/3;object-fit:contain;object-position:center;background:#0e1116;display:block;margin:0;padding:0;border-radius:0
+}
+/* Homepage motion strip: 2×2 for four loops */
+.video-strip-grid{grid-template-columns:repeat(2,minmax(0,1fr));max-width:980px;margin-inline:auto}
+.video-strip img.gif-loop{object-fit:cover}
+.video-strip figcaption{font-weight:600;text-align:center}
+@media(max-width:560px){.video-strip-grid{grid-template-columns:1fr}}

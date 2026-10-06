@@ -21,7 +21,7 @@
     AR.waBtn = "تواصل";
     AR.waShort = "تواصل";
     AR.exS = "تعبئة ومسار بعد الاتفاق. استخدم زر تواصل في القائمة.";
-    AR.ctS = "لطلب عرض سعر أو عيّنة أو توريد — راسلنا على واتساب.";
+    AR.ctS = "اطلب عرض سعر أو عيّنة أو توريد. دوس «تواصل» أو راسلنا على واتساب.";
     AR.ctNote = "التواصل من زر «تواصل» في القائمة أو زر واتساب. من 8ص إلى 8م عدا الجمعة.";
     AR.foot = "توباباو مصر · مصنع 6 أكتوبر · قطعة 37";
     patchFaq(AR.faq, "رقم؟", "من زر تواصل في القائمة أو زر واتساب.");
@@ -35,7 +35,7 @@
     EN.waBtn = "Contact";
     EN.waShort = "Contact";
     EN.exS = "Packing and route after terms. Use the Contact button in the menu.";
-    EN.ctS = "For a quote, sample or supply order — message us on WhatsApp.";
+    EN.ctS = "Ask for a quote, a sample or a supply order. Tap Contact or message us on WhatsApp.";
     EN.ctNote = "Use the Contact button in the menu, or the WhatsApp button. 08:00–20:00 except Friday.";
     EN.foot = "TuBaoBao Egypt · 6th of October factory · Plot 37";
     patchFaq(EN.faq, "Phone?", "Use the Contact button in the menu, or the WhatsApp button.");
@@ -76,7 +76,7 @@
     ZH.more = "更多";
     ZH.waBtn = "联系";
     ZH.waShort = "联系";
-    ZH.ctS = "报价、样品和供货，请通过 WhatsApp 沟通。";
+    ZH.ctS = "报价、样品或供货，请点「联系」或通过 WhatsApp 找我们。";
     ZH.ctNote = "请用页眉的「联系」，或右下角的 WhatsApp。每天 8:00–20:00，周五休息。";
     ZH.brand = "埃及兔宝宝";
     ZH.sub = ZH.sub || "十月六日城 · PVC 工厂";
