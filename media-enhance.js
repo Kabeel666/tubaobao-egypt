@@ -75,17 +75,14 @@
     var grid = document.createElement("div");
     grid.className = "photo-grid factory-shots";
     var list = [];
-    (MEDIA.factory || []).forEach(function (src) { if (src) list.push(src); });
-    (MEDIA.works || []).forEach(function (src) {
-      if (!src) return;
-      if (/gallery-|showroom-collage|lifestyle|uses\//i.test(src)) return;
-      if (!/(catalog-rack|product-0[1-6]|manufacturing|sample-rack|factory\/)/i.test(src)) return;
-      if (list.indexOf(src) >= 0) return;
-      list.push(src);
+    (MEDIA.factory || []).forEach(function (src) {
+      if (!src || /(manufacturing-panels|sample-rack|_wna\.)/i.test(src)) return;
+      if (list.indexOf(src) < 0) list.push(src);
     });
-    list.slice(0, 10).forEach(function (src, i) {
-      var cap = L("ورشة / عينات " + (i + 1), "Workshop / samples " + (i + 1), "车间 / 样品 " + (i + 1));
-      grid.innerHTML += '<figure class="photo-card">' + img(src, cap) + "<figcaption>" + cap + "</figcaption></figure>";
+    list.slice(0, 10).forEach(function (src) {
+      var m = /(M\d-\d{3})/.exec(src);
+      var cap = m ? L("كود ", "Code ", "编码 ") + m[1] : L("عيّنة من المصنع", "Factory sample", "工厂样品");
+      grid.innerHTML += '<figure class="photo-card' + (m ? ' is-code' : '') + '">' + img(src, cap) + "<figcaption>" + cap + "</figcaption></figure>";
     });
     wrap.appendChild(grid);
     var d = t();
@@ -104,7 +101,7 @@
     var picks = [
       { src: fu(slat), cat: true, alt: "M1-003" },
       { src: fu("media/uses/kitchen-grey-marble.jpg"), cat: false, alt: "" },
-      { src: fu("media/factory/manufacturing-panels.jpg"), cat: false, alt: "" }
+      { src: fu("media/works/catalog-rack.jpg"), cat: false, alt: "" }
     ];
     var lineImgs = (MEDIA.lifestyle || []).concat(MEDIA.works || []).concat(MEDIA.products || []).filter(Boolean);
     var lineCards = page.querySelectorAll(".grid3 > .card");

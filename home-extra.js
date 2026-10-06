@@ -446,7 +446,7 @@
     h += '<p class="lead">' + L("ثلاث حاجات واضحة قبل ما تطلب كمية.", "Three plain things before you order volume.", "下单前先弄清这三件事。") + "</p>";
     h += '<div class="why-grid">';
     var why = [
-      [L("عيّنة على الرف", "Sample on the rack", "样品就在架上"), L("شوف الكود في مصنع 6 أكتوبر قبل الكمية. اللون على الشاشة تقريبي.", "See the code at the 6th of October factory before volume. Screen colour is approximate.", "大批量前先到十月六日城工厂看编码。屏幕颜色只是近似。")],
+      [L("عيّنة على الرف", "Sample on the rack", "样品就在架上"), L("شوف العيّنة الحقيقية في المصنع قبل الكمية. اللون على الشاشة تقريبي.", "See the real sample at the factory before volume. Screen colour is approximate.", "大批量前先到工厂看真实样品。屏幕颜色只是近似。")],
       [L("مكتبة أكواد", "Code library", "编码图库"), L("خشب، رخام، كتان، جلد والمزيد — بالكود، من غير أسعار منشورة.", "Wood, marble, linen, leather and more — by code, with no published prices.", "木纹、仿石、亚麻、皮革等——按编码，页面不标价。")],
       [L("عرض على واتساب", "WhatsApp quote", "WhatsApp 报价"), L("ابعت الكود والمقاس والمكان، والفريق بيرد من زر تواصل.", "Send the code, size and room — the team replies from Contact.", "发来编码、尺寸和空间，工厂通过「联系」回复。")]
     ];
@@ -562,19 +562,17 @@
     h += '<section class="home-sec" id="home-factory"><h2>' + tx(d, "factoryHomeT", "عينات المصنع", "Factory samples", "工厂样品与车间") + "</h2>";
     h += '<p class="lead">' + tx(d, "factoryHomeLead", "", "", "") + "</p>";
     h += '<div class="photo-grid home-factory-grid">';
-    var facCap = tx(d, "facCap", "ورشة / عينات", "Workshop / samples", "车间 / 样品");
+    var facCap = tx(d, "facCap", "عيّنة من المصنع", "Factory sample", "工厂样品");
     var facItems = [];
-    fac.forEach(function (src) { if (src) facItems.push({ src: src, cap: facCap }); });
-    /* Keep workshop strip to factory + catalog racks + product panels — not lifestyle / application gallery shots */
-    var workshopOk = /(factory\/|catalog-rack|product-0[1-6]|manufacturing|sample-rack)/i;
-    var workshopNo = /(gallery-|showroom-collage|lifestyle|uses\/)/i;
-    works.forEach(function (src) {
-      if (!src || workshopNo.test(src) || !workshopOk.test(src)) return;
-      if (facItems.some(function (x) { return x.src === src; })) return;
-      facItems.push({ src: src, cap: facCap });
+    /* Curated samples only: real catalog code shots + sheet stack. No door-leaf / workshop shots. */
+    var noDoor = /(manufacturing-panels|sample-rack|_wna\.)/i;
+    fac.forEach(function (src) {
+      if (!src || noDoor.test(src)) return;
+      var m = /(M\d-\d{3})/.exec(src);
+      facItems.push({ src: src, code: m ? m[1] : "", cap: m ? L("كود ", "Code ", "编码 ") + m[1] : facCap });
     });
     facItems.slice(0, 8).forEach(function (item) {
-      h += '<figure class="photo-card"><img src="' + item.src + '" alt="' + item.cap + '" width="640" height="480" loading="lazy" decoding="async"/><figcaption>' + item.cap + "</figcaption></figure>";
+      h += '<figure class="photo-card' + (item.code ? ' is-code' : '') + '"><img class="' + (item.code ? 'is-catalog' : 'is-scene') + '" src="' + item.src + '" alt="' + item.cap + '" width="640" height="480" loading="lazy" decoding="async"/><figcaption>' + item.cap + "</figcaption></figure>";
     });
     h += '</div><div class="center-actions"><button class="btn navy" type="button" data-tab="factory">' + tx(d, "facT", "المصنع", "Factory", "工厂") + "</button></div></section>";
 

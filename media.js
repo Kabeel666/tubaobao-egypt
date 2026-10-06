@@ -30,9 +30,11 @@ window.MEDIA={
     {img:fileUrl("media/marketing/feature-waterproof.jpg"), ar:["مقاوم للمياه","تركيب داخلي يومي"], en:["Waterproof-ready interior","Daily moisture use"]},
     {img:fileUrl("media/marketing/feature-mold.jpg"), ar:["يساعد ضد العفن","سطح يتنظف بسهولة"], en:["Mold-resistant help","Easy-clean surface"]},
     {img:fileUrl("media/marketing/feature-install.jpg"), ar:["تركيب سريع","فوق الحائط القائم"], en:["Fast install","Over existing walls"]},
-    {img:fileUrl("media/marketing/feature-made-egypt.jpg"), ar:["صنع في مصر","6 أكتوبر"], en:["Made in Egypt","6th of October"]}
+    {img:fileUrl("media/marketing/feature-made-egypt.jpg"), ar:["صنع في مصر","مصنع محلي"], en:["Made in Egypt","Local factory"]}
   ],
-  factory: ["media/factory/manufacturing-panels.jpg","media/factory/sample-rack.jpg"].map(fileUrl).filter(Boolean),
+  /* Factory samples: real catalog code shots + finish sheet stack. Door-leaf workshop shots (manufacturing-panels, sample-rack) retired. */
+  factory: ["media/works/catalog-rack.jpg","media/products/M1-003_w20.jpg","media/products/M3-002_w20.jpg","media/products/M1-001_w20.jpg",
+    "media/products/M3-003_w13_4.jpg","media/products/M1-006_w13_4.jpg","media/products/M2-001_w13_4.jpg","media/products/M1-008_w13_4.jpg"].map(fileUrl).filter(Boolean),
   works: [
     "media/works/showroom-collage.jpg","media/works/catalog-rack.jpg",
     "media/works/product-01.jpg","media/works/product-02.jpg","media/works/product-03.jpg",
@@ -82,13 +84,13 @@ window.MEDIA={
     if(/gallery-|showroom-collage/i.test(src||"")) {
       g.push([src, "فكرة تطبيق "+(i+1), "Application idea "+(i+1), "上墙构想 "+(i+1)]);
     } else if(/(catalog-rack|product-0|manufacturing|sample-rack|factory)/i.test(src||"")) {
-      g.push([src, "ورشة / عينات "+(i+1), "Workshop / samples "+(i+1), "车间 / 样品 "+(i+1)]);
+      g.push([src, "عيّنة من المصنع "+(i+1), "Factory sample "+(i+1), "工厂样品 "+(i+1)]);
     } else {
       g.push([src, "صورة "+(i+1), "Photo "+(i+1), "照片 "+(i+1)]);
     }
   });
   (MEDIA.lifestyle||[]).forEach(function(src,i){ g.push([src, "لايف ستايل "+(i+1), "Lifestyle "+(i+1), "生活方式 "+(i+1)]); });
-  (MEDIA.factory||[]).forEach(function(src,i){ g.push([src, "تصنيع "+(i+1), "Manufacturing "+(i+1), "制造 "+(i+1)]); });
+  (MEDIA.factory||[]).forEach(function(src,i){ if(g.some(function(r){return r[0]===src;})) return; g.push([src, "عيّنة من المصنع "+(i+1), "Factory sample "+(i+1), "工厂样品 "+(i+1)]); });
   (MEDIA.partner||[]).forEach(function(row){ if(row&&row.img) g.push([row.img, row.ar, row.en, row.zh || row.en]); });
   MEDIA.gallery=g;
 })();

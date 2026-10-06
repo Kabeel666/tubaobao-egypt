@@ -86,3 +86,7 @@ body:not(.en) .sec-kick{letter-spacing:0;font-size:.82rem}
 .wrap.preview-3d{width:min(1200px,calc(100% - 32px));margin:0 auto;padding:28px 0;background:transparent}
 .preview-3d-in > div{min-width:0}
 .preview-3d-in h2{font-size:clamp(26px,2.8vw,36px);overflow-wrap:anywhere}
+
+/* v20261006j — factory samples: real catalog code shots shown whole */
+.home-factory-grid .photo-card.is-code img,.factory-shots .photo-card.is-code img{object-fit:contain;background:#0e1116}
+.home-factory-grid .photo-card img.is-scene{object-fit:cover}
