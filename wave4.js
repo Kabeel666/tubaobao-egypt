@@ -89,7 +89,7 @@
   }
 
   /* ---- Contact page ---- */
-  var MAPS = "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent("5th Industrial Zone, 6th of October City, Giza, Egypt");
+  var MAPS = "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent("Plot 37, 5th Industrial Zone, 6th of October City, Giza, Egypt");
   window.contactPageHtml = function (d) {
     var h = '<div class="wrap contact-page">';
     h += '<div class="ct-hero"><div class="ct-hero-copy">';

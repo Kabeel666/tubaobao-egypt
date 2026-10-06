@@ -1,7 +1,7 @@
 /* Simplified Chinese UI. Finish cards keep the English name plus a family label. */
 const ZH={dir:"ltr",brand:"埃及兔宝宝",sub:"十月六日城 · PVC 工厂",lang:"EN",
 heroK:"埃及兔宝宝 · 十月六日城 37 号地块",heroT:"室内墙面饰面，<br/>十月六日城自产。",
-heroS:"PVC 护墙条和 5 mm 大板，木纹、大理石、亚麻、皮革肌理，用于室内。选好编码，看真实样品。",
+heroS:"PVC 护墙条与 5 mm 大板，木纹、大理石、亚麻、皮革肌理。选好编码，看真实样品。",
 cta1:"浏览花色",cta2:"看看工厂",
 heroFinishes:"浏览花色",heroContact:"联系我们",
 heroCap:"展厅静帧 · 上墙构想",

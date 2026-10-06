@@ -1,6 +1,6 @@
 const EN={dir:"ltr",brand:"TuBaoBao Egypt",sub:"PVC factory · 6th of October",lang:"عربي",
 heroK:"6th of October · Plot 37",heroT:"Interior wall finishes,<br/>made in 6th of October.",
-heroS:"PVC slats and 5 mm sheets in wood, marble, linen and leather looks, for interiors. Pick a code and see the real sample.",
+heroS:"PVC slats and 5 mm sheets in wood, marble, linen and leather looks. Pick a code, see the real sample.",
 cta1:"Browse finishes",cta2:"The factory",
 heroFinishes:"Browse finishes",heroContact:"Contact",
 heroCap:"Showroom still · application idea",
