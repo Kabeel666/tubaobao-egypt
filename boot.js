@@ -29,7 +29,7 @@ function render(){
     page("products", `<div class="wrap"><h2>${d.prodT}</h2><p class="lead">${d.prodS}</p><div class="grid3">${d.lines.map(([h,p,c])=>`<article class="card"><span class="chip" style="background:${c}"></span><div class="meta"><b>${h}</b><p>${p}</p></div></article>`).join("")}</div></div>`) +
     page("colors", `<div class="wrap"><h2>${d.colT}</h2><p class="lead">${d.colS}</p><div class="filters" id="filters">${famBtns.map(([k,l])=>`<button class="${fam===k?"on":""}" data-fam="${k}">${l}</button>`).join("")}</div><div class="grid4">${shown.map(x=>`<article class="card"><span class="chip" style="background:${finishColor(x)}"></span><div class="meta"><b class="code">${x[0]}</b><div>${finishLabel(x)}</div><small>${finishFam(x)}</small></div></article>`).join("")}</div><p class="note">${d.colNote}</p></div>`) +
     page("sheets", `<div class="wrap"><h2>${d.shT}</h2><p class="lead">${d.shS}</p><div class="grid4">${SH.map(x=>`<article class="card"><span class="chip" style="background:${x[3]}"></span><div class="meta"><b class="code">${x[0]}</b><div>${lang==="ar"?x[1]:x[2]}</div><small>122 × 280 · 5 mm</small></div></article>`).join("")}</div></div>`) +
-    page("sizes", `<div class="wrap"><h2>${d.szT}</h2><p class="lead">${d.szS}</p><div class="scroll"><table><tr>${d.profH.map(h=>`<th>${h}</th>`).join("")}</tr>${PR.map(p=>`<tr><td>${p[0]}</td><td>${p[1]}</td><td>${p[2]}</td><td>${p[3]}</td><td>${lang==="ar"?p[4]:p[5]}</td></tr>`).join("")}</table></div></div>`) +
+    page("sizes", `<div class="wrap"><h2>${d.szT}</h2><p class="lead">${d.szS}</p><div class="scroll"><table><tr>${d.profH.map(h=>`<th>${h}</th>`).join("")}</tr>${PR.map(p=>`<tr><td>${p[0]}</td><td>${p[1]}</td><td>${p[2]}</td><td>${p[3]}</td><td>${typeof prNote==="function"?prNote(p):(lang==="ar"?p[4]:p[5])}</td></tr>`).join("")}</table></div></div>`) +
     page("chooser", (typeof chooserInner==="function"?chooserInner(d):"")) +
     page("looks", (typeof looksInner==="function"?looksInner(d):"")) +
     page("videos", (typeof videosInner==="function"?videosInner(d):"")) +
@@ -38,19 +38,19 @@ function render(){
     page("specs", `<div class="wrap"><h2>${d.spxT}</h2><p class="lead">${d.spxS}</p><div class="scroll"><table><tr>${d.specH.map(h=>`<th>${h}</th>`).join("")}</tr>${d.spec.map(r=>`<tr>${r.map(c=>`<td>${c}</td>`).join("")}</tr>`).join("")}</table></div></div>`) +
     page("calc", `<div class="wrap"><h2>${d.calcT}</h2><p class="lead">${d.calcS}</p><div class="calc"><div><label>${d.lbW}</label><input id="wallW" type="number" step="0.1" value="4"/><label>${d.lbH}</label><input id="wallH" type="number" step="0.1" value="2.8"/><label>${d.lbSz}</label><select id="slatW"><option value="0.134">13.4</option><option value="0.16">16</option><option value="0.18" selected>18</option><option value="0.20">20</option></select><p class="note">${d.calcNote}</p></div><div class="result"><div id="resA"></div><div id="resP"></div><div id="resS"></div></div></div></div>`) +
     page("install", `<div class="wrap"><h2>${d.insT}</h2><p class="lead">${d.insS}</p><div class="steps">${d.steps.map((s,i)=>`<div class="step"><div class="num">${i+1}</div><div><b>${s[0]}</b><div>${s[1]}</div></div></div>`).join("")}</div></div>`) +
-    page("access", `<div class="wrap"><h2>${d.accT}</h2><p class="lead">${d.accS}</p>${cards(ACC.map(x=>[lang==="ar"?x[1]:x[2], lang==="ar"?(x[3]||""):(x[4]||"")]))}</div>`) +
+    page("access", `<div class="wrap"><h2>${d.accT}</h2><p class="lead">${d.accS}</p>${cards(ACC.map(x=>typeof rowPair==="function"?rowPair("ACC",x):[lang==="ar"?x[1]:x[2], lang==="ar"?(x[3]||""):(x[4]||"")]))}</div>`) +
     page("compare", `<div class="wrap"><h2>${d.cmpT}</h2><p class="lead">${d.cmpS}</p><div class="scroll"><table><tr>${d.cmpH.map(h=>`<th>${h}</th>`).join("")}</tr>${d.cmp.map(r=>`<tr>${r.map(c=>`<td>${c}</td>`).join("")}</tr>`).join("")}</table></div></div>`) +
     page("care", `<div class="wrap"><h2>${d.careT}</h2><p class="lead">${d.careS}</p>${cards(d.care)}</div>`) +
     page("trade", `<div class="wrap"><h2>${d.trT}</h2><p class="lead">${d.trS}</p>${cards(d.trade)}</div>`) +
     page("export", `<div class="wrap"><h2>${d.exT}</h2><p class="lead">${d.exS}</p>${cards(d.ex)}</div>`) +
-    page("gov", `<div class="wrap"><h2>${d.govT}</h2><p class="lead">${d.govS}</p><div class="grid4">${GOV.map(g=>`<article class="card"><div class="meta"><b>${lang==="ar"?g[1]:g[2]}</b><small>${lang==="ar"?g[3]:g[4]}</small></div></article>`).join("")}</div></div>`) +
-    page("pack", `<div class="wrap"><h2>${d.pkT}</h2><p class="lead">${d.pkS}</p>${cards(PACK.map(x=>[lang==="ar"?x[1]:x[2], lang==="ar"?(x[3]||""):(x[4]||"")]))}</div>`) +
+    page("gov", `<div class="wrap"><h2>${d.govT}</h2><p class="lead">${d.govS}</p><div class="grid4">${GOV.map(g=>{const gp=typeof govPair==="function"?govPair(g):[lang==="ar"?g[1]:g[2],lang==="ar"?g[3]:g[4]];return `<article class="card"><div class="meta"><b>${gp[0]}</b><small>${gp[1]}</small></div></article>`;}).join("")}</div></div>`) +
+    page("pack", `<div class="wrap"><h2>${d.pkT}</h2><p class="lead">${d.pkS}</p>${cards(PACK.map(x=>typeof rowPair==="function"?rowPair("PACK",x):[lang==="ar"?x[1]:x[2], lang==="ar"?(x[3]||""):(x[4]||"")]))}</div>`) +
     page("factory", `<div class="wrap"><h2>${d.facT}</h2><p class="lead">${d.facP}</p>${cards(d.fac)}</div>`) +
     page("soon", `<div class="wrap"><h2>${d.soonT}</h2><p class="lead">${d.soonS}</p>${cards(d.soon)}</div>`) +
     page("faq", `<div class="wrap"><h2>${d.faqT}</h2>${d.faq.map(([q,a])=>`<details><summary>${q}</summary><p>${a}</p></details>`).join("")}</div>`) +
-    page("contact", `<div class="wrap"><h2>${d.ctT}</h2><p class="lead">${d.ctS}</p><p class="note">${d.ctNote}</p><p class="addr">${d.addr}</p><p class="lead">${d.hours}</p></div>`) +
+    page("contact", typeof contactPageHtml==="function"?contactPageHtml(d):`<div class="wrap"><h2>${d.ctT}</h2><p class="lead">${d.ctS}</p><p class="addr">${d.addr}</p><p class="lead">${d.hours}</p></div>`) +
     page("projects", `<div class="wrap"><h2>${d.projT|| (lang==="ar"?"مشاريع":"Projects")}</h2><p class="lead">${d.projS||""}</p><div class="grid3">${(typeof PROJ!=="undefined"?PROJ:[]).map(x=>`<article class="card"><div class="meta"><b>${lang==="ar"?x[1]:x[2]}</b><p>${lang==="ar"?x[3]:x[4]}</p><small>${lang==="ar"?"مخطط نصي — ليس مشروع منشور":(lang==="zh"?"文字草图 — 非已发布项目":"Text sketch — not a published project")}</small></div></article>`).join("")}</div></div>`);
-  $("foot").textContent=d.foot;
+  if(typeof footHtml==="function"&&$("footInner")) $("footInner").innerHTML=footHtml(d); else if($("foot")) $("foot").textContent=d.foot;
   bind();
   if(tab==="calc") calc();
 }

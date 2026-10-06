@@ -464,7 +464,7 @@
     h += '<section class="home-sec chooser-band rise-in">';
     h += '<div class="chooser-band-in">';
     if (chooser) {
-      h += '<img class="chooser-photo" src="' + chooser.img + '" alt="' + roomCap(d, "chooser", chooser) + '" width="1280" height="720" loading="lazy" decoding="async"/>';
+      h += '<img class="chooser-photo" src="' + chooser.img + '" alt="' + roomCap(d, "chooser", chooser) + '" width="1280" height="720" loading="eager" decoding="async"/>';
     }
     h += "<div><h2>" + tx(d, "chooserT", "اختار إيه", "How to choose", "怎么选") + "</h2>";
     h += '<p class="lead">' + tx(d, "chooserLead", "", "", "") + "</p>";
