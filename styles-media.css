@@ -278,3 +278,71 @@ footer .foot-in{display:block}
   .scroll tr:nth-child(even) td:first-child{background:#faf7f2}
   .scroll th:first-child{background:var(--navy)}
 }
+
+/* ---- Wave 6: fuller pages, sticky filters, a11y, chooser/viz ---- */
+.filters-sticky{
+  position:sticky;top:72px;z-index:40;
+  display:flex;gap:8px;justify-content:center;flex-wrap:wrap;
+  margin:0 0 12px;padding:10px 4px;
+  background:rgba(247,244,239,.94);backdrop-filter:blur(10px);
+  border-bottom:1px solid rgba(230,223,211,.9)
+}
+.col-hint{text-align:center;color:var(--muted);font-weight:600;font-size:.92rem;margin:0 0 14px}
+.empty-state{
+  text-align:center;padding:36px 20px;border:1px dashed var(--line);
+  border-radius:16px;background:#fff;margin:8px 0 18px
+}
+.empty-state b{display:block;color:var(--navy);font-size:1.1rem;margin-bottom:6px}
+.empty-state p{margin:0 0 14px;color:var(--muted)}
+.chooser-rail{
+  list-style:none;margin:0 0 20px;padding:0;
+  display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px
+}
+.chooser-rail li{
+  background:#fff;border:1px solid var(--line);border-radius:14px;padding:14px 16px;
+  box-shadow:0 4px 14px rgba(27,36,48,.05)
+}
+.chooser-rail b{display:block;color:var(--navy);margin-bottom:4px}
+.chooser-rail span{color:var(--muted);font-size:.92rem;line-height:1.45}
+.choose-table tr:nth-child(even) td{background:#faf7f2}
+.choose-table td:first-child{font-weight:700;color:var(--navy);white-space:nowrap}
+.viz-steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.viz-step{border-top:3px solid var(--gold)}
+@media(max-width:760px){
+  .filters-sticky{top:64px;justify-content:flex-start;overflow-x:auto;flex-wrap:nowrap;padding-bottom:12px;-webkit-overflow-scrolling:touch}
+  .filters-sticky button{flex:0 0 auto}
+  .chooser-rail,.viz-steps{grid-template-columns:1fr}
+  .scroll .choose-table{min-width:560px}
+  .scroll .choose-table th:first-child,.scroll .choose-table td:first-child{
+    position:sticky;inset-inline-start:0;z-index:1;box-shadow:1px 0 0 var(--line)
+  }
+  .scroll .choose-table td:first-child{background:#fff}
+  .scroll .choose-table tr:nth-child(even) td:first-child{background:#faf7f2}
+  .scroll .choose-table th:first-child{background:var(--navy)}
+}
+
+/* Gold focus ring */
+:focus{outline:none}
+:focus-visible{
+  outline:3px solid var(--gold)!important;
+  outline-offset:3px!important
+}
+.btn:focus-visible,.lang:focus-visible,.filters button:focus-visible,
+.primary-nav button:focus-visible,.more-row button:focus-visible,
+.search-chip:focus-visible,.pop-card:focus-visible,.fab-wa:focus-visible,
+.foot-links button:focus-visible,a.hdr-wa:focus-visible{
+  outline:3px solid var(--gold)!important;
+  outline-offset:3px!important
+}
+.fab-wa:focus-visible{border-radius:50%}
+
+/* Wave 7 prep helpers (why-factory band uses these classes too) */
+.why-band{margin:8px 0 28px}
+.why-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:12px}
+.why-card{
+  background:#fff;border:1px solid var(--line);border-radius:16px;padding:18px 18px 16px;
+  box-shadow:0 4px 16px rgba(27,36,48,.06);border-top:3px solid var(--gold)
+}
+.why-card b{display:block;color:var(--navy);font-size:1.05rem;margin-bottom:6px}
+.why-card p{margin:0;color:#4a5563;line-height:1.55}
+@media(max-width:760px){.why-grid{grid-template-columns:1fr}}

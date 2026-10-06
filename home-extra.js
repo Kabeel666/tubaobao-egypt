@@ -305,12 +305,17 @@
       return [r[1], r[3], r[5], r[7]];
     }
     var h = "";
-    h += '<div class="wrap"><h2>' + L("اختار إيه؟", "What should you pick?", "该怎么选？") + "</h2>";
+    h += '<div class="wrap chooser-page"><h2>' + L("اختار إيه؟", "What should you pick?", "该怎么选？") + "</h2>";
     h += '<p class="lead">' + L(
-      "دليل عملي من غير أسعار ومن غير شهادات. الاختيار حسب المكان والرطوبة وشكل الحائط. العيّنة من المصنع هي اللي تحسم اللون.",
-      "A practical guide with no prices and no certificates. Choose by room, moisture and wall shape. The factory sample decides the colour.",
-      "一份实用指南，没有价格，也没有证书。按空间、干湿和墙面形态来选。颜色以工厂样品为准。"
+      "ابدأ بالمكان (حمام، مكتب، كافيه…)، بعدين الخامة، وبعدين العرض. العيّنة من المصنع تحسم اللون. مفيش أسعار على الصفحة.",
+      "Start with the room (bath, office, café…), then the finish, then the width. The factory sample decides the colour. No prices on the page.",
+      "先看空间（卫浴、办公、咖啡店……），再选花色，再选宽度。颜色以工厂样品为准。页面不标价。"
     ) + "</p>";
+    h += '<ol class="chooser-rail" aria-label="' + L("خطوات الاختيار", "Chooser steps", "选材步骤") + '">';
+    h += "<li><b>" + L("1. المكان", "1. Room", "1. 空间") + "</b><span>" + L("رطوبة يومية ولا جاف؟", "Daily moisture or dry?", "日常潮气还是干燥？") + "</span></li>";
+    h += "<li><b>" + L("2. الخامة", "2. Finish", "2. 花色") + "</b><span>" + L("رخام، خشب، سيراميك، WPC، كتان، جلد", "Marble, wood, ceramic, WPC, linen, leather", "仿石、木纹、仿瓷、WPC、亚麻、皮革") + "</span></li>";
+    h += "<li><b>" + L("3. العرض", "3. Width", "3. 宽度") + "</b><span>" + L("13.4 / 16 / 20 أو لوح 5مم", "13.4 / 16 / 20 or a 5mm sheet", "13.4 / 16 / 20 或 5mm 大板") + "</span></li>";
+    h += "</ol>";
     h += '<div class="scroll"><table class="choose-table"><tr><th>' + L("الخامة", "Finish", "材料") + "</th><th>" + L("أنسب أماكن", "Better rooms", "更合适的空间") + "</th><th>" + L("الرطوبة", "Moisture", "潮气") + "</th><th>" + L("السمك / العرض", "Thickness / width", "厚度 / 宽度") + "</th></tr>";
     rows.forEach(function (r, i) {
       var c = quad(r, rowsZh[i]);
@@ -332,11 +337,11 @@
     });
     h += "</div>";
     h += '<p class="note">' + L(
-      "مفيش سعر هنا. العرض على واتساب حسب الكود والكمية. 18 سم كمان متاح مع 16 و20 في الحاسبة.",
-      "No price here. The quote is on WhatsApp by code and volume. 18 cm is also available with 16 and 20 in the calculator.",
-      "这里不标价。报价在 WhatsApp 上按编码和数量来。计算器里除了 16 和 20，也可以选 18 cm。"
+      "العرض على واتساب حسب الكود والكمية. 18 سم متاح مع 16 و20 في الحاسبة.",
+      "Quotes on WhatsApp by code and volume. 18 cm is available with 16 and 20 in the calculator.",
+      "报价按编码和数量在 WhatsApp 上确认。计算器里可选 16、18、20 cm。"
     ) + "</p>";
-    h += '<p class="note">' + L("لو محتاج مساعدة في الاختيار، استخدم زر تواصل في القائمة أو زر واتساب.", "If you want help choosing, use the Contact button in the menu or the WhatsApp button.", "如果需要帮忙选，请用菜单里的「联系」或 WhatsApp 按钮。") + "</p></div>";
+    h += '<p class="note">' + L("محتاج مساعدة؟ زر تواصل في القائمة أو واتساب.", "Need a hand? Use Contact in the header, or WhatsApp.", "需要帮忙？用页眉「联系」或 WhatsApp。") + "</p></div>";
     return h;
   };
 
@@ -351,33 +356,30 @@
         if (rank && rank < best && MEDIA.uses[i].img) { best = rank; img = MEDIA.uses[i].img; }
       }
     }
-    var msg = "";
-    var h = '<div class="wrap"><h2>' + L("شوف الحائط قبل ما يتركّب", "See the wall before it is installed", "安装之前，先看这面墙") + "</h2>";
+    var h = '<div class="wrap viz-page"><h2>' + L("شوف الحائط قبل ما يتركّب", "See the wall before it is installed", "安装之前，先看这面墙") + "</h2>";
     h += '<p class="lead">' + L(
-      "نبعتلك معاينة شكل تقريبية للحائط بالخامة اللي اخترتها: خشب، رخام، سيراميك لوك، شيبورد/WPC، أو كتان. كده تشوف الاتجاه قبل ما نفصل الكمية.",
-      "We send an approximate look preview of the wall in the finish you picked: wood, marble, ceramic look, chipboard/WPC, or linen. You see the direction before quantity is cut.",
-      "按你选的花色回一张墙面效果：木纹、仿石、仿瓷、刨花板/WPC 或亚麻。先看方向，再裁数量。"
+      "ثلاث خطوات بسيطة: ابعت صورة، اختار كود، واستلم معاينة شكل للحائط قبل التركيب.",
+      "Three clear steps: send a photo, pick a code, and get a look preview of the wall before install.",
+      "三步清楚：发照片、选编码、安装前拿到墙面效果预览。"
     ) + "</p>";
-    if (img) h += '<figure class="photo-card" style="max-width:720px"><img src="' + img + '" alt="' + L("معاينة 3D للحائط", "3D wall preview", "墙面效果预览") + '" width="640" height="480" loading="lazy" decoding="async"/><figcaption>' + L("فكرة تطبيق — ليست رسم تنفيذ", "Application idea — not a construction drawing", "上墙构想，不是施工图") + "</figcaption></figure>";
-    h += '<div class="grid3" style="margin-top:16px">';
+    if (img) h += '<figure class="photo-card" style="max-width:720px"><img src="' + img + '" alt="' + L("معاينة 3D للحائط", "3D wall preview", "墙面效果预览") + '" width="640" height="480" loading="lazy" decoding="async"/><figcaption>' + L("مثال معاينة شكل", "Example look preview", "效果预览示例") + "</figcaption></figure>";
+    h += '<div class="viz-steps" style="margin-top:16px">';
     var steps = [
-      ["1. صور الأوضة", "1. Room photos", "1. 房间照片", "صورة واضحة للحائط من قدام، وصورة جانبية لو فيه عمود أو فتحة.", "A clear front photo of the wall, plus a side photo if there is a column or opening.", "墙面正面要清楚；有柱子或洞口时再补一张侧面。"],
-      ["2. المقاسات", "2. Sizes", "2. 尺寸", "عرض الحائط وارتفاعه بالمتر، وخصم الأبواب والشبابيك.", "Wall width and height in metres, minus doors and windows.", "墙宽和墙高，单位米，并扣掉门窗。"],
-      ["3. الخامة", "3. Finish", "3. 花色", "كود من المكتبة أو اتجاه: رخام / خشب / سيراميك / WPC / كتان.", "A library code or a direction: marble / wood / ceramic / WPC / linen.", "图库编码，或一个方向：仿石 / 木纹 / 仿瓷 / WPC / 亚麻。"],
-      ["4. المعاينة", "4. The preview", "4. 预览", "ترجع لك صورة شكل استرشادية. اللون على الشاشة تقريبي.", "You get a guide image back. Colour on screen is approximate.", "你会收到一张参考图。屏幕上的颜色只是近似。"]
+      ["1. ابعت صورة", "1. Send a photo", "1. 发照片", "صورة واضحة للحائط (وجانبية لو فيه عمود). المقاسات بالمتر تساعد.", "A clear wall photo (plus a side shot if there is a column). Metres help.", "墙面正面要清楚；有柱子再补侧面。尺寸（米）会更准。"],
+      ["2. اختار الكود", "2. Pick a code", "2. 选编码", "كود من التشطيبات، أو اتجاه: رخام / خشب / سيراميك / WPC / كتان.", "A finishes-library code, or a direction: marble / wood / ceramic / WPC / linen.", "从图库选编码，或先定方向：仿石 / 木纹 / 仿瓷 / WPC / 亚麻。"],
+      ["3. استلم المعاينة", "3. Get the look preview", "3. 拿到效果", "نرجّع صورة شكل استرشادية على واتساب. اللون على الشاشة تقريبي — العيّنة هي المرجع.", "We return a guide image on WhatsApp. Screen colour is approximate — the sample is the reference.", "我们在 WhatsApp 回一张参考效果。屏幕颜色近似，以工厂样品为准。"]
     ];
     steps.forEach(function (s) {
       var title = ar ? s[0] : (isZh() ? s[2] : s[1]);
       var body = ar ? s[3] : (isZh() ? s[5] : s[4]);
-      h += '<article class="card"><div class="meta"><b>' + title + "</b><p>" + body + "</p></div></article>";
+      h += '<article class="card viz-step"><div class="meta"><b>' + title + "</b><p>" + body + "</p></div></article>";
     });
     h += "</div>";
-    h += '<div class="honest-box"><b>' + L("بصدق", "Honest limit", "说清楚界限") + "</b><p>" + L(
-      "دي معاينة تصميم عشان تشوف الشكل قبل التركيب. ليست رسم تنفيذ مختوم، وليست لوحة إنشائية، ومش مقياس موقع، ومش بديل المعاينة على الطبيعة. التوريد والأسعار يتأكدوا بعد كده من زر تواصل في القائمة.",
-      "This is a design preview so you can see the look before install. It is not a stamped construction drawing, not a structural sheet, not a site survey, and not a substitute for seeing the real sample. Supply and prices are confirmed afterwards from the Contact button.",
-      "这是安装前看效果的设计预览。不是盖章的施工图，不是结构图，不是现场丈量，也不能代替亲眼看样品。供货和价格之后通过联系按钮确认。"
+    h += '<p class="note">' + L(
+      "المعاينة شكل تقريبي قبل التركيب، مش رسم تنفيذ. اطلبها من زر تواصل أو واتساب.",
+      "The preview is a look before install, not a construction drawing. Request it from Contact or WhatsApp.",
+      "预览是安装前的效果参考，不是施工图。用「联系」或 WhatsApp 申请。"
     ) + "</p></div>";
-    h += '<p class="note">' + L("اطلب المعاينة من زر تواصل في القائمة أو زر واتساب.", "Request the preview from the Contact button in the menu or the WhatsApp button.", "预览请用菜单里的「联系」或 WhatsApp 按钮。") + "</p></div>";
     return h;
   };
 
@@ -474,25 +476,26 @@
 
     /* Wave 5: popular codes with real catalog photos */
     var popCodes = ["M1-001", "M1-002", "M1-003", "M1-004", "M1-005", "M1-006", "M1-008", "M1-009", "M2-001", "M3-001", "M3-002", "M3-003"];
-    var famZhP = {wood:"木材",marble:"大理石",leather:"皮革",textile:"亚麻",ceramic:"陶瓷",chipboard:"刨花板",solid:"纯色",sheet:"板材"};
     var popItems = [];
     popCodes.forEach(function (code) {
       var photo = (typeof codePrimary === "function") ? codePrimary(code) : "";
       if (!photo && window.CODE_MEDIA && CODE_MEDIA[code]) photo = CODE_MEDIA[code].primary || "";
       if (!photo) return;
       var row = (typeof F !== "undefined") ? F.filter(function (x) { return x[0] === code; })[0] : null;
-      var name = row ? (isAr() ? row[2] : row[3]) : "";
-      if (row && typeof lang !== "undefined" && lang === "zh") name = row[3] + (famZhP[row[1]] ? " · " + famZhP[row[1]] : "");
-      popItems.push({ code: code, photo: photo, name: name });
+      var fam = row ? (typeof finishFam === "function" ? finishFam(row) : row[1]) : "";
+      var shortName = row ? (isAr() ? row[2] : row[3]) : "";
+      if (shortName && shortName.length > 28) shortName = shortName.slice(0, 26) + "…";
+      var cap = fam ? (shortName ? fam + " · " + shortName : fam) : shortName;
+      popItems.push({ code: code, photo: photo, fam: fam, cap: cap });
     });
     if (popItems.length >= 6) {
       h += '<section class="home-sec pop-codes rise-in" id="home-popular"><div class="pop-head"><div><h2>' + L("أكواد مطلوبة", "Popular codes", "热门编码") + "</h2>";
-      h += '<p class="lead">' + L("صور كتالوج حقيقية من المصنع. دوس على الكود يفتح التشطيبات.", "Real catalog shots from the factory. Tap a code to open the finishes.", "工厂实拍图册照片。点编码查看花色库。") + "</p></div>";
+      h += '<p class="lead">' + L("صور كتالوج من المصنع. دوس على الكود يفتح التشطيبات.", "Factory catalog shots. Tap a code to open the finishes.", "工厂图册实拍。点编码打开花色库。") + "</p></div>";
       h += '<button class="btn navy" type="button" data-tab="colors">' + L("كل التشطيبات", "All finishes", "全部花色") + "</button></div>";
       h += '<div class="pop-row">';
       popItems.forEach(function (it) {
-        h += '<button type="button" class="pop-card" data-tab="colors" aria-label="' + it.code + '"><img src="' + it.photo + '" alt="' + it.code + " " + (it.name || "").replace(/"/g, "") + '" width="400" height="300" loading="lazy" decoding="async"/>';
-        h += '<span class="pop-meta"><b>' + it.code + "</b><small>" + it.name + "</small></span></button>";
+        h += '<button type="button" class="pop-card" data-tab="colors" aria-label="' + it.code + (it.fam ? (" — " + it.fam) : "") + '"><img src="' + it.photo + '" alt="' + it.code + '" width="400" height="300" loading="lazy" decoding="async"/>';
+        h += '<span class="pop-meta"><b>' + it.code + "</b><small>" + (it.cap || it.fam || "") + "</small></span></button>";
       });
       h += "</div></section>";
     }
@@ -549,9 +552,11 @@
     var facCap = tx(d, "facCap", "ورشة / عينات", "Workshop / samples", "车间 / 样品");
     var facItems = [];
     fac.forEach(function (src) { if (src) facItems.push({ src: src, cap: facCap }); });
-    var roomShots = /(showroom-collage|product-0[145]|gallery-32c6577aed|gallery-8ab1133712)\.jpg/;
+    /* Keep workshop strip to factory + catalog racks + product panels — not lifestyle / application gallery shots */
+    var workshopOk = /(factory\/|catalog-rack|product-0[1-6]|manufacturing|sample-rack)/i;
+    var workshopNo = /(gallery-|showroom-collage|lifestyle|uses\/)/i;
     works.forEach(function (src) {
-      if (!src || roomShots.test(src)) return;
+      if (!src || workshopNo.test(src) || !workshopOk.test(src)) return;
       if (facItems.some(function (x) { return x.src === src; })) return;
       facItems.push({ src: src, cap: facCap });
     });

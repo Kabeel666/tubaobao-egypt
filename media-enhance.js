@@ -68,12 +68,24 @@
   function injectFactoryPhotos() {
     var page = $("p-factory");
     if (!page || !window.MEDIA) return;
-    if (page.querySelector(".photo-grid")) return;
+    if (page.querySelector(".photo-grid.factory-shots")) return;
     var wrap = page.querySelector(".wrap") || page;
+    var old = page.querySelector(".photo-grid");
+    if (old && !old.classList.contains("factory-shots")) old.remove();
     var grid = document.createElement("div");
-    grid.className = "photo-grid";
-    (MEDIA.factory || []).forEach(function (src, i) {
-      if (src) grid.innerHTML += '<figure class="photo-card">' + img(src, "Factory " + (i + 1)) + "</figure>";
+    grid.className = "photo-grid factory-shots";
+    var list = [];
+    (MEDIA.factory || []).forEach(function (src) { if (src) list.push(src); });
+    (MEDIA.works || []).forEach(function (src) {
+      if (!src) return;
+      if (/gallery-|showroom-collage|lifestyle|uses\//i.test(src)) return;
+      if (!/(catalog-rack|product-0[1-6]|manufacturing|sample-rack|factory\/)/i.test(src)) return;
+      if (list.indexOf(src) >= 0) return;
+      list.push(src);
+    });
+    list.slice(0, 10).forEach(function (src, i) {
+      var cap = L("ورشة / عينات " + (i + 1), "Workshop / samples " + (i + 1), "车间 / 样品 " + (i + 1));
+      grid.innerHTML += '<figure class="photo-card">' + img(src, cap) + "<figcaption>" + cap + "</figcaption></figure>";
     });
     wrap.appendChild(grid);
     var d = t();
@@ -153,8 +165,9 @@
     var moreLabel = L("صور أكتر", "More photos", "更多照片") + " (" + shown + " / " + MEDIA.gallery.length + ")";
     sec.innerHTML = '<div class="wrap"><h2>' + title + '</h2><p class="lead">' + lead + '</p><div class="photo-grid">' +
       rows.map(function (row) {
-        return '<figure class="photo-card">' + img(row[0], lang === "ar" ? row[1] : row[2]) +
-          "<figcaption>" + (lang === "ar" ? row[1] : row[2]) + "</figcaption></figure>";
+        var cap = lang === "ar" ? row[1] : (lang === "zh" ? (row[3] || row[2]) : row[2]);
+        return '<figure class="photo-card">' + img(row[0], cap) +
+          "<figcaption>" + cap + "</figcaption></figure>";
       }).join("") + "</div>" +
       (more ? '<div class="center-actions"><button type="button" class="btn navy" id="galleryMore">' + moreLabel + "</button></div>" : "") +
       "</div>";
@@ -221,8 +234,19 @@
   function ensureGalleryTab() {
     if (typeof TABS === "undefined") return;
     if (!TABS.some(function (x) { return x[0] === "gallery"; })) {
-      TABS.splice(8, 0, ["gallery", "المعرض", "Gallery"]);
+      TABS.splice(8, 0, ["gallery", "المعرض", "Gallery", "图库"]);
     }
+    TABS.forEach(function (x) {
+      if (x[0] === "gallery" && !x[3]) x[3] = "图库";
+      if (x[0] === "faq" && !x[3]) x[3] = "问答";
+      if (x[0] === "specs" && !x[3]) x[3] = "规格";
+      if (x[0] === "calc" && !x[3]) x[3] = "计算器";
+      if (x[0] === "compare" && !x[3]) x[3] = "对比";
+      if (x[0] === "access" && !x[3]) x[3] = "配件";
+      if (x[0] === "install" && !x[3]) x[3] = "安装";
+      if (x[0] === "videos" && !x[3]) x[3] = "视频";
+      if (x[0] === "looks" && !x[3]) x[3] = "花色与饰面";
+    });
   }
   function scrubWrongPhone() {
     var bad=/0100\s*500\s*7592|01005007592/g;

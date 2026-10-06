@@ -73,12 +73,22 @@ window.MEDIA={
 (function(){
   var g=[];
   Object.keys(CODE_MEDIA).sort().forEach(function(code){
-    var src=codePrimary(code); if(src) g.push([src, code, code]);
+    var src=codePrimary(code); if(src) g.push([src, code, code, code]);
   });
-  (MEDIA.uses||[]).forEach(function(u){ if(u&&u.img) g.push([u.img, u.ar, u.en]); });
-  (MEDIA.works||[]).forEach(function(src,i){ g.push([src, "فكرة تطبيق "+(i+1), "Application idea "+(i+1)]); });
-  (MEDIA.lifestyle||[]).forEach(function(src,i){ g.push([src, "لايف ستايل "+(i+1), "Lifestyle "+(i+1)]); });
-  (MEDIA.factory||[]).forEach(function(src,i){ g.push([src, "تصنيع "+(i+1), "Manufacturing "+(i+1)]); });
-  (MEDIA.partner||[]).forEach(function(row){ if(row&&row.img) g.push([row.img, row.ar, row.en]); });
+  (MEDIA.uses||[]).forEach(function(u){
+    if(u&&u.img) g.push([u.img, u.ar, u.en, u.zh || (u.en || "").replace(" — application idea", " · 上墙构想")]);
+  });
+  (MEDIA.works||[]).forEach(function(src,i){
+    if(/gallery-|showroom-collage/i.test(src||"")) {
+      g.push([src, "فكرة تطبيق "+(i+1), "Application idea "+(i+1), "上墙构想 "+(i+1)]);
+    } else if(/(catalog-rack|product-0|manufacturing|sample-rack|factory)/i.test(src||"")) {
+      g.push([src, "ورشة / عينات "+(i+1), "Workshop / samples "+(i+1), "车间 / 样品 "+(i+1)]);
+    } else {
+      g.push([src, "صورة "+(i+1), "Photo "+(i+1), "照片 "+(i+1)]);
+    }
+  });
+  (MEDIA.lifestyle||[]).forEach(function(src,i){ g.push([src, "لايف ستايل "+(i+1), "Lifestyle "+(i+1), "生活方式 "+(i+1)]); });
+  (MEDIA.factory||[]).forEach(function(src,i){ g.push([src, "تصنيع "+(i+1), "Manufacturing "+(i+1), "制造 "+(i+1)]); });
+  (MEDIA.partner||[]).forEach(function(row){ if(row&&row.img) g.push([row.img, row.ar, row.en, row.zh || row.en]); });
   MEDIA.gallery=g;
 })();

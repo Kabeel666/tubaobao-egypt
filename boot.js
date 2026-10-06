@@ -27,7 +27,18 @@ function render(){
     page("home", richHome(d)) +
     page("about", `<div class="wrap"><div class="about-card"><h2>${d.aboutT}</h2><p>${d.aboutP}</p></div></div>`) +
     page("products", `<div class="wrap"><h2>${d.prodT}</h2><p class="lead">${d.prodS}</p><div class="grid3">${d.lines.map(([h,p,c])=>`<article class="card"><span class="chip" style="background:${c}"></span><div class="meta"><b>${h}</b><p>${p}</p></div></article>`).join("")}</div></div>`) +
-    page("colors", `<div class="wrap"><h2>${d.colT}</h2><p class="lead">${d.colS}</p><div class="filters" id="filters">${famBtns.map(([k,l])=>`<button class="${fam===k?"on":""}" data-fam="${k}">${l}</button>`).join("")}</div><div class="grid4">${shown.map(x=>`<article class="card"><span class="chip" style="background:${finishColor(x)}"></span><div class="meta"><b class="code">${x[0]}</b><div>${finishLabel(x)}</div><small>${finishFam(x)}</small></div></article>`).join("")}</div><p class="note">${d.colNote}</p></div>`) +
+    page("colors", (()=>{
+      const photoN=shown.filter(x=>window.CODE_MEDIA&&CODE_MEDIA[x[0]]&&CODE_MEDIA[x[0]].primary).length;
+      const hint=lang==="ar"
+        ? (shown.length?`${shown.length} تشطيب · ${photoN} بصورة كتالوج`:"مفيش تشطيبات في الفلتر ده")
+        : (lang==="zh"
+          ? (shown.length?`${shown.length} 个花色 · ${photoN} 张图册照片`:"这个筛选下没有花色")
+          : (shown.length?`${shown.length} finishes · ${photoN} with catalog photos`:"No finishes in this filter"));
+      const empty=shown.length===0
+        ? `<div class="empty-state"><b>${lang==="ar"?"جرّب فلتر تاني":(lang==="zh"?"换一个筛选试试":"Try another filter")}</b><p>${lang==="ar"?"اختار عائلة تانية أو ارجع للكل.":(lang==="zh"?"换一个系列，或回到「全部」。":"Pick another family, or go back to All.")}</p><button type="button" class="btn navy" data-fam-reset="1">${d.all||(lang==="ar"?"الكل":(lang==="zh"?"全部":"All"))}</button></div>`
+        : `<div class="grid4">${shown.map(x=>`<article class="card"><span class="chip" style="background:${finishColor(x)}"></span><div class="meta"><b class="code">${x[0]}</b><div>${finishLabel(x)}</div><small>${finishFam(x)}</small></div></article>`).join("")}</div>`;
+      return `<div class="wrap colors-page"><h2>${d.colT}</h2><p class="lead">${d.colS}</p><div class="filters filters-sticky" id="filters">${famBtns.map(([k,l])=>`<button type="button" class="${fam===k?"on":""}" data-fam="${k}">${l}</button>`).join("")}</div><p class="col-hint" id="colHint">${hint}</p>${empty}<p class="note">${d.colNote}</p></div>`;
+    })()) +
     page("sheets", `<div class="wrap"><h2>${d.shT}</h2><p class="lead">${d.shS}</p><div class="grid4">${SH.map(x=>`<article class="card"><span class="chip" style="background:${x[3]}"></span><div class="meta"><b class="code">${x[0]}</b><div>${lang==="ar"?x[1]:x[2]}</div><small>122 × 280 · 5 mm</small></div></article>`).join("")}</div></div>`) +
     page("sizes", `<div class="wrap"><h2>${d.szT}</h2><p class="lead">${d.szS}</p><div class="scroll"><table><tr>${d.profH.map(h=>`<th>${h}</th>`).join("")}</tr>${PR.map(p=>`<tr><td>${p[0]}</td><td>${p[1]}</td><td>${p[2]}</td><td>${p[3]}</td><td>${typeof prNote==="function"?prNote(p):(lang==="ar"?p[4]:p[5])}</td></tr>`).join("")}</table></div></div>`) +
     page("chooser", (typeof chooserInner==="function"?chooserInner(d):"")) +
@@ -74,6 +85,7 @@ function bind(){
   document.querySelectorAll("[data-tab]").forEach(el=>el.onclick=e=>{e.preventDefault();var id=el.dataset.tab; if(el.dataset.anchor) id+=":"+el.dataset.anchor; setTab(id);});
   const f=$("filters");
   if(f) f.onclick=e=>{const b=e.target.closest("button"); if(!b) return; fam=b.dataset.fam; render();};
+  document.querySelectorAll("[data-fam-reset]").forEach(el=>{el.onclick=e=>{e.preventDefault(); fam="all"; render();};});
   ["wallW","wallH","slatW"].forEach(id=>{const el=$(id); if(el) el.addEventListener("input",calc);});
   const hs=$("homeSearch");
   const hb=$("homeSearchBtn");
