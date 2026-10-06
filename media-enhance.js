@@ -87,17 +87,25 @@
   function injectProductPhotos() {
     var page = $("p-products");
     if (!page || !window.MEDIA) return;
+    var fu = (typeof fileUrl === "function") ? fileUrl : function (p) { return p; };
+    var slat = (window.CODE_MEDIA && CODE_MEDIA["M1-003"] && CODE_MEDIA["M1-003"].primary) || "media/products/M1-003_w20.jpg";
+    var picks = [
+      { src: fu(slat), cat: true, alt: "M1-003" },
+      { src: fu("media/uses/kitchen-grey-marble.jpg"), cat: false, alt: "" },
+      { src: fu("media/factory/manufacturing-panels.jpg"), cat: false, alt: "" }
+    ];
     var lineImgs = (MEDIA.lifestyle || []).concat(MEDIA.works || []).concat(MEDIA.products || []).filter(Boolean);
     var lineCards = page.querySelectorAll(".grid3 > .card");
     lineCards.forEach(function (card, i) {
       if (card.querySelector("img.finish-photo, img.line-photo")) return;
-      var src = lineImgs[i] || lineImgs[0];
+      var pick = (picks[i] && picks[i].src) ? picks[i] : { src: lineImgs[i] || lineImgs[0], cat: false, alt: "" };
+      var src = pick.src;
       if (!src) return;
       var chip = card.querySelector(".chip");
       var im = document.createElement("img");
-      im.className = "finish-photo line-photo";
+      im.className = "finish-photo line-photo" + (pick.cat ? " is-catalog" : " is-scene");
       im.src = src;
-      im.alt = "";
+      im.alt = pick.alt;
       im.setAttribute("width", "640");
       im.setAttribute("height", "480");
       im.loading = "lazy";
@@ -110,10 +118,16 @@
     if (page.querySelector(".photo-grid")) return;
     var wrap = page.querySelector(".wrap") || page;
     var grid = document.createElement("div");
-    grid.className = "photo-grid";
+    grid.className = "photo-grid product-shots";
+    var codes = window.CODE_MEDIA ? Object.keys(CODE_MEDIA).sort() : [];
     (MEDIA.products || []).slice(0, 12).forEach(function (src, i) {
-      if (src) grid.innerHTML += '<figure class="photo-card">' + img(src, "Product " + (i + 1)) + "</figure>";
+      var code = codes[i] || "";
+      if (src) grid.innerHTML += '<figure class="photo-card">' + img(src, code || ("Product " + (i + 1))) + (code ? "<figcaption>" + code + "</figcaption>" : "") + "</figure>";
     });
+    var head = document.createElement("h3");
+    head.className = "shots-title";
+    head.textContent = L("لقطات الكتالوج بالكود", "Catalog shots by code", "按编码的图册实拍");
+    wrap.appendChild(head);
     wrap.appendChild(grid);
   }
   function injectGalleryPage() {

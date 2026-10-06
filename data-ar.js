@@ -37,6 +37,6 @@ usesT:"فين ينفع يتركّب",usesLead:"أفكار للمكان المن�
 searchT:"ابحث في المكتبة",searchLead:"دوّر على التشطيب بالكود أو بالاسم.",searchPh:"ابحث بكود أو اسم التشطيب",searchBtn:"بحث",
 factoryHomeT:"عينات المصنع",factoryHomeLead:"عينات ورفوف العرض وأرض الورشة.",facCap:"ورشة / عينات",
 factsT:"نظرة سريعة",
-contactPage:"صفحة التواصل",contactNote:"استخدم زر «تواصل» في القائمة أو زر واتساب. رقم التليفون مش مكتوب في الصفحة.",
+contactPage:"صفحة التواصل",contactNote:"استخدم زر «تواصل» في القائمة أو زر واتساب.",
 rooms:{restaurant:"مطعم",salon:"صالون",gym:"جيم",leatherbed:"غرفة جلد",reception:"استقبال",living:"صالة",kitchen:"مطبخ",pharmacy:"صيدلية",clinic:"ممر عيادة",lobby:"لوبي فندق",preview3d:"معاينة الحائط",chooser:"لوحة العينات"},
 more:"المزيد",waBtn:"تواصل",waShort:"واتساب"};

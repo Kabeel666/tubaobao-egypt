@@ -36,6 +36,6 @@ usesT:"Where it belongs",usesLead:"Ideas for where each finish fits best.",usesA
 searchT:"Search the library",searchLead:"Find a finish by code or name.",searchPh:"Search by code or finish name",searchBtn:"Search",
 factoryHomeT:"Factory samples",factoryHomeLead:"Samples, racks and the workshop floor.",facCap:"Workshop / samples",
 factsT:"At a glance",
-contactPage:"Contact page",contactNote:"Use the Contact button in the header, or the WhatsApp button. The page does not print a phone number.",
+contactPage:"Contact page",contactNote:"Tap Contact in the header or the WhatsApp button.",
 rooms:{restaurant:"Restaurant",salon:"Salon",gym:"Gym",leatherbed:"Leather bedroom",reception:"Reception",living:"Living room",kitchen:"Kitchen",pharmacy:"Pharmacy",clinic:"Clinic corridor",lobby:"Hotel lobby",preview3d:"Wall preview",chooser:"Sample board"},
 more:"More",waBtn:"Contact",waShort:"WhatsApp"};

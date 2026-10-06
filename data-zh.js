@@ -37,7 +37,7 @@ usesT:"适合用在哪里",usesLead:"每种花色适合用在哪里。",usesAll:
 searchT:"在图库里找",searchLead:"按编码或名称查找花色。",searchPh:"按编码或花色名称搜索",searchBtn:"搜索",
 factoryHomeT:"工厂样品与车间",factoryHomeLead:"样品、样品架与车间现场。",facCap:"车间 / 样品",
 factsT:"工厂一览",
-contactPage:"联系页面",contactNote:"请用页眉的「联系」或右下角 WhatsApp。正文里不放电话号码。",
+contactPage:"联系页面",contactNote:"请用页眉的「联系」或右下角 WhatsApp。",
 rooms:{restaurant:"餐厅",salon:"美发沙龙",gym:"健身房",leatherbed:"皮革卧室",reception:"前台",living:"客厅",kitchen:"厨房",pharmacy:"药店",clinic:"诊所走廊",lobby:"酒店大堂",preview3d:"墙面效果",chooser:"样品墙"},
 more:"更多",waBtn:"联系",waShort:"WhatsApp",
 galleryT:"工厂照片与上墙构想",galleryS:"编码和制造照片是实拍。商铺、商场、办公、咖啡、酒店和工作室的图是生成的上墙构想，不是已完工案例。",

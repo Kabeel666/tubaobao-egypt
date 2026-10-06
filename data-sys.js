@@ -15,7 +15,7 @@ const ACC=[
 ['A14','زاوية عمود','Column corner set','PVC','trim'],
 ['A15','طقم بداية/نهاية','Start/end kit','PVC','kit'],
 ['A16','فوم لاصق خلفي','Adhesive foam backing','foam','underlay'],
-['A17','قطاع WPC داخلي','Interior WPC profile language','WPC','profile'],
+['A17','قطاع WPC داخلي','Interior WPC profile','WPC','profile'],
 ['A18','مشبك مخفي','Hidden clip','steel','fixings'],
 ['A19','حشوة فجوة','Gap filler strip','PVC','trim'],
 ['A20','حافظة زاوية معدنية','Metal corner protector','steel','protect'],
