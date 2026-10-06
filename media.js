@@ -35,9 +35,9 @@ window.MEDIA={
   factory: ["media/factory/manufacturing-panels.jpg","media/factory/sample-rack.jpg"].map(fileUrl).filter(Boolean),
   works: [
     "media/works/showroom-collage.jpg","media/works/catalog-rack.jpg",
-    "media/home/product-01.jpg","media/home/product-02.jpg","media/home/product-03.jpg",
-    "media/home/product-04.jpg","media/home/product-05.jpg","media/home/product-06.jpg",
-    "media/home/creative-04.jpg","media/home/creative-05.jpg"
+    "media/works/product-01.jpg","media/works/product-02.jpg","media/works/product-03.jpg",
+    "media/works/product-04.jpg","media/works/product-05.jpg","media/works/product-06.jpg",
+    "media/works/gallery-32c6577aed.jpg","media/works/gallery-8ab1133712.jpg"
   ].map(fileUrl).filter(Boolean),
   uses: [
     {id:"preview3d", img:fileUrl("media/uses/preview-3d-wall.jpg"), ar:"معاينة 3D للحائط — فكرة تطبيق", en:"3D wall preview — application idea"},

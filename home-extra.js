@@ -10,6 +10,41 @@
   }
   window.PRIMARY = ["home", "products", "colors", "chooser", "viz"];
 
+
+  window.homeSearchPool = function () {
+    var finishes = (typeof F !== "undefined" ? F : []).map(function (x) {
+      return { kind: "finish", code: x[0], fam: x[1], ar: x[2], en: x[3], color: x[4] };
+    });
+    var sheets = (typeof SH !== "undefined" ? SH : []).map(function (x) {
+      return { kind: "sheet", code: x[0], fam: "sheet", ar: x[1], en: x[2], color: x[3] };
+    });
+    return finishes.concat(sheets);
+  };
+  window.filterPool = function (q) {
+    q = (q || "").trim().toLowerCase();
+    var pool = window.homeSearchPool();
+    var out;
+    if (!q) out = pool.slice(0, 10);
+    else {
+      out = pool.filter(function (p) {
+        var hay = (p.code + " " + p.ar + " " + p.en + " " + p.fam + " " + p.kind).toLowerCase();
+        return hay.indexOf(q) >= 0;
+      }).slice(0, 12);
+    }
+    // Prefer items that have a catalog photo when the query is empty
+    if (!q && window.CODE_MEDIA) {
+      var withPhoto = [];
+      var without = [];
+      out.forEach(function (p) {
+        if (CODE_MEDIA[p.code] && CODE_MEDIA[p.code].primary) withPhoto.push(p);
+        else without.push(p);
+      });
+      out = withPhoto.concat(without).slice(0, 10);
+    }
+    return out;
+  };
+
+
   function L(ar, en, zh) {
     if (typeof lang !== "undefined" && lang === "ar") return ar;
     if (typeof lang !== "undefined" && lang === "zh") return (zh != null && zh !== "") ? zh : en;
@@ -373,7 +408,19 @@
     h += '<figure class="photo-card hero-frame"><img class="hero-photo kenburns" src="' + heroImg + '" alt="TuBaoBao Egypt" width="1280" height="800" loading="eager" decoding="async"/>';
     h += "<figcaption>" + tx(d, "heroCap", "لقطة استرشادية · فكرة تطبيق", "Showroom still · an application idea", "展厅静帧 · 上墙构想") + "</figcaption></figure>";
     h += '<div class="hero-thumbs">';
-    life.slice(0, 4).forEach(function (src) {
+    var thumbSrcs = [];
+    life.forEach(function (src) {
+      if (!src || src === heroImg) return;
+      if (thumbSrcs.indexOf(src) >= 0) return;
+      thumbSrcs.push(src);
+    });
+    if (thumbSrcs.length < 4) {
+      life.forEach(function (src) {
+        if (!src || thumbSrcs.indexOf(src) >= 0) return;
+        thumbSrcs.push(src);
+      });
+    }
+    thumbSrcs.slice(0, 4).forEach(function (src) {
       h += '<img src="' + src + '" alt="" width="320" height="320" loading="lazy" decoding="async"/>';
     });
     h += "</div></div></div></div>";
@@ -381,7 +428,7 @@
     h += '<div class="wrap preview-3d rise-in"><div class="preview-3d-in">';
     if (wall) {
       h += '<figure class="photo-card"><img src="' + wall.img + '" alt="' + roomCap(d, "preview3d", wall) + '" width="1280" height="720" loading="eager" decoding="async"/>';
-      h += "<figcaption>" + tx(d, "appIdeaLong", "فكرة تطبيق — ليست رسم تنفيذ", "Application idea — not a construction drawing", "上墙构想，不是施工图") + "</figcaption></figure>";
+      h += "<figcaption>" + tx(d, "appIdeaLong", "فكرة تطبيق", "Look preview", "上墙预览") + "</figcaption></figure>";
     }
     h += "<div><h2>" + tx(d, "vizT", "شوف الحائط قبل التركيب", "See the wall before it is installed", "安装之前，先看这面墙") + "</h2>";
     h += "<p>" + tx(d, "vizLead", "", "", "") + "</p>";
@@ -395,9 +442,8 @@
     var gifs = (window.IDEA_GIFS && window.IDEA_GIFS.length) ? window.IDEA_GIFS : (window.IDEA_VIDEOS || []).filter(function (v) { return v.gif; });
     gifs.slice(0, 2).forEach(function (v) {
       var cap = L(v.ar, v.en, v.zh);
-      var note = tx(d, "videoNote", "فكرة بصرية للتطبيق — مش تصوير موقع حقيقي", "A visual application idea — not a filmed job", "视觉构想，并非实拍工程");
       h += '<figure class="photo-card"><img class="gif-loop" src="' + v.gif + '" alt="' + cap + '" width="480" height="300" loading="lazy" decoding="async"/>';
-      h += "<figcaption>" + cap + "<small>" + note + "</small></figcaption></figure>";
+      h += "<figcaption>" + cap + "</figcaption></figure>";
     });
     h += '</div><div class="center-actions"><button class="btn navy" type="button" data-tab="videos">' + tx(d, "videoAll", "كل الفيديوهات", "All videos", "查看全部") + "</button></div></section>";
 
@@ -418,7 +464,7 @@
       var u = useSrc(id);
       if (!u) return;
       var cap = roomCap(d, id, u);
-      h += '<figure class="photo-card"><img src="' + u.img + '" alt="' + cap + '" width="640" height="480" loading="lazy" decoding="async"/><figcaption>' + cap + "<small>" + tx(d, "appIdea", "فكرة تطبيق", "Application idea", "上墙构想") + "</small></figcaption></figure>";
+      h += '<figure class="photo-card"><img src="' + u.img + '" alt="' + cap + '" width="640" height="480" loading="lazy" decoding="async"/><figcaption>' + cap + "</figcaption></figure>";
     });
     h += '</div><div class="center-actions"><button class="btn navy" type="button" data-tab="spaces">' + tx(d, "usesAll", "كل الأماكن", "All places", "查看全部空间") + "</button></div></section>";
 
@@ -436,19 +482,33 @@
       }
       var kind = p.kind === "sheet" ? L("لوح", "Sheet", "大板") : (typeof finishFam === "function" ? finishFam(p.fam) : p.fam);
       h += '<article class="card finish-mini" data-tab="' + (p.kind === "sheet" ? "sheets" : "colors") + '">';
-      h += '<span class="chip" style="background:' + (p.color || "#ccc") + '"></span>';
+      var photo = "";
+      if (typeof codePrimary === "function") photo = codePrimary(p.code) || "";
+      if (!photo && window.CODE_MEDIA && CODE_MEDIA[p.code] && CODE_MEDIA[p.code].primary) {
+        photo = (typeof fileUrl === "function") ? fileUrl(CODE_MEDIA[p.code].primary) : CODE_MEDIA[p.code].primary;
+      }
+      if (photo) {
+        h += '<img class="finish-photo" src="' + photo + '" alt="' + p.code + '" width="640" height="480" loading="lazy" decoding="async"/>';
+      } else {
+        h += '<span class="chip" style="background:' + (p.color || "#ccc") + '"></span>';
+      }
       h += '<div class="meta"><b class="code">' + p.code + "</b><div>" + name + "</div><small>" + kind + "</small></div></article>";
     });
     h += "</div></section>";
 
     h += '<section class="home-sec" id="home-factory"><h2>' + tx(d, "factoryHomeT", "عينات المصنع", "Factory samples", "工厂样品与车间") + "</h2>";
     h += '<p class="lead">' + tx(d, "factoryHomeLead", "", "", "") + "</p>";
-    h += '<div class="photo-carousel">';
-    fac.forEach(function (src) {
-      h += '<figure class="photo-card"><img src="' + src + '" alt="' + tx(d, "facCap", "ورشة / عينات", "Workshop / samples", "车间 / 样品") + '" width="640" height="480" loading="lazy" decoding="async"/><figcaption>' + tx(d, "facCap", "ورشة / عينات", "Workshop / samples", "车间 / 样品") + "</figcaption></figure>";
+    h += '<div class="photo-grid home-factory-grid">';
+    var facCap = tx(d, "facCap", "ورشة / عينات", "Workshop / samples", "车间 / 样品");
+    var facItems = [];
+    fac.forEach(function (src) { if (src) facItems.push({ src: src, cap: facCap }); });
+    works.forEach(function (src) {
+      if (!src) return;
+      if (facItems.some(function (x) { return x.src === src; })) return;
+      facItems.push({ src: src, cap: facCap });
     });
-    works.slice(0, 6).forEach(function (src) {
-      h += '<figure class="photo-card"><img src="' + src + '" alt="" width="640" height="480" loading="lazy" decoding="async"/></figure>';
+    facItems.slice(0, 8).forEach(function (item) {
+      h += '<figure class="photo-card"><img src="' + item.src + '" alt="' + item.cap + '" width="640" height="480" loading="lazy" decoding="async"/><figcaption>' + item.cap + "</figcaption></figure>";
     });
     h += '</div><div class="center-actions"><button class="btn navy" type="button" data-tab="factory">' + tx(d, "facT", "المصنع", "Factory", "工厂") + "</button></div></section>";
 
@@ -463,8 +523,7 @@
     h += '<p class="lead">' + tx(d, "ctS", "", "", "") + "</p>";
     h += '<p class="addr">' + tx(d, "addr", "", "", "") + "</p>";
     h += '<p class="lead hours">' + tx(d, "hours", "", "", "") + "</p>";
-    h += '<div class="contact-actions"><button class="btn navy" type="button" data-tab="contact">' + tx(d, "contactPage", "صفحة التواصل", "Contact page", "联系页面") + "</button></div>";
-    h += '<p class="note">' + tx(d, "contactNote", "استخدم زر «تواصل» في القائمة أو زر واتساب. رقم التليفون مش مكتوب في الصفحة.", "Use the Contact button in the header, or the WhatsApp button. The page does not print a phone number.", "请用页眉的「联系」或右下角 WhatsApp。正文里不放电话号码。") + "</p></section>";
+    h += '<div class="contact-actions"><button class="btn gold" type="button" data-tab="contact">' + tx(d, "contactPage", "صفحة التواصل", "Contact page", "联系页面") + "</button></div></section>";
     h += "</div>";
     return h;
   };

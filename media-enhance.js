@@ -21,19 +21,8 @@
     board.insertAdjacentHTML("afterbegin", '<img class="hero-photo" src="' + MEDIA.hero + '" alt="TuBaoBao Egypt" width="1280" height="800" loading="eager" decoding="async"/>');
   }
   function injectFeatures() {
-    var home = $("p-home");
-    if (!home || !window.MEDIA || !MEDIA.features || !MEDIA.features.length) return;
-    if (home.querySelector(".feature-strip")) return;
-    var wrap = home.querySelector(".wrap.hero-in") || home.querySelector(".wrap") || home;
-    var html = '<div class="feature-strip">';
-    MEDIA.features.forEach(function (f) {
-      if (!f.img) return;
-      var title = lang === "ar" ? f.ar[0] : f.en[0];
-      var sub = lang === "ar" ? f.ar[1] : f.en[1];
-      html += '<article class="feature-card">' + img(f.img, title) + '<div><b>' + title + '</b><p>' + sub + '</p></div></article>';
-    });
-    html += "</div>";
-    wrap.insertAdjacentHTML("beforeend", html);
+    /* Disabled: feature-strip used to land inside the navy hero and break the layout. */
+    document.querySelectorAll("#p-home .feature-strip").forEach(function (el) { el.remove(); });
   }
   function labelApproxSwatches() {
     document.querySelectorAll("#p-colors .card, #p-sheets .card").forEach(function (card) {
@@ -65,8 +54,10 @@
       im.setAttribute("height", "480");
       im.loading = "lazy";
       im.decoding = "async";
-      if (chip) card.insertBefore(im, chip);
-      else card.insertBefore(im, card.firstChild);
+      if (chip) {
+        card.insertBefore(im, chip);
+        chip.style.display = "none";
+      } else card.insertBefore(im, card.firstChild);
       if (m.variants && m.variants.length) {
         var widths = m.variants.map(function (v) { return v.width + " cm"; }).join(" · ");
         var small = card.querySelector("small");
@@ -96,6 +87,26 @@
   function injectProductPhotos() {
     var page = $("p-products");
     if (!page || !window.MEDIA) return;
+    var lineImgs = (MEDIA.lifestyle || []).concat(MEDIA.works || []).concat(MEDIA.products || []).filter(Boolean);
+    var lineCards = page.querySelectorAll(".grid3 > .card");
+    lineCards.forEach(function (card, i) {
+      if (card.querySelector("img.finish-photo, img.line-photo")) return;
+      var src = lineImgs[i] || lineImgs[0];
+      if (!src) return;
+      var chip = card.querySelector(".chip");
+      var im = document.createElement("img");
+      im.className = "finish-photo line-photo";
+      im.src = src;
+      im.alt = "";
+      im.setAttribute("width", "640");
+      im.setAttribute("height", "480");
+      im.loading = "lazy";
+      im.decoding = "async";
+      if (chip) {
+        card.insertBefore(im, chip);
+        chip.style.display = "none";
+      } else card.insertBefore(im, card.firstChild);
+    });
     if (page.querySelector(".photo-grid")) return;
     var wrap = page.querySelector(".wrap") || page;
     var grid = document.createElement("div");

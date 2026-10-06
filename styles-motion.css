@@ -29,8 +29,8 @@
 .process-card:hover,
 .photo-card:hover,
 .fam-card:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 12px 28px rgba(27,36,48,.08);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 26px rgba(27,36,48,.09);
 }
 .photo-card img{transition:opacity .25s ease}
 .photo-card:hover img{opacity:.94}
