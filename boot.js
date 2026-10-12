@@ -21,7 +21,7 @@ function render(){
   $("brandName").innerHTML=d.brand+"<small>"+d.sub+"</small>";
   if(typeof window.__tbbSyncLang==="function") window.__tbbSyncLang();
   $("tabs").innerHTML=TABS.map((row)=>`<button type="button" data-tab="${row[0]}" class="${tab===row[0]?"on":""}">${typeof tabLabel==="function"?tabLabel(row):(lang==="ar"?row[1]:row[2])}</button>`).join("");
-  const shown=F.filter(x=>fam==="all"||x[1]===fam);
+  const shown=F.filter(x=>fam==="all"||x[1]===fam||(String(fam).indexOf("tex-")===0&&typeof window.texMatch==="function"&&window.texMatch(fam,x)));
   const famBtns=[["all",d.all|| (lang==="ar"?"الكل":"All")],["wood",d.wood|| (lang==="ar"?"خشب":"Wood")],["marble",d.marble|| (lang==="ar"?"رخام":"Marble")],["ceramic",d.ceramic|| (lang==="ar"?"سيراميك":"Ceramic")],["chipboard",d.chipboard|| (lang==="ar"?"شيبورد/WPC":"Chipboard/WPC")],["textile",d.textile|| (lang==="ar"?"كتان":"Linen")],["solid",d.solid|| (lang==="ar"?"ساده":"Solid")],["leather",d.leather|| (lang==="ar"?"جلد":"Leather")]];
   $("app").innerHTML=
     page("home", richHome(d)) +
