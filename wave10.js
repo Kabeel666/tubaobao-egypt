@@ -200,15 +200,15 @@
   P.inquiry = function () {
     var bt = [L("Showroom / retail shop", "معرض / محل", "展厅 / 零售店"), L("Contractor / fit-out", "مقاول / تشطيبات", "装修 / 施工"), L("Wholesaler / dealer", "تاجر جملة / وكيل", "批发商 / 代理"), L("Developer", "مطوّر عقاري", "开发商"), L("Interior designer", "مصمم داخلي", "室内设计师"), L("Importer (export)", "مستورد (تصدير)", "进口商（出口）")];
     var it = [L("Become a distributor", "أبقى موزع", "成为经销商"), L("Samples & catalog", "عيّنات وكتالوج", "样品与图册"), L("Project supply", "توريد لمشروع", "项目供货"), L("Spec sheets & certificates", "مواصفات وشهادات", "规格表与证书")];
-    function inp(id, lab, ph) { return '<label for="' + id + '">' + lab + '</label><input id="' + id + '" type="text" required placeholder="' + esc(ph || "") + '"/>'; }
-    function sel(id, lab, opts) { return '<label for="' + id + '">' + lab + '</label><select id="' + id + '">' + opts.map(function (o) { return "<option>" + o + "</option>"; }).join("") + "</select>"; }
+    function inp(id, lab, ph) { return '<div class="w10-field"><label for="' + id + '">' + lab + ' <span class="w10-req" aria-hidden="true">*</span></label><input id="' + id + '" type="text" required placeholder="' + esc(ph || "") + '"/></div>'; }
+    function sel(id, lab, opts) { return '<div class="w10-field"><label for="' + id + '">' + lab + '</label><select id="' + id + '">' + opts.map(function (o) { return "<option>" + o + "</option>"; }).join("") + "</select></div>"; }
     return '<div class="wrap w10">' + head(L("Start the conversation", "ابدأ الكلام", "开始沟通"), L("Distributor inquiry", "طلب وكالة / توزيع", "经销申请"),
       L("Fill in a few details. The button opens WhatsApp with your message ready — review it and press send.", "املا شوية بيانات. الزرار هيفتح واتساب والرسالة جاهزة — راجعها ودوس إرسال.", "填写几项信息，按钮会打开 WhatsApp 并预填消息，确认后发送即可。")) +
       '<form class="w10-form" id="w10Form" novalidate>' +
       inp("w10Name", L("Your name", "الاسم", "姓名")) + inp("w10Co", L("Company", "الشركة", "公司")) +
       inp("w10City", L("Country / city", "الدولة / المدينة", "国家 / 城市"), L("e.g. Egypt — Alexandria", "مثلاً: مصر — إسكندرية", "例如：埃及 — 亚历山大")) +
       sel("w10Type", L("Business type", "نوع النشاط", "业务类型"), bt) + sel("w10Int", L("Interested in", "مهتم بـ", "感兴趣的内容"), it) +
-      '<label for="w10Msg">' + L("Notes (optional)", "ملاحظات (اختياري)", "备注（可选）") + '</label><textarea id="w10Msg" rows="3"></textarea>' +
+      '<div class="w10-field w10-full"><label for="w10Msg">' + L("Notes (optional)", "ملاحظات (اختياري)", "备注（可选）") + '</label><textarea id="w10Msg" rows="4"></textarea></div>' +
       '<p class="w10-err" id="w10Err" hidden>' + L("Please fill name, company and country / city.", "من فضلك املا الاسم والشركة والدولة / المدينة.", "请填写姓名、公司与国家 / 城市。") + "</p>" +
       '<button type="submit" class="btn gold">' + L("Send on WhatsApp", "ابعت على واتساب", "通过 WhatsApp 发送") + "</button></form>" +
       '<p class="note">' + L("Nothing is stored on this site; your details only go into the WhatsApp message you send.", "الموقع مش بيحفظ أي بيانات؛ بياناتك بتروح بس في رسالة الواتساب اللي انت بتبعتها.", "本网站不存储任何信息，您的资料只会出现在您发送的 WhatsApp 消息中。") + "</p>" + stepsHtml() + "</div>";

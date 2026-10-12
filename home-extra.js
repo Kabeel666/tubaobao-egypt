@@ -433,7 +433,7 @@
     });
     h += "</ul></div>";
     h += '<div class="board board-photo">';
-    h += '<figure class="photo-card hero-frame"><img class="hero-photo kenburns" src="' + heroImg + '" alt="' + brand + '" width="1280" height="800" loading="eager" decoding="async"/>';
+    h += '<figure class="photo-card hero-frame"><img class="hero-photo kenburns" src="' + heroImg + '" alt="' + brand + '" width="1280" height="800" loading="eager" fetchpriority="high" decoding="sync"/>';
     h += "<figcaption>" + tx(d, "heroCap", "لقطة عرض · فكرة تطبيق", "Showroom still · application idea", "展厅静帧 · 上墙构想") + "</figcaption></figure>";
     h += '<div class="hero-thumbs">';
     var thumbSrcs = [];
